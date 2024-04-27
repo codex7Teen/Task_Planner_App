@@ -11,7 +11,7 @@ static const String boxName = 'Notes_db';
 int? id;
 
 @HiveField(1)
-final String name;
+String name;
 
 @HiveField(2)
 String? note;

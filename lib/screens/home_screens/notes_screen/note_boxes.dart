@@ -24,10 +24,10 @@ class _NoteBoxesState extends State<NoteBoxes> {
         valueListenable: notesListNotifier,
         builder:
             (BuildContext context, List<NotesModel> notesList, Widget? child) {
-              // showing add any add-notes GIF if no data to display.
+          // showing add any add-notes GIF if no data to display.
           return notesListNotifier.value.isEmpty
               ? Center(
-                child: Column(
+                  child: Column(
                     children: [
                       SizedBox(
                         height: 40,
@@ -41,7 +41,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   fontWeight: FontWeight.w300, fontSize: 24))
                     ],
                   ),
-              )
+                )
               : GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisSpacing: 18,
@@ -100,7 +100,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                             // goto view and edit page
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return ScreenEditNotes(note: data);
+                              return ScreenEditNotes(notesModel: data);
                             }));
                           },
                           child: Container(
@@ -111,6 +111,10 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),
                                     bottomRight: Radius.circular(20))),
+                            // lottie animation
+                            child: LottieBuilder.asset(
+                                repeat: false,
+                                'assets/animations/note_contents2.json'),
                           ),
                         )
                       ],

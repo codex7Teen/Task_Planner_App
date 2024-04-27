@@ -12,7 +12,7 @@ class TodoModel extends HiveObject{
   int? id;
 
   @HiveField(1)
-  final String name;
+  String name;
 
   @HiveField(2)
   final List<TodoStepsModel> todoStepsList;

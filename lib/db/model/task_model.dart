@@ -12,10 +12,10 @@ class TaskModel extends HiveObject{
   int? id;
 
   @HiveField(1)
-  final String name;
+  String name;
   
   @HiveField(2)
-  final String description;
+  String description;
 
   @HiveField(3)
   final List<TaskStepsModel> taskStepsList;

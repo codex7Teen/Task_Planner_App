@@ -1,13 +1,34 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_alert_box.dart';
+import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/notes_screen/note_update_bottom_sheet.dart';
+import 'package:scribe/screens/validations/validations.dart';
 
-class ScreenEditNotes extends StatelessWidget {
+class ScreenEditNotes extends StatefulWidget {
   // creating an object of Notesmodel and accepting data to display
-  final NotesModel note;
-  const ScreenEditNotes({super.key, required this.note});
+  final NotesModel notesModel;
+  const ScreenEditNotes({super.key, required this.notesModel});
+
+  @override
+  State<ScreenEditNotes> createState() => _ScreenEditNotesState();
+}
+
+class _ScreenEditNotesState extends State<ScreenEditNotes> {
+  // setting globalkey for forms
+  final _formKey = GlobalKey<FormState>();
+
+  // controller for note
+  final TextEditingController noteController = TextEditingController();
+
+  @override
+  void initState() {
+    noteController.text = widget.notesModel.note ?? "";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +38,7 @@ class ScreenEditNotes extends StatelessWidget {
         title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // notes title
-            child: Text(note.name,
+            child: Text(widget.notesModel.name,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
@@ -31,7 +52,9 @@ class ScreenEditNotes extends StatelessWidget {
         actions: [
           //  Edit button
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                notesUpdateBottomSheet(context, widget.notesModel.name, widget.notesModel);
+              },
               child: Text('Edit',
                   style: Theme.of(context)
                       .textTheme
@@ -42,7 +65,7 @@ class ScreenEditNotes extends StatelessWidget {
           TextButton(
               onPressed: () {
                 // show alertbox and then delete
-                showNotelAertDialog(context, note.id);
+                showNotelAertDialog(context, widget.notesModel.id);
               },
               child: Text('Delete',
                   style: Theme.of(context)
@@ -55,24 +78,31 @@ class ScreenEditNotes extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          // notes container
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 221, 235, 255),
-                borderRadius: BorderRadius.circular(20)),
-            //! N O T E S - FIELD
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: TextFormField(
-                style: TextStyle(fontSize: 18),
-                decoration: InputDecoration(
-                    hintText: 'Type something...', border: InputBorder.none),
-                maxLines: 30,
-                minLines: 1,
+        child: Form(
+          key: _formKey,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height,
+            ),
+            // notes container
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 221, 235, 255),
+                  borderRadius: BorderRadius.circular(20)),
+              //! N O T E S - FIELD
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: TextFormField(
+                  controller: noteController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => Validators()
+                      .validateField(value, 'Please type something to save.'),
+                  style: TextStyle(fontSize: 18),
+                  decoration: InputDecoration(
+                      hintText: 'Type something...', border: InputBorder.none),
+                  maxLines: 30,
+                  minLines: 1,
+                ),
               ),
             ),
           ),
@@ -80,6 +110,7 @@ class ScreenEditNotes extends StatelessWidget {
       ),
       floatingActionButton: Align(
         alignment: Alignment(0.9, 0.95),
+        //! S A V E - BTN
         child: FloatingActionButton(
             backgroundColor: Color.fromARGB(255, 6, 0, 61),
             child: Text(
@@ -87,10 +118,24 @@ class ScreenEditNotes extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () {
-              // go back
-              Navigator.of(context).pop();
+              // validate the notes
+              if (_formKey.currentState!.validate()) {
+                // calling function to update and save the data
+                saveAndUpdateNote();
+              }
             }),
       ),
     );
+  }
+
+  // update and save note method
+  Future<void> saveAndUpdateNote() async {
+    final notesDB = await Hive.openBox<NotesModel>(NotesModel.boxName);
+    // Update note content
+    widget.notesModel.note = noteController.text;
+    // Save to Hive
+    await notesDB.put(widget.notesModel.id, widget.notesModel);
+    // pop context
+    Navigator.pop(context);
   }
 }

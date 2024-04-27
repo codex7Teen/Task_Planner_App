@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import, prefer_const_constructors
+// ignore_for_file: unnecessary_import, prefer_const_constructors, unused_import
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:scribe/screens/home_screens/tasks_screen/add_steps_pop.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/alert_box.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/steps.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/tasks_screen/task_update_bottom_sheet.dart';
 
 class TaskBoxes extends StatefulWidget {
   const TaskBoxes({super.key});
@@ -149,7 +150,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                       IconButton(
                                           onPressed: () {
                                             // edit tasks
-                                            taskBottomSheet(context);
+                                            updateTaskBottomSheet(context, data.name, data.description, data);
                                           },
                                           icon: Icon(
                                             Icons.edit_note_rounded,

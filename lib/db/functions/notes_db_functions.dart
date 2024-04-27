@@ -36,3 +36,12 @@ Future<void> deleteNotes(int id) async {
     await notesDB.delete(id);
     getNotesDetails();
 }
+
+//! UPDATE NOTE
+Future<void> updateNotes(int id, NotesModel newValue) async {
+final notesDB = await Hive.openBox<NotesModel>(NotesModel.boxName);
+// update the existing task wiith the new value using the ID provided
+await notesDB.put(id, newValue);
+// refresh ui
+getNotesDetails();
+}

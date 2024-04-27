@@ -8,6 +8,7 @@ import 'package:scribe/screens/home_screens/todo_screen/add_todo_pop.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo,s.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_alert_box.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todo_edit_bottom_sheet.dart';
 
 class TodoBoxes extends StatefulWidget {
   const TodoBoxes({super.key});
@@ -113,7 +114,8 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                       )),
                                   IconButton(
                                       onPressed: () {
-                                        todoBottomSheet(context);
+                                        // edit todo
+                                        todoEditBottomSheet(context, data.name, data);
                                       },
                                       icon: Icon(
                                         Icons.edit_note_rounded,
