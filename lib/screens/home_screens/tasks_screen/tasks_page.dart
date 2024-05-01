@@ -32,15 +32,16 @@ class _ScreenTasksState extends State<ScreenTasks> {
       // Global key
       key: _globalKey,
       // floating action button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // bottom sheet
-          taskBottomSheet(context);
-        },
-        backgroundColor: Colors.white,
-        child: Icon(
-          Icons.add,
-          color: Color.fromARGB(255, 6, 0, 61),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 18),
+        child: FloatingActionButton.extended(
+          label: Text('Add Task', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
+          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          onPressed: () {
+            // bottom sheet
+            taskBottomSheet(context);
+          },
+          backgroundColor: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

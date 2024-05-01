@@ -20,19 +20,22 @@ class NotesModelAdapter extends TypeAdapter<NotesModel> {
       id: fields[0] as int?,
       name: fields[1] as String,
       note: fields[2] as String?,
+      isFavorite: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, NotesModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.note);
+      ..write(obj.note)
+      ..writeByte(3)
+      ..write(obj.isFavorite);
   }
 
   @override

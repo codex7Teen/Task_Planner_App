@@ -21,13 +21,16 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       name: fields[1] as String,
       description: fields[2] as String,
       taskStepsList: (fields[3] as List).cast<TaskStepsModel>(),
+      isFavorite: fields[4] as bool,
+      isChecked1: fields[5] as bool,
+      isChecked2: fields[6] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +38,13 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
-      ..write(obj.taskStepsList);
+      ..write(obj.taskStepsList)
+      ..writeByte(4)
+      ..write(obj.isFavorite)
+      ..writeByte(5)
+      ..write(obj.isChecked1)
+      ..writeByte(6)
+      ..write(obj.isChecked2);
   }
 
   @override

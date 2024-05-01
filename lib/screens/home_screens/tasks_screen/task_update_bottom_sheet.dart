@@ -156,7 +156,7 @@ void updateTaskBottomSheet(BuildContext context, String initialTaskName,
                       },
                       child: Container(
                         height: 35,
-                        width: 100,
+                        width: 105,
                         decoration: BoxDecoration(
                           border: Border.all(width: 1.5, color: Colors.white),
                           borderRadius: BorderRadius.circular(20),
@@ -169,7 +169,7 @@ void updateTaskBottomSheet(BuildContext context, String initialTaskName,
                               Icon(Icons.create_outlined,
                                   color: Colors.white, size: 18.5),
                               SizedBox(width: 6),
-                              Text('Create',
+                              Text('Update',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium

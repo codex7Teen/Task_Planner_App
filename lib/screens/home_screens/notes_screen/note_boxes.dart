@@ -1,22 +1,21 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
+import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/screens/home_screens/notes_screen/edit_note.dart';
 
 class NoteBoxes extends StatefulWidget {
-  const NoteBoxes({super.key});
+  final int sectionIndex;
+  const NoteBoxes({super.key, required this.sectionIndex});
 
   @override
   State<NoteBoxes> createState() => _NoteBoxesState();
 }
 
 class _NoteBoxesState extends State<NoteBoxes> {
-  // fovorites
-  bool favorite = true;
-
   @override
   Widget build(BuildContext context) {
     // note boxes builder
@@ -24,8 +23,12 @@ class _NoteBoxesState extends State<NoteBoxes> {
         valueListenable: notesListNotifier,
         builder:
             (BuildContext context, List<NotesModel> notesList, Widget? child) {
-          // showing add any add-notes GIF if no data to display.
-          return notesListNotifier.value.isEmpty
+          // Filter notes based on selectedIndex
+          final filteredNotes = widget.sectionIndex == 0
+              ? notesList
+              : notesList.where((note) => note.isFavorite).toList();
+          // showing add any add-notes GIF if no data to display and if on allNotes section
+          return notesListNotifier.value.isEmpty && widget.sectionIndex == 0 
               ? Center(
                   child: Column(
                     children: [
@@ -48,7 +51,8 @@ class _NoteBoxesState extends State<NoteBoxes> {
                       mainAxisSpacing: 20,
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
-                    final data = notesList[index];
+                    // Using filteredNotes
+                    final data = filteredNotes[index];
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -63,17 +67,20 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   topRight: Radius.circular(20))),
                           child: Row(
                             children: [
+                              // favorite icon
                               IconButton(
                                   onPressed: () {
                                     // Favorite note
                                     setState(() {
-                                      favorite = !favorite;
+                                      data.isFavorite = !data.isFavorite;
+                                      // Save data to db
+                                      updateNotes(data.id!, data);
                                     });
                                   },
                                   icon: Icon(
-                                    favorite
-                                        ? Icons.favorite_border_rounded
-                                        : Icons.favorite_rounded,
+                                    data.isFavorite
+                                        ? Icons.favorite_rounded
+                                        : Icons.favorite_border_rounded,
                                     color: Colors.white,
                                     size: 18,
                                   )),
@@ -121,7 +128,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                     );
                   },
                   // telling how much notes to display
-                  itemCount: notesList.length);
+                  itemCount: filteredNotes.length);
         });
   }
 }

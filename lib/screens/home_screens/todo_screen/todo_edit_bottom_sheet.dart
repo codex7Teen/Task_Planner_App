@@ -116,7 +116,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName, TodoModel todo
                         },
                         child: Container(
                           height: 35,
-                          width: 100,
+                          width: 105,
                           decoration: BoxDecoration(
                               border:
                                   Border.all(width: 1.5, color: Colors.white),

@@ -5,6 +5,7 @@ import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart'
 import 'package:scribe/screens/home_screens/notes_screen/note_boxes.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_search_bar.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenNotes extends StatefulWidget {
@@ -32,15 +33,16 @@ class _ScreenNotesState extends State<ScreenNotes> {
       // Global key
       key: _globalKey,
       // floating button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // open add notes page
-          notesBottomSheet(context);
-        },
-        backgroundColor: Colors.white,
-        child: Icon(
-          Icons.add,
-          color: Color.fromARGB(255, 6, 0, 61),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 18),
+        child: FloatingActionButton.extended(
+          label: Text('Add Notes', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
+          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          onPressed: () {
+            // bottom sheet
+            notesBottomSheet(context);
+          },
+          backgroundColor: Colors.white,
         ),
       ),
 
@@ -248,7 +250,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 SizedBox(height: 28),
 
                 //! N O T E - B O X E S S S S
-                Expanded(child: NoteBoxes()),
+                Expanded(child: NoteBoxes(sectionIndex: selectedIndex)),
               ],
             ),
           )

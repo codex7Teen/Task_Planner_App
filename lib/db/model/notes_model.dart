@@ -16,5 +16,8 @@ String name;
 @HiveField(2)
 String? note;
 
-NotesModel({this.id, required this.name, this.note});
+@HiveField(3)
+bool isFavorite;
+
+NotesModel({this.id, required this.name, this.note, this.isFavorite = false});
 }

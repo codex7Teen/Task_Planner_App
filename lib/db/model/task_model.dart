@@ -20,7 +20,20 @@ class TaskModel extends HiveObject{
   @HiveField(3)
   final List<TaskStepsModel> taskStepsList;
 
-  TaskModel({this.id, required this.name, required this.description,required this.taskStepsList});
+  // FAVORITE ICON
+  @HiveField(4)
+  bool isFavorite;
+
+  // CHECKBOX 1
+  @HiveField(5)
+  bool isChecked1;
+  
+  // CHECKBOX 2
+  @HiveField(6)
+  bool isChecked2;
+
+
+  TaskModel({this.id, required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false});
 
   get isChecked => null;
 }

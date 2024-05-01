@@ -22,16 +22,20 @@ class _ScreenEventsState extends State<ScreenEvents> {
       // Global key
       key: _globalKey,
       // floating button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // open add events page
-        },
-        backgroundColor: Colors.white,
-        child: Icon(
-          Icons.add,
-          color: Color.fromARGB(255, 6, 0, 61),
+      // floating action button
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 18),
+        child: FloatingActionButton.extended(
+          label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
+          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          onPressed: () {
+            // add event
+            
+          },
+          backgroundColor: Colors.white,
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
       body: Stack(
         children: [

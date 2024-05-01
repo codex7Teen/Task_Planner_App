@@ -111,12 +111,9 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
       floatingActionButton: Align(
         alignment: Alignment(0.9, 0.95),
         //! S A V E - BTN
-        child: FloatingActionButton(
+        child: FloatingActionButton.extended(
             backgroundColor: Color.fromARGB(255, 6, 0, 61),
-            child: Text(
-              'Save',
-              style: TextStyle(color: Colors.white),
-            ),
+            label: Text('Save', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
             onPressed: () {
               // validate the notes
               if (_formKey.currentState!.validate()) {

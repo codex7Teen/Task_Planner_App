@@ -6,6 +6,8 @@ import 'package:scribe/db/model/task_model.dart';
 
 ValueNotifier<List<TaskModel>> taskListNotifier = ValueNotifier([]);
 
+// task db functions
+
 //! ADD TASK
 Future<void> addTaskDetails(TaskModel value) async {
   // Open the Hive box for TaskModel

@@ -20,11 +20,6 @@ class TaskBoxes extends StatefulWidget {
 }
 
 class _TaskBoxesState extends State<TaskBoxes> {
-  // heading checkbox
-  bool? isChecked = false;
-
-  // favorites
-  bool favorite = true;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +59,17 @@ class _TaskBoxesState extends State<TaskBoxes> {
                               borderRadius: BorderRadius.circular(15)),
                           child: Row(
                             children: [
+                              // T A S K - C H E C K B O X
                               Checkbox(
                                   fillColor:
                                       MaterialStatePropertyAll(Colors.white),
                                   checkColor: Color.fromARGB(255, 6, 0, 61),
-                                  value: isChecked,
+                                  value: data.isChecked1,
                                   onChanged: (newBool) {
                                     setState(() {
-                                      isChecked = newBool;
+                                      data.isChecked1 = newBool ?? false;
+                                      /// save to task model
+                                      updateTask(data.id!, data);
                                     });
                                   }),
                               SizedBox(width: 5),
@@ -129,7 +127,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
 
                                   SizedBox(height: 10),
 
-                                  // bottom icons
+                                  //! B O T T O M - I C O N S
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -137,6 +135,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                       SizedBox(
                                         width: 24,
                                       ),
+                                      // Add task-btn
                                       IconButton(
                                           onPressed: () {
                                             // ADD STEPS (Opens add step popup)
@@ -147,6 +146,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                             color: Colors.white,
                                             size: 23,
                                           )),
+                                          // edit tadsk btn
                                       IconButton(
                                           onPressed: () {
                                             // edit tasks
@@ -157,19 +157,23 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                             color: Colors.white,
                                             size: 30,
                                           )),
+                                          // favorite button
                                       IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              favorite = !favorite;
+                                              data.isFavorite = !data.isFavorite;
+                                              // save to db
+                                              updateTask(data.id!, data);
                                             });
                                           },
                                           icon: Icon(
-                                              favorite
-                                                  ? Icons
-                                                      .favorite_border_rounded
-                                                  : Icons.favorite_rounded,
+                                              data.isFavorite
+                                                  ? Icons.favorite_rounded 
+                                                  : Icons
+                                                      .favorite_border_rounded,
                                               color: Colors.white,
                                               size: 23)),
+                                              // delete-task button
                                       IconButton(
                                           onPressed: () {
                                             // show delete alert-box
