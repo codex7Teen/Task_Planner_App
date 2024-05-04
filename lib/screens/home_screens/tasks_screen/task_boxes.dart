@@ -94,7 +94,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                               .textTheme
                                               .titleMedium
                                               ?.copyWith(
-                                                  color: Colors.white,
+                                                  color: Colors.grey,
                                                   fontSize: 17,
                                                   decoration: TextDecoration
                                                       .lineThrough)

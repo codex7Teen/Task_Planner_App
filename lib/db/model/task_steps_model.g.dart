@@ -19,17 +19,20 @@ class TaskStepsModelAdapter extends TypeAdapter<TaskStepsModel> {
     return TaskStepsModel(
       step: fields[1] as String,
       id: fields[0] as int?,
+      isStepChecked: fields[2] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskStepsModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.step);
+      ..write(obj.step)
+      ..writeByte(2)
+      ..write(obj.isStepChecked);
   }
 
   @override

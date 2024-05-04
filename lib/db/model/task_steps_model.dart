@@ -12,7 +12,10 @@ class TaskStepsModel {
   @HiveField(1)
   final String step;
 
-  TaskStepsModel({required this.step, this.id});
+  @HiveField(2)
+  bool isStepChecked;
+
+  TaskStepsModel({required this.step, this.id, this.isStepChecked = false});
 
   get isChecked => null;
 }

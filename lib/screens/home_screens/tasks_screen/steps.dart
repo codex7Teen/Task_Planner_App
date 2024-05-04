@@ -14,8 +14,6 @@ class StepsWidget extends StatefulWidget {
 }
 
 class _StepsWidgetState extends State<StepsWidget> {
-  // steps checkbox
-  bool? isChecked2 = false;
   
   late TaskModel task;
   late List<TaskStepsModel> stepsDataList;
@@ -44,17 +42,16 @@ class _StepsWidgetState extends State<StepsWidget> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.circle, color: Colors.white, size: 10),
+                   stepsData.isStepChecked ? Icon(Icons.circle, color: Colors.grey[600], size: 10) : Icon(Icons.circle, color: Color.fromARGB(255, 221, 235, 255), size: 10),
                   SizedBox(width: 8),
                   Text(stepsData.step,
-                      style: stepsData.isChecked ? Theme.of(context)
+                      style: stepsData.isStepChecked ? Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white, decoration: TextDecoration.lineThrough) :Theme.of(context)
+                          ?.copyWith(color: Colors.grey[600], decoration: TextDecoration.lineThrough) : Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white)
-                          ),
+                          ?.copyWith(color: Colors.white))
                 ],
               ),
               Row(
@@ -62,10 +59,10 @@ class _StepsWidgetState extends State<StepsWidget> {
                   Checkbox(
                       checkColor: Color.fromARGB(255, 6, 0, 61),
                       fillColor: MaterialStatePropertyAll(Colors.white),
-                      value: isChecked2,
+                      value: stepsData.isStepChecked,
                       onChanged: (newBool) {
                         setState(() {
-                          isChecked2 = newBool;  
+                          stepsData.isStepChecked = newBool ?? false;
                         });
                       }),
                   IconButton(
