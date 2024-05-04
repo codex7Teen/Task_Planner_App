@@ -318,7 +318,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
 
                   SizedBox(height: 15),
                   //! T A S K - B O X E S S S
-                  TaskBoxes(),
+                  TaskBoxes(sectionIndex: selectedIndex),
                 ],
               ),
             )

@@ -47,10 +47,14 @@ class _StepsWidgetState extends State<StepsWidget> {
                   Icon(Icons.circle, color: Colors.white, size: 10),
                   SizedBox(width: 8),
                   Text(stepsData.step,
-                      style: Theme.of(context)
+                      style: stepsData.isChecked ? Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white)),
+                          ?.copyWith(color: Colors.white, decoration: TextDecoration.lineThrough) :Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white)
+                          ),
                 ],
               ),
               Row(

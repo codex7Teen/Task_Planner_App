@@ -13,14 +13,14 @@ import 'package:scribe/screens/home_screens/tasks_screen/task_bottom_sheet.dart'
 import 'package:scribe/screens/home_screens/tasks_screen/task_update_bottom_sheet.dart';
 
 class TaskBoxes extends StatefulWidget {
-  const TaskBoxes({super.key});
+  final int sectionIndex;
+  const TaskBoxes({super.key, required this.sectionIndex});
 
   @override
   State<TaskBoxes> createState() => _TaskBoxesState();
 }
 
 class _TaskBoxesState extends State<TaskBoxes> {
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -29,12 +29,22 @@ class _TaskBoxesState extends State<TaskBoxes> {
         valueListenable: taskListNotifier,
         builder:
             (BuildContext context, List<TaskModel> taskList, Widget? child) {
+          // filtering tasks based on selectedIndex
+          List<TaskModel> filteredTasks;
+          //! F I L T E R I N G - T A S K S
+          if (widget.sectionIndex == 0) {
+            filteredTasks = taskList.where((task) => !task.isChecked1).toList();
+          } else if (widget.sectionIndex == 1) {
+            filteredTasks = taskList.where((task) => task.isFavorite).toList();
+          } else {
+            filteredTasks = taskList.where((task) => task.isChecked1).toList();
+          }
           // showing add any add-task GIF if no data to display.
           return taskListNotifier.value.isEmpty
               ? Center(
                   child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height *.045),
+                    SizedBox(height: MediaQuery.of(context).size.height * .045),
                     Lottie.asset('assets/animations/tasks.json', width: 240),
                     Text('Add your tasks...',
                         style: Theme.of(context)
@@ -46,7 +56,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                 ))
               : ListView.separated(
                   itemBuilder: (context, index) {
-                    final data = taskList[index];
+                    final data = filteredTasks[index];
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
@@ -68,6 +78,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   onChanged: (newBool) {
                                     setState(() {
                                       data.isChecked1 = newBool ?? false;
+
                                       /// save to task model
                                       updateTask(data.id!, data);
                                     });
@@ -77,14 +88,22 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   // task name
-                                  child: Text(
-                                    data.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium
-                                        ?.copyWith(
-                                            color: Colors.white, fontSize: 17),
-                                  ),
+                                  child: Text(data.name,
+                                      style: data.isChecked1
+                                          ? Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                  color: Colors.white,
+                                                  fontSize: 17,
+                                                  decoration: TextDecoration
+                                                      .lineThrough)
+                                          : Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                  color: Colors.white,
+                                                  fontSize: 17)),
                                 ),
                               ),
                             ],
@@ -146,34 +165,39 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                             color: Colors.white,
                                             size: 23,
                                           )),
-                                          // edit tadsk btn
+                                      // edit tadsk btn
                                       IconButton(
                                           onPressed: () {
                                             // edit tasks
-                                            updateTaskBottomSheet(context, data.name, data.description, data);
+                                            updateTaskBottomSheet(
+                                                context,
+                                                data.name,
+                                                data.description,
+                                                data);
                                           },
                                           icon: Icon(
                                             Icons.edit_note_rounded,
                                             color: Colors.white,
                                             size: 30,
                                           )),
-                                          // favorite button
+                                      // favorite button
                                       IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              data.isFavorite = !data.isFavorite;
+                                              data.isFavorite =
+                                                  !data.isFavorite;
                                               // save to db
                                               updateTask(data.id!, data);
                                             });
                                           },
                                           icon: Icon(
                                               data.isFavorite
-                                                  ? Icons.favorite_rounded 
+                                                  ? Icons.favorite_rounded
                                                   : Icons
                                                       .favorite_border_rounded,
                                               color: Colors.white,
                                               size: 23)),
-                                              // delete-task button
+                                      // delete-task button
                                       IconButton(
                                           onPressed: () {
                                             // show delete alert-box
@@ -197,7 +221,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                       ),
                     );
                   },
-                  itemCount: taskList.length,
+                  itemCount: filteredTasks.length,
                   // spacing between each container
                   separatorBuilder: (context, index) {
                     return SizedBox(height: 23);
