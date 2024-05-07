@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import
+// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_alert_box.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
@@ -134,5 +135,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
     await notesDB.put(widget.notesModel.id, widget.notesModel);
     // pop context
     Navigator.pop(context);
+    // notify listeners
+    notesListNotifier.notifyListeners();
   }
 }

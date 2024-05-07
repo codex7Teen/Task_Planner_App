@@ -19,17 +19,20 @@ class TodoStepsModelAdapter extends TypeAdapter<TodoStepsModel> {
     return TodoStepsModel(
       stepTodo: fields[2] as String,
       id: fields[0] as int?,
+      isTodoChecked: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TodoStepsModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(2)
-      ..write(obj.stepTodo);
+      ..write(obj.stepTodo)
+      ..writeByte(3)
+      ..write(obj.isTodoChecked);
   }
 
   @override

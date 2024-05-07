@@ -28,7 +28,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
               ? notesList
               : notesList.where((note) => note.isFavorite).toList();
           // showing add any add-notes GIF if no data to display and if on allNotes section
-          return notesListNotifier.value.isEmpty && widget.sectionIndex == 0 
+          return notesListNotifier.value.isEmpty && widget.sectionIndex == 0
               ? Center(
                   child: Column(
                     children: [
@@ -111,18 +111,27 @@ class _NoteBoxesState extends State<NoteBoxes> {
                             }));
                           },
                           child: Container(
-                            height: 133.7,
-                            width: 185,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 221, 235, 255),
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20))),
-                            // lottie animation
-                            child: LottieBuilder.asset(
-                                repeat: false,
-                                'assets/animations/note_contents2.json'),
-                          ),
+                              height: 133.7,
+                              width: 185,
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 221, 235, 255),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20))),
+
+                              // showing lottie only if notes is empty
+                              child: data.note?.isEmpty ?? true
+                                  ? // lottie animation
+                                  LottieBuilder.asset(
+                                      repeat: false,
+                                      'assets/animations/note_contents2.json')
+                                  : Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.vertical,
+                                          child: Text(
+                                              data.note!)),
+                                    )),
                         )
                       ],
                     );

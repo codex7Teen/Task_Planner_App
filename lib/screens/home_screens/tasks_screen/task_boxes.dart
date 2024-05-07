@@ -78,7 +78,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   onChanged: (newBool) {
                                     setState(() {
                                       data.isChecked1 = newBool ?? false;
-
+                                      
                                       /// save to task model
                                       updateTask(data.id!, data);
                                     });

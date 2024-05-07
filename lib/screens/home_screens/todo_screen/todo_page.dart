@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_boxes.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todo_search-field.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenTodo extends StatefulWidget {
@@ -35,8 +36,15 @@ class _ScreenTodoState extends State<ScreenTodo> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
         child: FloatingActionButton.extended(
-          label: Text('Add Todo', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
-          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          label: Text('Add Todo',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge!
+                  .copyWith(color: Color.fromARGB(255, 6, 0, 61))),
+          icon: Icon(
+            Icons.add,
+            color: Color.fromARGB(255, 6, 0, 61),
+          ),
           onPressed: () {
             // bottom sheet
             todoBottomSheet(context);
@@ -80,48 +88,49 @@ class _ScreenTodoState extends State<ScreenTodo> {
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
-            child: searchToggle ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // side bar icon
-                IconButton(
-                    onPressed: () {
-                      // calling open drawer here
-                      _globalKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(Icons.menu_rounded,
-                        size: 44, color: Color.fromARGB(255, 6, 0, 61))),
-                // date
-                Text('20/03/2024',
-                    style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 6, 0, 61))),
-                // search icon
-                IconButton(
-                    onPressed: () {
-                      // Open Search Bar
-                      setState(() {
-                        searchToggle = !searchToggle;
-                      });
-                    },
-                    icon: Icon(Icons.search_rounded,
-                        size: 37, color: Color.fromARGB(255, 6, 0, 61))),
-              ],
-            ) : 
-            // search bar
-            // SearchBarField(
-            //   onCancelTapped: (){
-            //   setState(() {
-            //     searchToggle = !searchToggle;
-            //   });
-            // })
-            Text('Hoiiiiiiiiiiiiiiiiiiiiiiiii')
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
+              child: searchToggle
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // side bar icon
+                        IconButton(
+                            onPressed: () {
+                              // calling open drawer here
+                              _globalKey.currentState?.openDrawer();
+                            },
+                            icon: Icon(Icons.menu_rounded,
+                                size: 44,
+                                color: Color.fromARGB(255, 6, 0, 61))),
+                        // date
+                        Text('20/03/2024',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 6, 0, 61))),
+                        // search icon
+                        IconButton(
+                            onPressed: () {
+                              // Open Search Bar
+                              setState(() {
+                                searchToggle = !searchToggle;
+                              });
+                            },
+                            icon: Icon(Icons.search_rounded,
+                                size: 37,
+                                color: Color.fromARGB(255, 6, 0, 61))),
+                      ],
+                    )
+                    //! S E A R C H - B A R
+                  : TodoSearchBarField(
+                      onCancelTapped: () {
+                        setState(() {
+                          searchToggle = !searchToggle;
+                        });
+                      })),
 
           Padding(
             padding:
@@ -163,18 +172,18 @@ class _ScreenTodoState extends State<ScreenTodo> {
                             ),
                             Text(
                               'All ToDo',
-                              style: selectedIndex == 0 ? Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 15)
-                                    : Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:
-                                                  Color.fromARGB(255, 6, 0, 61),
-                                              fontSize: 14.5),
+                              style: selectedIndex == 0
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: Colors.white, fontSize: 15)
+                                  : Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: Color.fromARGB(255, 6, 0, 61),
+                                          fontSize: 14.5),
                             ),
                             SizedBox(width: 3),
                           ],
@@ -213,21 +222,20 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                   ? Colors.white
                                   : Color.fromARGB(255, 6, 0, 61),
                             ),
-                            Text(
-                              'Favorites',
-                              style: selectedIndex == 1 ? Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 15)
+                            Text('Favorites',
+                                style: selectedIndex == 1
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color: Colors.white, fontSize: 15)
                                     : Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:
-                                                  Color.fromARGB(255, 6, 0, 61),
-                                              fontSize: 14.5)
-                            ),
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color:
+                                                Color.fromARGB(255, 6, 0, 61),
+                                            fontSize: 14.5)),
                             SizedBox(width: 3),
                           ],
                         ),
@@ -240,30 +248,28 @@ class _ScreenTodoState extends State<ScreenTodo> {
 
                 // Seleted field indication text (eg. All tasks, favs etc.)
                 selectedIndex == 0
-                    ? Text(
-                        'All Todo',
+                    ? Text('All Todo',
                         style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(
-                                  color: Color.fromARGB(255, 6, 0, 61),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)
-                      )
-                    : Text(
-                        'Favorites',
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: Color.fromARGB(255, 6, 0, 61),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold))
+                    : Text('Favorites',
                         style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(
-                                  color: Color.fromARGB(255, 6, 0, 61),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)
-                      ),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: Color.fromARGB(255, 6, 0, 61),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold)),
 
                 SizedBox(height: 28),
                 //! T O D O - B O X E S S S
-                TodoBoxes(),
+                TodoBoxes(
+                  todoSectionIndex: selectedIndex,
+                ),
               ],
             ),
           )

@@ -17,5 +17,11 @@ class TodoModel extends HiveObject{
   @HiveField(2)
   final List<TodoStepsModel> todoStepsList;
 
-  TodoModel({required this.name, this.id, required this.todoStepsList});
-}
+  @HiveField(3)
+  bool todoFavorite;
+
+  @HiveField(4)
+  bool todoCheckBox;
+
+  TodoModel({required this.name, this.id, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false});
+} 

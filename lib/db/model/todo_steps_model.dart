@@ -12,5 +12,8 @@ class TodoStepsModel {
   @HiveField(2)
   final String stepTodo;
 
-  TodoStepsModel({required this.stepTodo, this.id});
+  @HiveField(3)
+  bool isTodoChecked;
+
+  TodoStepsModel({required this.stepTodo, this.id, this.isTodoChecked = false});
 }

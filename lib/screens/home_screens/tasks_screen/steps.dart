@@ -20,7 +20,9 @@ class _StepsWidgetState extends State<StepsWidget> {
 
   @override
   void initState() {
+    // getting List of taskstepsmodel
     stepsDataList = widget.taskModel.taskStepsList;
+    // getting taskmodel
     task = widget.taskModel;
     super.initState();
   }
@@ -63,13 +65,18 @@ class _StepsWidgetState extends State<StepsWidget> {
                       onChanged: (newBool) {
                         setState(() {
                           stepsData.isStepChecked = newBool ?? false;
+
+                          // assigning the new changed bool to isStepChecked bool inside taskstepsmodel
+                          task.taskStepsList[index].isStepChecked = stepsData.isStepChecked;
+                          // Save to taskstepsmodel
+                          updateTask(task.key, task);
                         });
                       }),
                   IconButton(
                       onPressed: ()async {
                         // delete step
                         task.taskStepsList.removeAt(index); 
-                       await updateTask(task.key, task);
+                       await updateTask(task.key, task); 
                       },
                       icon: Icon(
                         Icons.delete,

@@ -16,15 +16,15 @@ class TodoWidget extends StatefulWidget {
 }
 
 class _TodoWidgetState extends State<TodoWidget> {
-  //Todo checkbox
-  bool? isChecked2 = false;
-  
+
   late TodoModel todo;
   late List<TodoStepsModel> todoDataList;
 
   @override
   void initState() {
+    // getting todomodel
     todo = widget.todoModel;
+    // getting list of todostepsmodel
     todoDataList = widget.todoModel.todoStepsList;
     super.initState();
   }
@@ -49,10 +49,14 @@ class _TodoWidgetState extends State<TodoWidget> {
                   Icon(Icons.circle, color: Colors.white, size: 10),
                   SizedBox(width: 8),
                   Text(todoData.stepTodo,
-                      style: Theme.of(context)
+                      style: todoData.isTodoChecked ? Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white)),
+                          ?.copyWith(color: Colors.grey[600], decoration: TextDecoration.lineThrough) : Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white)
+                          ),
                 ],
               ),
               Row(
@@ -60,10 +64,16 @@ class _TodoWidgetState extends State<TodoWidget> {
                   Checkbox(
                       checkColor: Color.fromARGB(255, 6, 0, 61),
                       fillColor: MaterialStatePropertyAll(Colors.white),
-                      value: isChecked2,
+                      value: todoData.isTodoChecked,
                       onChanged: (newBool) {
                         setState(() {
-                          isChecked2 = newBool;
+                          todoData.isTodoChecked = newBool ?? false;
+
+                        
+                          // assigning to newlychanged bool to isTodoChecked inside todostepsmodel which is inside todoModel
+                          todo.todoStepsList[index].isTodoChecked = todoData.isTodoChecked;
+                          // save to db (todomodel)
+                          updateTodo(todo.id!, todo);
                         });
                       }),
                   IconButton(
