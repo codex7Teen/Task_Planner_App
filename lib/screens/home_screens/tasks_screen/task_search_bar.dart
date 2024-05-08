@@ -7,61 +7,61 @@ import 'package:scribe/db/model/task_model.dart';
 class SearchBarField extends StatefulWidget {
   final VoidCallback onCancelTapped;
   final List<TaskModel> taskListx;
-  const SearchBarField({super.key, required this.onCancelTapped, required this.taskListx});
+  const SearchBarField(
+      {super.key, required this.onCancelTapped, required this.taskListx});
 
   @override
   State<SearchBarField> createState() => _SearchBarFieldState();
 }
 
 class _SearchBarFieldState extends State<SearchBarField> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-                    padding: const EdgeInsets.only(top: 11),
-                    child: TextFormField(
-                      onChanged: (value) {
-                        searchFields(value);
-                      },
-                        style: Theme.of(context)
-                              .textTheme
-                              .titleMedium?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
-                        decoration: InputDecoration(
-                            hintText: 'Search...',
-                            fillColor: Colors.white,
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide.none
-                                ),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  // calls the setstate to toggle between icons.
-                                  widget.onCancelTapped();
-                                },
-                                icon: Icon(Icons.cancel_rounded)),
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 12.0)),
-                      ),
-                  );
+      padding: const EdgeInsets.only(top: 11),
+      child: TextFormField(
+        onChanged: (value) {
+          searchFields(value);
+        },
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+        decoration: InputDecoration(
+            hintText: 'Search...',
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none),
+            suffixIcon: IconButton(
+                onPressed: () {
+                  // clear field
+                  clearSearchField();
+                  // toggle between icons.
+                  widget.onCancelTapped();
+                },
+                icon: Icon(Icons.cancel_rounded)),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 25, vertical: 12.0)),
+      ),
+    );
   }
 
   // method for searching tasks
   void searchFields(String query) {
-    List<TaskModel> filteredTasks = widget.taskListx.where((list){
+    List<TaskModel> filteredTasks = widget.taskListx.where((list) {
       return list.name.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
     setState(() {
-      // assisgning the filtered tasks only-if textformfield has any value
-      taskListNotifier.value = filteredTasks.isNotEmpty ? filteredTasks : widget.taskListx;
+      // assisgning the filtered tasks to taskmodel
+      taskListNotifier.value = filteredTasks;
     });
   }
 
-  // clear the textformfield value
+  // clear the textformfield value on cancel button tap
   void clearSearchField() {
-    setState(() {
-      searchFields('');
-    });
+    searchFields('');
   }
 }

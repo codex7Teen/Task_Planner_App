@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_boxes.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_search_bar.dart';
@@ -23,7 +25,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   // search icon ontap
-  bool searchToggle = true;
+  bool searchToggle = false;
 
   //! S C A F F O L D
   @override
@@ -61,11 +63,14 @@ class _ScreenNotesState extends State<ScreenNotes> {
               ),
               Column(
                 children: [
-                  Image.asset(
-                    'assets/images/decoration_image_2.png',
-                    height: MediaQuery.of(context).size.height * .23,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill,
+                  Visibility(
+                    visible: !searchToggle,
+                    child: Image.asset(
+                      'assets/images/decoration_image_2.png',
+                      height: MediaQuery.of(context).size.height * .23,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Divider(
                     indent: 17,
@@ -80,7 +85,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
 
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
-            child: searchToggle ? Row(
+            child: !searchToggle ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // side bar icon
@@ -115,7 +120,9 @@ class _ScreenNotesState extends State<ScreenNotes> {
               setState(() {
                 searchToggle = !searchToggle;
               });
-            }),
+            },
+            notesModelx: notesListNotifier.value,
+            ),
           ),
 
           Padding(
@@ -250,7 +257,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                 SizedBox(height: 28),
 
                 //! N O T E - B O X E S S S S
-                Expanded(child: NoteBoxes(sectionIndex: selectedIndex)),
+                Expanded(child: NoteBoxes(sectionIndex: selectedIndex, notesSearchToggle: searchToggle,)),
               ],
             ),
           )

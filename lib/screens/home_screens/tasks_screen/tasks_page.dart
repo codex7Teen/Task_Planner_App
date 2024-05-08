@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_bottom_sheet.dart';
@@ -22,10 +23,11 @@ class _ScreenTasksState extends State<ScreenTasks> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   // search icon ontap
-  bool searchToggle = true;
+  bool searchToggle = false;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       // getting all tasks from DB
       drawer: SideDrawer(),
@@ -51,7 +53,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            // decoration images
+            // Decoration images
             Column(
               children: [
                 Image.asset(
@@ -62,10 +64,13 @@ class _ScreenTasksState extends State<ScreenTasks> {
                   fit: BoxFit.fill,
                 ),
                 Spacer(),
-                Image.asset('assets/images/decoration_image_2.png',
-                    height: MediaQuery.of(context).size.height * 0.23,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill),
+                Visibility(
+                  visible: !searchToggle,
+                  child: Image.asset('assets/images/decoration_image_2.png',
+                      height: MediaQuery.of(context).size.height * 0.23,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill),
+                ),
                 Divider(
                   indent: 17,
                   endIndent: 17,
@@ -78,11 +83,11 @@ class _ScreenTasksState extends State<ScreenTasks> {
             Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
-                child: searchToggle
+                child: !searchToggle
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // side bar icon
+                          // side bar icon (Drawer icon)
                           IconButton(
                               onPressed: () {
                                 // calling open drawer here
@@ -119,8 +124,6 @@ class _ScreenTasksState extends State<ScreenTasks> {
                       onCancelTapped: () {
                         setState(() {
                           searchToggle = !searchToggle;
-                          // Clear the search query when cancel button is tapped
-                          
                         });
                       })),
 
@@ -318,7 +321,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
 
                   SizedBox(height: 15),
                   //! T A S K - B O X E S S S
-                  TaskBoxes(sectionIndex: selectedIndex),
+                  TaskBoxes(sectionIndex: selectedIndex, taskSearchToggler: searchToggle,),
                 ],
               ),
             )

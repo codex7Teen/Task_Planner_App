@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_boxes.dart';
@@ -22,10 +24,9 @@ class _ScreenTodoState extends State<ScreenTodo> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   // search icon ontap
-  bool searchToggle = true;
+  bool searchToggle = false;
 
   //! S C A F F O L D
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,12 +70,15 @@ class _ScreenTodoState extends State<ScreenTodo> {
               ),
               Column(
                 children: [
-                  Image.asset(
-                    'assets/images/decoration_image_2.png',
-                    // Media Query
-                    height: MediaQuery.of(context).size.height * .23,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill,
+                  Visibility(
+                    visible: !searchToggle,
+                    child: Image.asset(
+                      'assets/images/decoration_image_2.png',
+                      // Media Query
+                      height: MediaQuery.of(context).size.height * .23,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Divider(
                     indent: 17,
@@ -89,7 +93,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
 
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
-              child: searchToggle
+              child: !searchToggle
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -126,6 +130,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                     )
                     //! S E A R C H - B A R
                   : TodoSearchBarField(
+                    todoListx: todoListNotifier.value,
                       onCancelTapped: () {
                         setState(() {
                           searchToggle = !searchToggle;
@@ -269,6 +274,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                 //! T O D O - B O X E S S S
                 TodoBoxes(
                   todoSectionIndex: selectedIndex,
+                  todoSearchToggler: searchToggle,
                 ),
               ],
             ),

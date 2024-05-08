@@ -18,7 +18,7 @@ Future<void> main() async {
     // Initialize Hive
     await Hive.initFlutter();
 
-    // Register the LoginModelAdapter
+    // Register the LoginModelAdapter 
     Hive.registerAdapter(LoginModelAdapter());
     // Register the TaskModelAdapter
     Hive.registerAdapter(TaskModelAdapter());
