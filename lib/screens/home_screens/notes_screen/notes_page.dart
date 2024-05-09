@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_boxes.dart';
@@ -97,7 +98,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                     icon: Icon(Icons.menu_rounded,
                         size: 44, color: Color.fromARGB(255, 6, 0, 61))),
                 // date
-                Text('20/03/2024', style: Theme.of(context)
+                Text(DateFormat('dd/MM/yyyy').format(DateTime.now()), style: Theme.of(context)
                                   .textTheme
                                   .titleLarge
                                   ?.copyWith(

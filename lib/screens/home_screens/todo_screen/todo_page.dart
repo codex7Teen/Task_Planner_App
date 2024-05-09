@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
@@ -107,7 +108,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                 size: 44,
                                 color: Color.fromARGB(255, 6, 0, 61))),
                         // date
-                        Text('20/03/2024',
+                        Text(DateFormat('dd/MM/yyyy').format(DateTime.now()),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge

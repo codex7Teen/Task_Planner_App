@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenEvents extends StatefulWidget {
@@ -29,7 +31,8 @@ class _ScreenEventsState extends State<ScreenEvents> {
           label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
           icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
           onPressed: () {
-            // add event
+            // open add event bottom sheet
+            eventBottomSheet(context);
             
           },
           backgroundColor: Colors.white,
@@ -86,7 +89,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
 
                 SizedBox(width: 95),
                 // date
-                Text('20/03/2024',
+                Text(DateFormat('dd/MM/yyyy').format(DateTime.now()),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -152,7 +155,6 @@ class _ScreenEventsState extends State<ScreenEvents> {
                 SizedBox(height: 28),
 
                 //! C A L E N D A R -------
-
                 CalendarWidget(),
 
                 SizedBox(height: 40),

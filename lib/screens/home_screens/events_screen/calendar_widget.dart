@@ -14,7 +14,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-
         // giving curve to edges of calendar
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15), 
@@ -38,7 +37,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             ),
             headerHeight: 50,
           
-            // weeddays textstyle (sun, mon etc..)
+            // weekdays textstyle (sun, mon etc..)
             viewHeaderStyle: ViewHeaderStyle(
               dayTextStyle: TextStyle(
                 fontWeight: FontWeight.w600,
