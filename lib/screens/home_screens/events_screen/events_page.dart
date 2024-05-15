@@ -4,16 +4,35 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_sample_model.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenEvents extends StatefulWidget {
-  const ScreenEvents({super.key});
+  const ScreenEvents({super.key, this.event});
+
+   // calendar event object to acess eventsample model
+  final Event? event;
 
   @override
   State<ScreenEvents> createState() => _ScreenEventsState();
 }
 
 class _ScreenEventsState extends State<ScreenEvents> {
+
+//! INIT State
+@override
+  void initState() {
+    super.initState();
+
+      // getting the date
+    if(widget.event == null) {
+      // displays cureent time
+      fromDate = DateTime.now();
+      // displays current time + 2hrs
+      toDate = DateTime.now().add(Duration(hours: 2));
+    }
+  }
+
   //Setting global key for scafold state
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 

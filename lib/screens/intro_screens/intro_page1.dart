@@ -25,7 +25,7 @@ class IntroPage1 extends StatelessWidget {
              // sub text
             Text(
                 'Scribe enables you to effortlessly create and organize notes on the go. Streamline your productivity with this intuitive app designed to capture your thoughts anytime, anywhere.',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Color.fromARGB(255, 86, 86, 86)),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color.fromARGB(255, 86, 86, 86)),
                 ),
           ],
         ),

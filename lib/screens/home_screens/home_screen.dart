@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -6,6 +6,8 @@ import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_sample_model.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/events_page.dart';
 import 'package:scribe/decorators/colors/home_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_page.dart';
@@ -28,10 +30,9 @@ class _ScreenHomeState extends State<ScreenHome> {
     ScreenEvents()
   ];
 
-  // init state
+  //! init state
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     applyNavBarColors();
     // calling the function to get value from DB.
@@ -41,9 +42,15 @@ class _ScreenHomeState extends State<ScreenHome> {
     // calling the function to get value from DB.
     getNotesDetails();
     // calling the function to get value from DB.
-    getTodoDetails();
-    // calling the function to get value froqm DB.
-    
+    getTodoDetails(); 
+  }
+
+  //! Dispose
+  @override
+  void dispose() {
+    // dispose the event title field
+    eventNameController.dispose();
+    super.dispose();
   }
 
   // setting current index = 0

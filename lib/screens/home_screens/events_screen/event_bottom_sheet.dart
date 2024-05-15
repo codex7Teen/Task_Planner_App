@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_import, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
@@ -8,7 +10,11 @@ import 'package:scribe/screens/validations/validations.dart';
 final _formKey = GlobalKey<FormState>();
 
 // event name controller
-final nameController = TextEditingController();
+final eventNameController = TextEditingController();
+
+late DateTime fromDate;
+
+late DateTime toDate; 
 
 eventBottomSheet(BuildContext context) {
 
@@ -34,7 +40,7 @@ eventBottomSheet(BuildContext context) {
                       SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                        controller: nameController,
+                        controller: eventNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter event name'),
@@ -56,35 +62,83 @@ eventBottomSheet(BuildContext context) {
                   ),
                   Divider(),
 
-                  SizedBox(height: 35),
+                  SizedBox(height: 30),
 
-                  //! select date & time
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //! select from date & time
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Select date
-                      Column(
+                      Text('FROM', style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white, fontSize: 16)),
+                      SizedBox(height: 8),
+                      Row(
                         children: [
-                          Icon(Icons.calendar_month_outlined, color: Colors.white,size: 32,),
-                          SizedBox(height: 7),
-                          Text('Select Date', style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.white))
-                        ],
-                      ),
+                          Expanded(
+                            flex: 2,
+                            child: ListTile(
+                              // getting date from calendar utils
+                              leading: Text(Utils.toDate(fromDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
+                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              onTap: () {
+                                // open select from date
+                                
+                              },
+                            ),
+                          ),
 
-                      // Select time
-                      Column(
-                        children: [
-                          Icon(Icons.timer_outlined, color: Colors.white,size: 32,),
-                           SizedBox(height: 7),
-                          Text('Select Time', style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.white))
+                         Expanded(
+                            child: ListTile(
+                              leading: Text(Utils.toTime(fromDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
+                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              onTap: () {
+                                // open select from time
+                                
+                              },
+                            ),
+                          ),
                         ],
-                      ),
+                      )
+                    ],
+                  ),
+
+                  SizedBox(height: 30),
+
+                   //! select to date & time
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('TO', style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white, fontSize: 16)),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: ListTile(
+                              // getting date from calendar utils
+                              leading: Text(Utils.toDate(toDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
+                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              onTap: () {
+                                // open select from date
+                              },
+                            ),
+                          ),
+
+                         Expanded(
+                            child: ListTile(
+                              leading: Text(Utils.toTime(toDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
+                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              onTap: () {
+                                // open select from time
+                              },
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
 
                   SizedBox(height: 35),
 
-                  //! Dropdown list and create button
+                  //! Create button
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -97,8 +151,10 @@ eventBottomSheet(BuildContext context) {
                             Navigator.pop(context);
                             // snackbar
                             showSnackBar(context, 'Event added successfully.');
+                            // clear the fields
+                            eventNameController.clear();
                           }
-
+                          
                           // save datas to database
 
                         },
