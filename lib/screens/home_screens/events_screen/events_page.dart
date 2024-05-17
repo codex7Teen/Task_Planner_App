@@ -19,22 +19,23 @@ class ScreenEvents extends StatefulWidget {
 
 class _ScreenEventsState extends State<ScreenEvents> {
 
+// datetime notifier which contains the FROM-datetime
+  late ValueNotifier<DateTime> fromDateNotifier;
+
+  // datetime notifier which contains the TO-datetime
+  late ValueNotifier<DateTime> toDateNotifier;
+
+    // Setting global key for scafold state
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+   
 //! INIT State
 @override
   void initState() {
     super.initState();
-
-      // getting the date
-    if(widget.event == null) {
-      // displays cureent time
-      fromDate = DateTime.now();
-      // displays current time + 2hrs
-      toDate = DateTime.now().add(Duration(hours: 2));
-    }
+    final now = DateTime.now();
+    fromDateNotifier = ValueNotifier<DateTime>(now);
+    toDateNotifier = ValueNotifier<DateTime>(now.add(Duration(hours: 2)));
   }
-
-  //Setting global key for scafold state
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,6 @@ class _ScreenEventsState extends State<ScreenEvents> {
       drawer: SideDrawer(),
       // Global key
       key: _globalKey,
-      // floating button
       // floating action button
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
@@ -51,8 +51,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
           icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
           onPressed: () {
             // open add event bottom sheet
-            eventBottomSheet(context);
-            
+            eventBottomSheet(context, fromDateNotifier, toDateNotifier);
           },
           backgroundColor: Colors.white,
         ),

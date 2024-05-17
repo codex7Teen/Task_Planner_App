@@ -3,12 +3,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/db/model/login_model.dart';
 import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/db/model/task_model.dart';
 import 'package:scribe/db/model/task_steps_model.dart';
 import 'package:scribe/db/model/todo_model.dart';
 import 'package:scribe/db/model/todo_steps_model.dart';
+import 'package:scribe/screens/home_screens/events_screen/events_page.dart';
+import 'package:scribe/screens/home_screens/home_screen.dart';
 import 'package:scribe/screens/intro_screens/splash_screen.dart';
 
 Future<void> main() async {
@@ -30,6 +33,8 @@ Future<void> main() async {
     Hive.registerAdapter(TaskStepsModelAdapter());
     // Register the TaskModelAdapter
     Hive.registerAdapter(TodoStepsModelAdapter());
+    // Register the EventModelAdapter
+    Hive.registerAdapter(EventsModelAdapter());
  
     // Run the application
     runApp(const MyApp());
@@ -42,7 +47,7 @@ class MyApp extends StatelessWidget {
     Widget build(BuildContext context) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: const ScreenSplash(),
+            home: const ScreenHome(),
         );
     }
 }

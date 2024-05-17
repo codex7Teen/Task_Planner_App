@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scribe/db/functions/event_db_functions.dart';
+import 'package:scribe/db/functions/todo_db_functions.dart';
+import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
@@ -12,11 +15,92 @@ final _formKey = GlobalKey<FormState>();
 // event name controller
 final eventNameController = TextEditingController();
 
-late DateTime fromDate;
+eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
+    ValueNotifier<DateTime> toDateNotifier) {
+  //! E V E N T - F U N C T I O N S
 
-late DateTime toDate; 
+  Future<DateTime?> pickDateTime(
+    DateTime initialDate, {
+    required bool pickDate,
+    DateTime? firstDate,
+  }) async {
+    if (pickDate) {
+      final date = await showDatePicker(
+          // datepicker color-theme
+          builder: (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: Colors.blue, // header background color
+                ),
+              ),
+              child: child!,
+            );
+          },
+          context: context,
+          firstDate: firstDate ?? DateTime(2015, 8),
+          lastDate: DateTime(2101),
+          initialDate: initialDate);
 
-eventBottomSheet(BuildContext context) {
+      if (date == null) return null;
+      // assigns the initial time to time
+      final time =
+          Duration(hours: initialDate.hour, minutes: initialDate.minute);
+
+      return date.add(time);
+    } else {
+      final timeOfDay = await showTimePicker(
+          // timepicker color-theme
+          builder: (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                    primary: Colors.blue, // header background color
+                    secondary: Colors.cyan),
+              ),
+              child: child!,
+            );
+          },
+          context: context,
+          initialTime: TimeOfDay.fromDateTime(initialDate));
+
+      if (timeOfDay == null) return null;
+
+      final date =
+          DateTime(initialDate.year, initialDate.month, initialDate.day);
+      final time = Duration(hours: timeOfDay.hour, minutes: timeOfDay.minute);
+
+      return date.add(time);
+    }
+  }
+
+  //! F R O M - DATE-TIME
+  Future pickFromDateTime({required bool pickDate}) async {
+    final date = await pickDateTime(fromDateNotifier.value, pickDate: pickDate);
+
+    if (date == null) return;
+
+    // setting the todate to same as fromdate if, selected fromdate is date after the to date
+    if (date.isAfter(toDateNotifier.value)) {
+      toDateNotifier.value = DateTime(date.year, date.month, date.day,
+          fromDateNotifier.value.hour, fromDateNotifier.value.minute);
+    }
+
+    // adding the from datetime to notifier obj
+    fromDateNotifier.value = date;
+  }
+
+  //! T O - DATE-TIME
+  Future pickToDateTime({required bool pickDate}) async {
+    final date = await pickDateTime(toDateNotifier.value, pickDate: pickDate,
+    firstDate: pickDate ? fromDateNotifier.value : null,  
+    );
+
+    if (date == null) return;
+
+    // adding the from datetime to notifier obj
+    toDateNotifier.value = date;
+  }
 
   showModalBottomSheet(
       isScrollControlled: true,
@@ -45,17 +129,15 @@ eventBottomSheet(BuildContext context) {
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter event name'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 17),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: Colors.white, fontSize: 17),
                         decoration: InputDecoration(
-                            label: Text(
-                              'Enter event name',
-                              style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)
-                            ),
+                            label: Text('Enter event name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(color: Colors.grey)),
                             border: InputBorder.none),
                       ))
                     ],
@@ -64,34 +146,62 @@ eventBottomSheet(BuildContext context) {
 
                   SizedBox(height: 30),
 
-                  //! select from date & time
+                  //! select from date & time ( FROM )
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('FROM', style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white, fontSize: 16)),
+                      Text('FROM',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(color: Colors.white, fontSize: 16)),
                       SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
                             flex: 2,
                             child: ListTile(
-                              // getting date from calendar utils
-                              leading: Text(Utils.toDate(fromDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
-                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              // getting date
+                              leading: ValueListenableBuilder(
+                                  valueListenable: fromDateNotifier,
+                                  builder: (context, value, _) {
+                                    return Text(
+                                        Utils.toDate(fromDateNotifier.value),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .copyWith(color: Colors.white));
+                                  }),
+                              trailing: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.white,
+                              ),
                               onTap: () {
                                 // open select from date
-                                
+                                pickFromDateTime(pickDate: true);
                               },
                             ),
                           ),
-
-                         Expanded(
+                          Expanded(
+                            // getting time
                             child: ListTile(
-                              leading: Text(Utils.toTime(fromDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
-                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              leading: ValueListenableBuilder(
+                                  valueListenable: fromDateNotifier,
+                                  builder: (context, value, _) {
+                                    return Text(
+                                        Utils.toTime(fromDateNotifier.value),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .copyWith(color: Colors.white));
+                                  }),
+                              trailing: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.white,
+                              ),
                               onTap: () {
                                 // open select from time
-                                
+                                pickFromDateTime(pickDate: false);
                               },
                             ),
                           ),
@@ -102,11 +212,15 @@ eventBottomSheet(BuildContext context) {
 
                   SizedBox(height: 30),
 
-                   //! select to date & time
+                  //! select to date & time ( TO )
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('TO', style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white, fontSize: 16)),
+                      Text('TO',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(color: Colors.white, fontSize: 16)),
                       SizedBox(height: 8),
                       Row(
                         children: [
@@ -114,20 +228,45 @@ eventBottomSheet(BuildContext context) {
                             flex: 2,
                             child: ListTile(
                               // getting date from calendar utils
-                              leading: Text(Utils.toDate(toDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
-                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              leading: ValueListenableBuilder(
+                                  valueListenable: toDateNotifier,
+                                  builder: (context, value, _) {
+                                    return Text(
+                                        Utils.toDate(toDateNotifier.value),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .copyWith(color: Colors.white));
+                                  }),
+                              trailing: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.white,
+                              ),
                               onTap: () {
                                 // open select from date
+                                pickToDateTime(pickDate: true);
                               },
                             ),
                           ),
-
-                         Expanded(
+                          Expanded(
                             child: ListTile(
-                              leading: Text(Utils.toTime(toDate), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
-                              trailing: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white,),
+                              leading: ValueListenableBuilder(
+                                  valueListenable: toDateNotifier,
+                                  builder: (context, value, _) {
+                                    return Text(
+                                        Utils.toTime(toDateNotifier.value),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .copyWith(color: Colors.white));
+                                  }),
+                              trailing: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Colors.white,
+                              ),
                               onTap: () {
                                 // open select from time
+                                pickToDateTime(pickDate: false);
                               },
                             ),
                           ),
@@ -138,7 +277,7 @@ eventBottomSheet(BuildContext context) {
 
                   SizedBox(height: 35),
 
-                  //! Create button
+                  //! C R E A T E - B U T T O N
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -146,7 +285,16 @@ eventBottomSheet(BuildContext context) {
                       GestureDetector(
                         onTap: () {
                           // checking validation on button click
-                          if (_formKey.currentState!.validate()) {
+                          final validated = _formKey.currentState!.validate();
+ 
+                          if (validated) {
+                            // save datas to database
+                            final eventName = eventNameController.text.trim();
+
+                            final event = EventsModel(name: eventName, from: fromDateNotifier.value, to: toDateNotifier.value);
+
+                            addEventDetails(event);
+
                             // popping bottomsheet
                             Navigator.pop(context);
                             // snackbar
@@ -154,8 +302,6 @@ eventBottomSheet(BuildContext context) {
                             // clear the fields
                             eventNameController.clear();
                           }
-                          
-                          // save datas to database
 
                         },
                         child: Container(
@@ -173,14 +319,14 @@ eventBottomSheet(BuildContext context) {
                                 Icon(Icons.create_outlined,
                                     color: Colors.white, size: 18.5),
                                 SizedBox(width: 6),
-                                Text(
-                                  'Create',
-                                  style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19)
-                                ),
+                                Text('Create',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 19)),
                               ],
                             ),
                           ),
