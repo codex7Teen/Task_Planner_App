@@ -71,8 +71,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                   ),
                 ),
               ),
-               
-              // open calendar timeline view
+
+              // open calendar timeline view when onlongpressed
               onLongPress: (details) {
                 if (details.date != null) {
                   showTimelineBottomSheet(context, details.date!);

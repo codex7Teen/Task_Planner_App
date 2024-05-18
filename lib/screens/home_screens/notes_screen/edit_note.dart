@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import, invalid_use_of_visible_for_testing_member
+// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -100,7 +100,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                       .validateField(value, 'Please type something to save.'),
                   style: TextStyle(fontSize: 18),
                   decoration: InputDecoration(
-                      hintText: 'Type something...', border: InputBorder.none),
+                      hintText: "Write your notes here...", border: InputBorder.none),
                   maxLines: 30,
                   minLines: 1,
                 ),

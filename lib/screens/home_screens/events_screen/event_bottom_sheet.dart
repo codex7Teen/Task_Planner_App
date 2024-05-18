@@ -80,10 +80,10 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
 
     if (date == null) return;
 
-    // setting the todate to same as fromdate if, selected fromdate is date after the to date
+    // setting the todate to same as fromdate if selected fromdate is after the todate
     if (date.isAfter(toDateNotifier.value)) {
-      toDateNotifier.value = DateTime(date.year, date.month, date.day,
-          fromDateNotifier.value.hour, fromDateNotifier.value.minute);
+      // Update toDateNotifier with combined DateTime
+      toDateNotifier.value = date.add(Duration(hours: 2));
     }
 
     // adding the from datetime to notifier obj
@@ -92,14 +92,21 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
 
   //! T O - DATE-TIME
   Future pickToDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(toDateNotifier.value, pickDate: pickDate,
-    firstDate: pickDate ? fromDateNotifier.value : null,  
+    final date = await pickDateTime(
+      toDateNotifier.value,
+      pickDate: pickDate,
+      firstDate: pickDate ? fromDateNotifier.value : null,
     );
 
     if (date == null) return;
 
     // adding the from datetime to notifier obj
     toDateNotifier.value = date;
+
+     // Ensure toDate is always 2 hours after fromDate
+  toDateNotifier.value = date.isBefore(fromDateNotifier.value)
+      ? fromDateNotifier.value.add(Duration(hours: 2))
+      : date;
   }
 
   showModalBottomSheet(
@@ -286,14 +293,22 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                         onTap: () {
                           // checking validation on button click
                           final validated = _formKey.currentState!.validate();
- 
+
                           if (validated) {
                             // save datas to database
                             final eventName = eventNameController.text.trim();
 
-                            final event = EventsModel(name: eventName, from: fromDateNotifier.value, to: toDateNotifier.value);
+                            final event = EventsModel(
+                                name: eventName,
+                                from: fromDateNotifier.value,
+                                to: toDateNotifier.value);
 
                             addEventDetails(event);
+
+                            // resets the fromdate and todate to current date
+                            fromDateNotifier.value = DateTime.now();
+                            toDateNotifier.value =
+                                DateTime.now().add(Duration(hours: 2));
 
                             // popping bottomsheet
                             Navigator.pop(context);
@@ -302,7 +317,6 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                             // clear the fields
                             eventNameController.clear();
                           }
-
                         },
                         child: Container(
                           height: 35,

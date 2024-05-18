@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
@@ -48,7 +47,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-
+    
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -80,7 +79,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
                 )
               ],
             ),
-
+    
             Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
@@ -127,7 +126,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
                           searchToggle = !searchToggle;
                         });
                       })),
-
+    
             Padding(
               padding: const EdgeInsets.only(
                   left: 20, right: 20, top: 90, bottom: 35),
@@ -185,7 +184,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
                           ),
                         ),
                       ),
-
+    
                       // favorites
                       GestureDetector(
                         onTap: () {
@@ -236,7 +235,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
                           ),
                         ),
                       ),
-
+    
                       // Completed
                       GestureDetector(
                         onTap: () {
@@ -289,9 +288,9 @@ class _ScreenTasksState extends State<ScreenTasks> {
                       ),
                     ],
                   ),
-
+    
                   SizedBox(height: 28),
-
+    
                   // Seleted field indication text (eg. All tasks, favs etc.)
                   selectedIndex == 0
                       ? Text('All Tasks',
@@ -319,7 +318,7 @@ class _ScreenTasksState extends State<ScreenTasks> {
                                       color: Color.fromARGB(255, 6, 0, 61),
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
-
+    
                   SizedBox(height: 15),
                   //! T A S K - B O X E S S S
                   TaskBoxes(sectionIndex: selectedIndex, taskSearchToggler: searchToggle,),

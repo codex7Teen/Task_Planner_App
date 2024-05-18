@@ -20,10 +20,4 @@ class EventDataSource extends CalendarDataSource {
   String getSubject(int index) {
     return appointments![index].name;
   }
-
-  @override
-  bool isAllDay(int index) {
-    // Return true if the event is an all-day event
-    return false;
-  }
 }

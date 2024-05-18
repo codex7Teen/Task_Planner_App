@@ -6,7 +6,6 @@ import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
-import 'package:scribe/screens/home_screens/events_screen/event_sample_model.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/events_page.dart';
 import 'package:scribe/decorators/colors/home_colors.dart';

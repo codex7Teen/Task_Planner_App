@@ -23,6 +23,9 @@ class EventsModel {
   @HiveField(4)
   bool isAllDay;
 
+  @HiveField(5)
+  String? description;
+
   EventsModel(
-      {required this.name, required this.from, required this.to, this.id, this.isAllDay = false});
+      {required this.name, required this.from, required this.to, this.id, this.isAllDay = false, this.description});
 }

@@ -22,13 +22,14 @@ class EventsModelAdapter extends TypeAdapter<EventsModel> {
       to: fields[2] as DateTime,
       id: fields[3] as int?,
       isAllDay: fields[4] as bool,
+      description: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, EventsModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class EventsModelAdapter extends TypeAdapter<EventsModel> {
       ..writeByte(3)
       ..write(obj.id)
       ..writeByte(4)
-      ..write(obj.isAllDay);
+      ..write(obj.isAllDay)
+      ..writeByte(5)
+      ..write(obj.description);
   }
 
   @override

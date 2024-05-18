@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
-import 'package:scribe/screens/home_screens/events_screen/event_sample_model.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenEvents extends StatefulWidget {
-  const ScreenEvents({super.key, this.event});
-
-   // calendar event object to acess eventsample model
-  final Event? event;
+  const ScreenEvents({super.key});
 
   @override
   State<ScreenEvents> createState() => _ScreenEventsState();
@@ -161,7 +157,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
 
                 // Calendar logo
                 Text(
-                  'Current date',
+                  DateFormat('dd/MM/yyyy').format(DateTime.now()),
                   style: Theme.of(context)
                               .textTheme
                               .titleMedium
