@@ -33,6 +33,13 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                   valueListenable: eventListNotifier,
                   builder: (context, events, _) {
                     filteredEvents = _filterEventsByDate(date);
+
+                    // Determine the initial display date to display the event directly while opening the SF Ca-timeline
+                    DateTime initialDisplayDate = date;
+                    if (filteredEvents.isNotEmpty) {
+                      initialDisplayDate = filteredEvents.first.from;
+                    }
+
                     return SfCalendar(
                       //! DECORATION
                       // secondary header
@@ -69,7 +76,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
 
                       //! DATAS
                       dataSource: EventDataSource(filteredEvents),
-                      initialDisplayDate: date,
+                      initialDisplayDate: initialDisplayDate,
                       appointmentBuilder: (context, details) {
                         final event = details.appointments.first as EventsModel;
                         return Container(

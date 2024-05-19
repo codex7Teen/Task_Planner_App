@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 
 // ! Delete Alert Box
-showNotelAertDialog(BuildContext context, int? id) {
+showEventlAertDialog(BuildContext context, int? id) {
   showDialog(
       context: context,
       builder: (context) {
@@ -32,11 +33,13 @@ showNotelAertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteNotes(id).then((value) {
-                      // pops both alert and edit-note
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    });
+                    deleteEvent(id);
+                    // pop alert box
+                    Navigator.pop(context);
+                    // pop view event screen
+                    Navigator.pop(context);
+                    // pop calendar timeline bottomsheet
+                    Navigator.pop(context);
                   }
                 },
                 child: Text(

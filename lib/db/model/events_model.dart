@@ -9,13 +9,13 @@ class EventsModel extends HiveObject {
   static const String boxName = 'Event_db';
 
   @HiveField(0)
-  final String name;
+   String name;
 
   @HiveField(1)
-  final DateTime from;
+   DateTime from;
 
   @HiveField(2)
-  final DateTime to;
+   DateTime to;
 
   @HiveField(3)
   String? description;

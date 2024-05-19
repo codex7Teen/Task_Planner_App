@@ -6,6 +6,7 @@ import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/home_screens/events_screen/edit_event_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_delete_alert.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 class ScreenViewEvent extends StatefulWidget {
@@ -85,7 +86,8 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
           // Delete button
           TextButton(
               onPressed: () {
-                // show alertbox and then delete
+                // show alertbox and then delete event
+                showEventlAertDialog(context, events.key);
               },
               child: Text('Delete',
                   style: Theme.of(context)

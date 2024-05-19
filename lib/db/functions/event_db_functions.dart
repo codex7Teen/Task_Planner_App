@@ -38,3 +38,15 @@ Future<void> updateEvents(int key, EventsModel newValue) async {
 }
 
 //! DELETE EVENT
+Future<void> deleteEvent(int key) async {
+  final eventDB = await Hive.openBox<EventsModel>(EventsModel.boxName);
+  // delete the event using the key provided
+  await eventDB.delete(key);
+  
+  // refresh UI
+  eventListNotifier.value.clear();
+  // adding new events to notifier list after clearing the event list inside notifier
+  eventListNotifier.value.addAll(await fetchEvents());
+  // notify listeners
+  eventListNotifier.notifyListeners();
+}

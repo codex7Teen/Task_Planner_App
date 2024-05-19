@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:scribe/db/model/category_model.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/db/model/login_model.dart';
 import 'package:scribe/db/model/notes_model.dart';
@@ -16,39 +17,41 @@ import 'package:scribe/screens/home_screens/home_screen.dart';
 import 'package:scribe/screens/intro_screens/splash_screen.dart';
 
 Future<void> main() async {
-    // To Ensure Flutter widgets binding
-    WidgetsFlutterBinding.ensureInitialized();
+  // To Ensure Flutter widgets binding
+  WidgetsFlutterBinding.ensureInitialized();
 
-    // Initialize Hive
-    await Hive.initFlutter();
+  // Initialize Hive
+  await Hive.initFlutter();
 
-    // Register the LoginModelAdapter 
-    Hive.registerAdapter(LoginModelAdapter());
-    // Register the TaskModelAdapter
-    Hive.registerAdapter(TaskModelAdapter());
-    // Register the TaskModelAdapter
-    Hive.registerAdapter(NotesModelAdapter());
-    // Register the TaskModelAdapter
-    Hive.registerAdapter(TodoModelAdapter());
-    // Register the TaskModelAdapter
-    Hive.registerAdapter(TaskStepsModelAdapter());
-    // Register the TaskModelAdapter
-    Hive.registerAdapter(TodoStepsModelAdapter());
-    // Register the EventModelAdapter
-    Hive.registerAdapter(EventsModelAdapter());
- 
-    // Run the application
-    runApp(const MyApp());
+  // Register the LoginModelAdapter
+  Hive.registerAdapter(LoginModelAdapter());
+  // Register the TaskModelAdapter
+  Hive.registerAdapter(TaskModelAdapter());
+  // Register the TaskModelAdapter
+  Hive.registerAdapter(NotesModelAdapter());
+  // Register the TaskModelAdapter
+  Hive.registerAdapter(TodoModelAdapter());
+  // Register the TaskModelAdapter
+  Hive.registerAdapter(TaskStepsModelAdapter());
+  // Register the TaskModelAdapter
+  Hive.registerAdapter(TodoStepsModelAdapter());
+  // Register the EventModelAdapter
+  Hive.registerAdapter(EventsModelAdapter());
+  // Register the CategoryModelAdapter
+  Hive.registerAdapter(CategoryModelAdapter());
+
+  // Run the application
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-    const MyApp({super.key});
+  const MyApp({super.key});
 
-    @override
-    Widget build(BuildContext context) {
-        return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: const ScreenSplash(),
-        );
-    }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const ScreenSplash(),
+    );
+  }
 }

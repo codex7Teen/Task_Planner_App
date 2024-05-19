@@ -17,7 +17,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
 
 // datetime notifier which contains the FROM-datetime
   late ValueNotifier<DateTime> fromDateNotifier;
-
+  
   // datetime notifier which contains the TO-datetime
   late ValueNotifier<DateTime> toDateNotifier;
 

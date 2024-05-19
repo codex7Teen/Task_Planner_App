@@ -115,7 +115,7 @@ Future<EventsModel?> editEventBottomSheet(
         : date;
   }
 
- Future<EventsModel?> val= showModalBottomSheet<EventsModel>(
+  Future<EventsModel?> val = showModalBottomSheet<EventsModel>(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
       context: context,
@@ -304,16 +304,14 @@ Future<EventsModel?> editEventBottomSheet(
                             // save datas to database
                             final newEventName =
                                 eventNameController.text.trim();
+                            event.name = newEventName;
+                            event.from = fromDateNotifier.value;
+                            event.to = toDateNotifier.value;
 
-                            final newEvent = EventsModel(
-                                name: newEventName,
-                                from: fromDateNotifier.value,
-                                to: toDateNotifier.value);
-                            // update event by passing id and model
-                            await updateEvents(event.key, newEvent);
+                            await updateEvents(event.key, event);
 
-                            // popping bottomsheet and passing eventmodel to view event screen 
-                            Navigator.pop(context, newEvent);
+                            // popping bottomsheet and passing eventmodel to view event screen
+                            Navigator.pop(context, event);
                             // snackbar
                             showSnackBar(
                                 context, 'Event updated successfully.');
@@ -355,6 +353,5 @@ Future<EventsModel?> editEventBottomSheet(
           ),
         );
       });
-      return val;
+  return val;
 }
-
