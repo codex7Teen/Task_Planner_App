@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
@@ -25,6 +25,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   Future<void> _loadEvents() async {
     final allEvents = await fetchEvents();
     eventListNotifier.value = allEvents;
+    eventListNotifier.notifyListeners();
   }
 
   @override
@@ -36,6 +37,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         child: ValueListenableBuilder(
           valueListenable: eventListNotifier,
           builder: (context, events, _) {
+            
             //  SHOW CALENDAR WITH DATA
             return SfCalendar(
               view: CalendarView.month,

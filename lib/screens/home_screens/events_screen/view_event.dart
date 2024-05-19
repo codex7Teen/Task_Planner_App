@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
+import 'package:scribe/screens/home_screens/events_screen/edit_event_bottom_sheet.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 class ScreenViewEvent extends StatefulWidget {
@@ -25,21 +26,21 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
 
   // Store the original description
   String originalDescription = '';
-
+  late EventsModel events;
   @override
   void initState() {
     super.initState();
     eventDescriptionController.text = widget.event.description ?? "";
     // Save original
-    originalDescription = widget.event.description ?? ""; 
+    originalDescription = widget.event.description ?? "";
+    events = widget.event;
   }
 
   @override
   Widget build(BuildContext context) {
-
     // savebutton visibility
-    bool showSaveButton = originalDescription != eventDescriptionController.text;
-
+    bool showSaveButton =
+        originalDescription != eventDescriptionController.text;
 
     return Scaffold(
       //! A P P - B A R
@@ -48,7 +49,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
         title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // notes title
-            child: Text(widget.event.name,
+            child: Text(events.name,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
@@ -56,13 +57,25 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, events);
           },
         ),
         actions: [
-          //  Edit button
+          //!  E D I T - E V E N T
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                // Edit event (open edit-event bottomsheet)
+                editEventBottomSheet(
+                        context,
+                        ValueNotifier<DateTime>(widget.event.from),
+                        ValueNotifier<DateTime>(widget.event.to),
+                        widget.event)
+                    .then((value) {
+                  setState(() {
+                    events = value!;
+                  });
+                });
+              },
               child: Text('Edit',
                   style: Theme.of(context)
                       .textTheme
@@ -101,7 +114,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   Spacer(),
                   Text(
                     // from date
-                    Utils.toDate(widget.event.from),
+                    Utils.toDate(events.from),
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
@@ -110,7 +123,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   SizedBox(width: 25),
                   Text(
                     // from time
-                    Utils.toTime(widget.event.from),
+                    Utils.toTime(events.from),
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
@@ -132,7 +145,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   Spacer(),
                   Text(
                     // to date
-                    Utils.toDate(widget.event.to),
+                    Utils.toDate(events.to),
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
@@ -141,7 +154,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   SizedBox(width: 20),
                   Text(
                     // to time
-                    Utils.toTime(widget.event.to),
+                    Utils.toTime(events.to),
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
@@ -159,7 +172,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
               //! T I T L E
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Text(widget.event.name,
+                child: Text(events.name,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
@@ -239,7 +252,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
     // update note content
     widget.event.description = eventDescriptionController.text;
     // Save to hive
-    await eventDB.put(widget.event.id, widget.event);
+    await eventDB.put(widget.event.key, widget.event);
     // Call the Data saved snackbar
     // notify listeners
     eventListNotifier.notifyListeners();

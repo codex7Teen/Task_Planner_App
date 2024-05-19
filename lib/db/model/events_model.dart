@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 part 'events_model.g.dart';
 
 @HiveType(typeId: 7)
-class EventsModel {
+class EventsModel extends HiveObject {
   //box name
   static const String boxName = 'Event_db';
 
@@ -18,14 +18,8 @@ class EventsModel {
   final DateTime to;
 
   @HiveField(3)
-  int? id;
-
-  @HiveField(4)
-  bool isAllDay;
-
-  @HiveField(5)
   String? description;
 
   EventsModel(
-      {required this.name, required this.from, required this.to, this.id, this.isAllDay = false, this.description});
+      {required this.name, required this.from, required this.to, this.description});
 }
