@@ -33,7 +33,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                   final filteredTasks = taskList.where((task) => task.taskCategory == widget.selectedCategory).toList();
 
               // showing add-task GIF if no data to display.
-              if (taskListNotifier.value.isEmpty) {
+              if (filteredTasks.isEmpty) {
                 return Center(
                     child: Column(
                   children: [

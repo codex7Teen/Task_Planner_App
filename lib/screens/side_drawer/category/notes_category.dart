@@ -27,7 +27,7 @@ class _NotesCategoryState extends State<NotesCategory> {
                   // filtering task based on category
                   final filteredNotes = notesList.where((notes) => notes.notesCategory == widget.selectedCategory).toList();
                 // showing add your notes gif
-        if (notesListNotifier.value.isEmpty) {
+        if (filteredNotes.isEmpty) {
               return Center(
                 child: Column(
                   children: [

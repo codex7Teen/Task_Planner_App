@@ -31,7 +31,7 @@ class _TodoCategoryState extends State<TodoCategory> {
               // filtering task based on category
               final filteredTodos = todoList.where((todo) => todo.todoCategory == widget.selectedCategory).toList();
               // showing add any task gif
-              if (todoListNotifier.value.isEmpty) {
+              if (filteredTodos.isEmpty) {
                 return Column(
                   children: [
                     SizedBox(height: 109),

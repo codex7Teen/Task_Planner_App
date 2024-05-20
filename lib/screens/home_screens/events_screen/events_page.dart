@@ -157,14 +157,13 @@ class _ScreenEventsState extends State<ScreenEvents> {
 
                 // Calendar logo
                 Text(
-                  DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                  'Add your events.',
                   style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(
-                                  color: Color.fromARGB(255, 6, 0, 61),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)
+                            .textTheme
+                            .headlineLarge
+                            ?.copyWith(
+                                fontWeight: FontWeight.w300, fontSize: 22)
+                                  
                 ),
                 SizedBox(height: 28),
 
