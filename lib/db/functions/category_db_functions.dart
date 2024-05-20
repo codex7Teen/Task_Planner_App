@@ -32,3 +32,11 @@ Future<void> getCategoryDetails() async {
 // notifying listeners
   categoryNotifier.notifyListeners();
 }
+
+//! DELETE CATEGORY
+Future<void> deleteCategory(int id) async {
+   final categoryDB = await Hive.openBox<CategoryModel>(CategoryModel.boxName);
+    await categoryDB.delete(id);
+    // Refresh the category-list notifier
+    getCategoryDetails();
+}

@@ -181,7 +181,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                       onPressed: () {
                                         // edit tasks
                                         updateTaskBottomSheet(context,
-                                            data.name, data.description, data);
+                                            data.name, data.description, data, data.taskCategory);
                                       },
                                       icon: Icon(
                                         Icons.edit_note_rounded,

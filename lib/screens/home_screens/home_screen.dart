@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
@@ -42,6 +43,8 @@ class _ScreenHomeState extends State<ScreenHome> {
     getNotesDetails();
     // calling the function to get value from DB.
     getTodoDetails(); 
+    // calling the function to get value from DB.
+    getCategoryDetails();
   }
 
   //! Dispose

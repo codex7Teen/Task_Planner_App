@@ -32,7 +32,10 @@ class TaskModel extends HiveObject{
   @HiveField(6)
   bool isChecked2;
 
-  TaskModel({this.id, required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false});
+  @HiveField(7)
+  String? taskCategory;
+
+  TaskModel({this.id, required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false, this.taskCategory});
 
   get isChecked => null;
 }

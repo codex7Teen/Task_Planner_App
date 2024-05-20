@@ -16,8 +16,19 @@ final nameController = TextEditingController();
 // task description controller
 final descriptionController = TextEditingController();
 
-void updateTaskBottomSheet(BuildContext context, String initialTaskName,
-    String initialTaskDescriptionName, TaskModel taskModel) {
+// selected category which is used to capture the state
+String? selectedCategory;
+
+void updateTaskBottomSheet(
+    BuildContext context,
+    String initialTaskName,
+    String initialTaskDescriptionName,
+    TaskModel taskModel,
+    String? initialCategoryName) {
+      
+  // displaying the initial category name as selected if its not null
+ // Reset selectedCategory initially
+  String? selectedCategory = initialCategoryName;
 
   showModalBottomSheet(
     isScrollControlled: true,
@@ -106,31 +117,38 @@ void updateTaskBottomSheet(BuildContext context, String initialTaskName,
                       height: 50,
                       width: 150,
                       child: ValueListenableBuilder(
-                        valueListenable: categoryListNotifier,
-                        builder: (context, categoriesList, _) {
-                          return DropdownButtonFormField(
-                            style: TextStyle(color: Colors.white),
-                            dropdownColor: Colors.black,
-                            icon: Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white, size: 25),
-                            hint: Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              // print(value);
-                            },
-                            items: categoriesList.map((e) {
-                              return DropdownMenuItem(
-                                value: e,
-                                child: Text(e, style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium?.copyWith(color: Colors.white)),
-                              );
-                            }).toList(),
-                          );
-                        }
-                      ),
+                          valueListenable: categoryListNotifier,
+                          builder: (context, categoriesList, _) {
+                            return categoriesList.isNotEmpty
+                                ? DropdownButtonFormField(
+                                  value: selectedCategory,
+                                    style: TextStyle(color: Colors.white),
+                                    dropdownColor: Colors.black,
+                                    icon: Icon(Icons.arrow_drop_down_rounded,
+                                        color: Colors.white, size: 25),
+                                    hint: Text(
+                                      'Select Category',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    onChanged: (value) {
+                                      selectedCategory = value;
+                                    },
+                                    items: categoriesList.map((cat) {
+                                      return DropdownMenuItem(
+                                        value: cat,
+                                        child: Text(cat,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    color: Colors.white)),
+                                      );
+                                    }).toList(),
+                                  )
+                                : SizedBox(
+                                    width: 10,
+                                  );
+                          }),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -144,17 +162,18 @@ void updateTaskBottomSheet(BuildContext context, String initialTaskName,
 
                         //! save datas to database
                         final newTaskName = nameController.text.trim();
-                        final newTaskDescription = descriptionController.text.trim();
+                        final newTaskDescription =
+                            descriptionController.text.trim();
 
-                        if(newTaskName.isNotEmpty && newTaskDescription.isNotEmpty) {
+                        if (newTaskName.isNotEmpty &&
+                            newTaskDescription.isNotEmpty) {
                           // Update name in the model
-                          taskModel.name = newTaskName; 
+                          taskModel.name = newTaskName;
                           taskModel.description = newTaskDescription;
+                          taskModel.taskCategory = selectedCategory;
                           // Adding to db
                           updateTask(taskModel.id!, taskModel);
                         }
-
-                        
                       },
                       child: Container(
                         height: 35,

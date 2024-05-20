@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
+import 'package:scribe/screens/side_drawer/category/category_delete_alert.dart';
 import 'package:scribe/screens/side_drawer/category/category_page.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -28,7 +29,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                   return Row(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // delete the specific category
+                            showCategoryAlertDialog(context, data.key);
+                          },
                           icon: Icon(
                             Icons.delete,
                             color: Color.fromARGB(255, 6, 0, 61),

@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 
 // ! Delete Alert Box
-showTodoAlertDialog(BuildContext context, int? id) {
+showCategoryAlertDialog(BuildContext context, int? id) {
   showDialog(
       context: context,
       builder: (context) {
@@ -33,7 +34,7 @@ showTodoAlertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteTodo(id);
+                    deleteCategory(id);
                     Navigator.pop(context);
                   }
                 },

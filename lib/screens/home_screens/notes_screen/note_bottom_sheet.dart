@@ -70,29 +70,34 @@ notesBottomSheet(
                         child: ValueListenableBuilder(
                             valueListenable: categoryListNotifier,
                             builder: (context, categoriesList, _) {
-                              return DropdownButtonFormField(
-                                style: TextStyle(color: Colors.white),
-                                dropdownColor: Colors.black,
-                                icon: Icon(Icons.arrow_drop_down_rounded,
-                                    color: Colors.white, size: 25),
-                                hint: Text(
-                                  'Select Category',
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                onChanged: (value) {
-                                  // print(value);
-                                },
-                                items: categoriesList.map((e) {
-                                  return DropdownMenuItem(
-                                    value: e,
-                                    child: Text(e,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(color: Colors.white)),
-                                  );
-                                }).toList(),
-                              );
+                              return categoriesList.isNotEmpty
+                                  ? DropdownButtonFormField(
+                                      style: TextStyle(color: Colors.white),
+                                      dropdownColor: Colors.black,
+                                      icon: Icon(Icons.arrow_drop_down_rounded,
+                                          color: Colors.white, size: 25),
+                                      hint: Text(
+                                        'Select Category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        // print(value);
+                                      },
+                                      items: categoriesList.map((cat) {
+                                        return DropdownMenuItem(
+                                          value: cat,
+                                          child: Text(cat,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                      color: Colors.white)),
+                                        );
+                                      }).toList(),
+                                    )
+                                  : SizedBox(
+                                      width: 10,
+                                    );
                             }),
                       ),
 

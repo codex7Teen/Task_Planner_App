@@ -12,9 +12,12 @@ final _formKey = GlobalKey<FormState>();
 
 // task name controller
 final nameController = TextEditingController();
-
+ 
 // task description controller
 final descriptionController = TextEditingController();
+
+// selected category which is used to capture the state
+String? selectedCategory;
 
 void taskBottomSheet(BuildContext context) {
 
@@ -101,7 +104,7 @@ void taskBottomSheet(BuildContext context) {
                       child: ValueListenableBuilder(
                         valueListenable: categoryListNotifier,
                         builder: (context, categoriesList, _) {
-                          return DropdownButtonFormField(
+                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
                             style: TextStyle(color: Colors.white),
                             dropdownColor: Colors.black,
                             icon: Icon(Icons.arrow_drop_down_rounded,
@@ -111,17 +114,17 @@ void taskBottomSheet(BuildContext context) {
                               style: TextStyle(color: Colors.grey),
                             ),
                             onChanged: (value) {
-                              // print(value);
+                              selectedCategory = value;
                             },
-                            items: categoriesList.map((e) {
+                            items: categoriesList.map((cat) {
                               return DropdownMenuItem(
-                                value: e,
-                                child: Text(e, style: Theme.of(context)
+                                value: cat,
+                                child: Text(cat, style: Theme.of(context)
                                   .textTheme
                                   .titleMedium?.copyWith(color: Colors.white)),
                               );
                             }).toList(),
-                          );
+                          ) : SizedBox(width: 10,);
                         }
                       ),
                     ),
@@ -141,7 +144,7 @@ void taskBottomSheet(BuildContext context) {
 
                         if(taskName.isNotEmpty && taskDescription.isNotEmpty) {
 
-                          final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: []);
+                          final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: [], taskCategory: selectedCategory);
                           // calling the addTaskDtaikl function and passing the model
                           addTaskDetails(task);
                           // clearing the textfields
