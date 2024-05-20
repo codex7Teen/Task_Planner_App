@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
@@ -17,7 +18,6 @@ final descriptionController = TextEditingController();
 
 void updateTaskBottomSheet(BuildContext context, String initialTaskName,
     String initialTaskDescriptionName, TaskModel taskModel) {
-  final categoryList = ['Personal', 'Trip plans', 'Vacation'];
 
   showModalBottomSheet(
     isScrollControlled: true,
@@ -105,29 +105,31 @@ void updateTaskBottomSheet(BuildContext context, String initialTaskName,
                     SizedBox(
                       height: 50,
                       width: 150,
-                      child: DropdownButtonFormField(
-                        style: TextStyle(color: Colors.white),
-                        dropdownColor: Colors.black,
-                        icon: Icon(Icons.arrow_drop_down_rounded,
-                            color: Colors.white, size: 25),
-                        hint: Text(
-                          'Select Category',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        onChanged: (value) {
-                          // print(value);
-                        },
-                        items: categoryList.map((e) {
-                          return DropdownMenuItem(
-                            value: e,
-                            child: Text(e,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        color: Color.fromARGB(255, 6, 0, 61))),
+                      child: ValueListenableBuilder(
+                        valueListenable: categoryListNotifier,
+                        builder: (context, categoriesList, _) {
+                          return DropdownButtonFormField(
+                            style: TextStyle(color: Colors.white),
+                            dropdownColor: Colors.black,
+                            icon: Icon(Icons.arrow_drop_down_rounded,
+                                color: Colors.white, size: 25),
+                            hint: Text(
+                              'Select Category',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onChanged: (value) {
+                              // print(value);
+                            },
+                            items: categoriesList.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e, style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium?.copyWith(color: Colors.white)),
+                              );
+                            }).toList(),
                           );
-                        }).toList(),
+                        }
                       ),
                     ),
                     GestureDetector(

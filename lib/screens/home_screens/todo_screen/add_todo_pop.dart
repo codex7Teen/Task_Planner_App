@@ -35,6 +35,7 @@ showAddTodoPopup(BuildContext context, TodoModel todoModel) {
 
                       TextFormField(
                         controller: todoStepNameController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
                                     .validateField(name, 'Please enter todo name'),
                         style: Theme.of(context).textTheme.titleMedium,

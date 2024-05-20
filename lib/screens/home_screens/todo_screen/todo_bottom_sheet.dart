@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/todo_model.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
@@ -13,8 +14,6 @@ final _formKey = GlobalKey<FormState>();
 final nameController = TextEditingController();
 
 todoBottomSheet(BuildContext context) {
-  final categoryList = ['Personal', 'Trip plans', 'Vacation'];
-
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
@@ -42,17 +41,15 @@ todoBottomSheet(BuildContext context) {
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter todo name'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 17),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: Colors.white, fontSize: 17),
                         decoration: InputDecoration(
-                            label: Text(
-                              'Enter todo name',
-                              style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)
-                            ),
+                            label: Text('Enter todo name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(color: Colors.grey)),
                             border: InputBorder.none),
                       ))
                     ],
@@ -68,29 +65,33 @@ todoBottomSheet(BuildContext context) {
                       SizedBox(
                         height: 50,
                         width: 150,
-                        child: DropdownButtonFormField(
-                            style: TextStyle(color: Colors.white),
-                            dropdownColor: Colors.black,
-                            icon: Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white, size: 25),
-                            hint: Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              // print(value);
-                            },
-                            items: categoryList.map((e) {
-                              return DropdownMenuItem(
-                                  value: e,
-                                  child: Text(
-                                    e,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ));
-                            }).toList()),
+                        child: ValueListenableBuilder(
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              return DropdownButtonFormField(
+                                style: TextStyle(color: Colors.white),
+                                dropdownColor: Colors.black,
+                                icon: Icon(Icons.arrow_drop_down_rounded,
+                                    color: Colors.white, size: 25),
+                                hint: Text(
+                                  'Select Category',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                onChanged: (value) {
+                                  // print(value);
+                                },
+                                items: categoriesList.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: Colors.white)),
+                                  );
+                                }).toList(),
+                              );
+                            }),
                       ),
 
                       // create-button
@@ -107,14 +108,14 @@ todoBottomSheet(BuildContext context) {
                           // save datas to database
                           final todoName = nameController.text.trim();
 
-                          if(todoName.isNotEmpty) {
-                            final todo = TodoModel(name: todoName, todoStepsList: []);
+                          if (todoName.isNotEmpty) {
+                            final todo =
+                                TodoModel(name: todoName, todoStepsList: []);
                             // add to db
                             addTodoDetails(todo);
-                            // clearing the fields sdgv46g 5yt tgbefrvcbng hjkn79l 
+                            // clearing the fields sdgv46g 5yt tgbefrvcbng hjkn79l
                             nameController.clear();
                           }
-
                         },
                         child: Container(
                           height: 35,
@@ -131,14 +132,14 @@ todoBottomSheet(BuildContext context) {
                                 Icon(Icons.create_outlined,
                                     color: Colors.white, size: 18.5),
                                 SizedBox(width: 6),
-                                Text(
-                                  'Create',
-                                  style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19)
-                                ),
+                                Text('Create',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 19)),
                               ],
                             ),
                           ),

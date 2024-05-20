@@ -31,6 +31,7 @@ showAddStepsPopup(BuildContext context, TaskModel taskModel) {
 
                       TextFormField(
                         controller: stepNameController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
                                     .validateField(name, 'Please enter step name'),
                         style: Theme.of(context).textTheme.titleMedium,

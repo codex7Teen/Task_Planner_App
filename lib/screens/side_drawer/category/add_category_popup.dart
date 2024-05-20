@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
+import 'package:scribe/db/model/category_model.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 //! ADD CATEGORY POP-UP
@@ -23,12 +25,13 @@ showAddCategoryPopup(BuildContext context) {
                 child: Column(
                   children: [
                     Text(
-                      'Add new step.',
+                      'Add new category.',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(height: 20),
                     TextFormField(
                       controller: categoryNameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (name) => Validators()
                           .validateField(name, 'Please enter category name'),
                       style: Theme.of(context).textTheme.titleMedium,
@@ -58,8 +61,21 @@ showAddCategoryPopup(BuildContext context) {
                         TextButton(
                             onPressed: () {
                               // do validation
-                              _formKey.currentState!.validate();
-                              // Save to db
+                              final validated = _formKey.currentState!.validate();
+
+                              if(validated){
+                                // Save to db
+                              final categoryName =
+                                  categoryNameController.text.trim();
+
+                              final category =
+                                  CategoryModel(category: categoryName);
+                              // add category to db
+                              addCategory(category);
+                              // pop
+                              Navigator.pop(context);
+                              }
+                              
                             },
                             child: Text(
                               'Create',

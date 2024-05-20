@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/todo_model.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
@@ -12,9 +13,8 @@ final _formKey = GlobalKey<FormState>();
 // to-do name controller
 final nameController = TextEditingController();
 
-todoEditBottomSheet(BuildContext context, String initialTodoName, TodoModel todoModel) {
-  final categoryList = ['Personal', 'Trip plans', 'Vacation'];
-
+todoEditBottomSheet(
+    BuildContext context, String initialTodoName, TodoModel todoModel) {
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
@@ -42,17 +42,15 @@ todoEditBottomSheet(BuildContext context, String initialTodoName, TodoModel todo
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter todo name'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 17),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: Colors.white, fontSize: 17),
                         decoration: InputDecoration(
-                            label: Text(
-                              'Enter todo name',
-                              style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)
-                            ),
+                            label: Text('Enter todo name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(color: Colors.grey)),
                             border: InputBorder.none),
                       ))
                     ],
@@ -68,29 +66,33 @@ todoEditBottomSheet(BuildContext context, String initialTodoName, TodoModel todo
                       SizedBox(
                         height: 50,
                         width: 150,
-                        child: DropdownButtonFormField(
-                            style: TextStyle(color: Colors.white),
-                            dropdownColor: Colors.black,
-                            icon: Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white, size: 25),
-                            hint: Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              // print(value);
-                            },
-                            items: categoryList.map((e) {
-                              return DropdownMenuItem(
-                                  value: e,
-                                  child: Text(
-                                    e,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ));
-                            }).toList()),
+                        child: ValueListenableBuilder(
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              return DropdownButtonFormField(
+                                style: TextStyle(color: Colors.white),
+                                dropdownColor: Colors.black,
+                                icon: Icon(Icons.arrow_drop_down_rounded,
+                                    color: Colors.white, size: 25),
+                                hint: Text(
+                                  'Select Category',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                onChanged: (value) {
+                                  // print(value);
+                                },
+                                items: categoriesList.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: Colors.white)),
+                                  );
+                                }).toList(),
+                              );
+                            }),
                       ),
 
                       // create-button
@@ -129,14 +131,14 @@ todoEditBottomSheet(BuildContext context, String initialTodoName, TodoModel todo
                                 Icon(Icons.create_outlined,
                                     color: Colors.white, size: 18.5),
                                 SizedBox(width: 6),
-                                Text(
-                                  'Update',
-                                  style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19)
-                                ),
+                                Text('Update',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 19)),
                               ],
                             ),
                           ),

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
@@ -15,8 +16,6 @@ final nameController = TextEditingController();
 notesBottomSheet(
   BuildContext context,
 ) {
-  final categoryList = ['Personal', 'Trip plans', 'Vacation'];
-
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
@@ -26,7 +25,7 @@ notesBottomSheet(
           padding: MediaQuery.of(context).viewInsets,
           child: Padding(
             padding: const EdgeInsets.all(28.0),
-            child: Form(  
+            child: Form(
               key: _formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -44,17 +43,15 @@ notesBottomSheet(
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter note name'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: Colors.white, fontSize: 17),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: Colors.white, fontSize: 17),
                         decoration: InputDecoration(
-                            label: Text(
-                              'Enter note name',
-                              style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)
-                            ),
+                            label: Text('Enter note name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(color: Colors.grey)),
                             border: InputBorder.none),
                       ))
                     ],
@@ -70,29 +67,33 @@ notesBottomSheet(
                       SizedBox(
                         height: 50,
                         width: 150,
-                        child: DropdownButtonFormField(
-                            style: TextStyle(color: Colors.white),
-                            dropdownColor: Colors.black,
-                            icon: Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white, size: 25),
-                            hint: Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              // print(value);
-                            },
-                            items: categoryList.map((e) {
-                              return DropdownMenuItem(
-                                  value: e,
-                                  child: Text(
-                                    e,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ));
-                            }).toList()),
+                        child: ValueListenableBuilder(
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              return DropdownButtonFormField(
+                                style: TextStyle(color: Colors.white),
+                                dropdownColor: Colors.black,
+                                icon: Icon(Icons.arrow_drop_down_rounded,
+                                    color: Colors.white, size: 25),
+                                hint: Text(
+                                  'Select Category',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                onChanged: (value) {
+                                  // print(value);
+                                },
+                                items: categoriesList.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(color: Colors.white)),
+                                  );
+                                }).toList(),
+                              );
+                            }),
                       ),
 
                       // create button
@@ -108,15 +109,14 @@ notesBottomSheet(
 
                           // save datas to database
                           final notesName = nameController.text.trim();
-                          
-                          if(notesName.isNotEmpty) {
+
+                          if (notesName.isNotEmpty) {
                             final notes = NotesModel(name: notesName);
                             // calling the addNotesdetails-function and passing the model
                             addNotesDetails(notes);
                             // clearing the textfields
                             nameController.clear();
                           }
-
                         },
                         child: Container(
                           height: 35,

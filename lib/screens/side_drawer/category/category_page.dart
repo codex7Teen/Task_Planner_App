@@ -7,7 +7,8 @@ import 'package:scribe/screens/side_drawer/category/tasks_category.dart';
 import 'package:scribe/screens/side_drawer/category/todo_category.dart';
 
 class ScreenCategory extends StatefulWidget {
-  const ScreenCategory({super.key});
+  final String categoryName;
+  const ScreenCategory({super.key, required this.categoryName});
 
   @override
   State<ScreenCategory> createState() => _ScreenCategoryState();
@@ -94,7 +95,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
 
                 //Category heading
                 Center(
-                  child: Text('Category1',
+                  child: Text(widget.categoryName,
                   style: Theme.of(context) 
                               .textTheme
                               .titleLarge?.copyWith(color: Color.fromARGB(255, 6, 0, 61))
