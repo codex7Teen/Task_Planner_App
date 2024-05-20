@@ -7,10 +7,11 @@ import 'package:scribe/db/model/todo_model.dart';
 import 'package:scribe/screens/home_screens/todo_screen/add_todo_pop.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo,s.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_alert_box.dart';
-import 'package:scribe/screens/home_screens/todo_screen/todo_edit_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todo_update_bottomsheet.dart';
 
 class TodoCategory extends StatefulWidget {
-  const TodoCategory({super.key});
+  final selectedCategory;
+  const TodoCategory({super.key, required this.selectedCategory});
 
   @override
   State<TodoCategory> createState() => _TodoCategoryState();
@@ -24,8 +25,11 @@ class _TodoCategoryState extends State<TodoCategory> {
       child: Expanded(
         child: ValueListenableBuilder(
             valueListenable: todoListNotifier,
-            builder:
-                (BuildContext context, List<TodoModel> todoList, Widget? child) {
+            builder: (BuildContext context, List<TodoModel> todoList,
+                Widget? child) {
+              //! F I L T E R I N G
+              // filtering task based on category
+              final filteredTodos = todoList.where((todo) => todo.todoCategory == widget.selectedCategory).toList();
               // showing add any task gif
               if (todoListNotifier.value.isEmpty) {
                 return Column(
@@ -36,15 +40,16 @@ class _TodoCategoryState extends State<TodoCategory> {
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge
-                            ?.copyWith(fontWeight: FontWeight.w300, fontSize: 24))
+                            ?.copyWith(
+                                fontWeight: FontWeight.w300, fontSize: 24))
                   ],
                 );
               } else {
                 // displaying the todos
                 return ListView.separated(
                     itemBuilder: (context, index) {
-                      final data = todoList[index];
-      
+                      final data = filteredTodos[index];
+
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: ExpansionTile(
@@ -110,9 +115,9 @@ class _TodoCategoryState extends State<TodoCategory> {
                                   children: [
                                     //! STEPS  &  C H E C K B O X E S
                                     TodoWidget(todoModel: data),
-      
+
                                     SizedBox(height: 10),
-      
+
                                     // bottom icons
                                     Row(
                                       mainAxisAlignment:
@@ -135,7 +140,10 @@ class _TodoCategoryState extends State<TodoCategory> {
                                             onPressed: () {
                                               // edit todos
                                               todoEditBottomSheet(
-                                                  context, data.name, data);
+                                                  context,
+                                                  data.name,
+                                                  data,
+                                                  data.todoCategory);
                                             },
                                             icon: Icon(
                                               Icons.edit_note_rounded,
@@ -181,7 +189,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                         ),
                       );
                     },
-                    itemCount: todoList.length,
+                    itemCount: filteredTodos.length,
                     separatorBuilder: (context, index) {
                       return SizedBox(height: 18);
                     });

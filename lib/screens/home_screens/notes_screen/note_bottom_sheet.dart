@@ -13,6 +13,10 @@ final _formKey = GlobalKey<FormState>();
 // notes name text-controller
 final nameController = TextEditingController();
 
+// selected category which is used to capture the state
+String? selectedNoteCategory;
+
+
 notesBottomSheet(
   BuildContext context,
 ) {
@@ -68,37 +72,31 @@ notesBottomSheet(
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                            valueListenable: categoryListNotifier,
-                            builder: (context, categoriesList, _) {
-                              return categoriesList.isNotEmpty
-                                  ? DropdownButtonFormField(
-                                      style: TextStyle(color: Colors.white),
-                                      dropdownColor: Colors.black,
-                                      icon: Icon(Icons.arrow_drop_down_rounded,
-                                          color: Colors.white, size: 25),
-                                      hint: Text(
-                                        'Select Category',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      onChanged: (value) {
-                                        // print(value);
-                                      },
-                                      items: categoriesList.map((cat) {
-                                        return DropdownMenuItem(
-                                          value: cat,
-                                          child: Text(cat,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium
-                                                  ?.copyWith(
-                                                      color: Colors.white)),
-                                        );
-                                      }).toList(),
-                                    )
-                                  : SizedBox(
-                                      width: 10,
-                                    );
-                            }),
+                        valueListenable: categoryListNotifier,
+                        builder: (context, categoriesList, _) {
+                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
+                            style: TextStyle(color: Colors.white),
+                            dropdownColor: Colors.black,
+                            icon: Icon(Icons.arrow_drop_down_rounded,
+                                color: Colors.white, size: 25),
+                            hint: Text(
+                              'Select Category',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onChanged: (value) {
+                              selectedNoteCategory = value;
+                            },
+                            items: categoriesList.map((cat) {
+                              return DropdownMenuItem(
+                                value: cat,
+                                child: Text(cat, style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium?.copyWith(color: Colors.white)),
+                              );
+                            }).toList(),
+                          ) : SizedBox(width: 10,);
+                        }
+                      ),
                       ),
 
                       // create button
@@ -116,7 +114,7 @@ notesBottomSheet(
                           final notesName = nameController.text.trim();
 
                           if (notesName.isNotEmpty) {
-                            final notes = NotesModel(name: notesName);
+                            final notes = NotesModel(name: notesName, notesCategory: selectedNoteCategory);
                             // calling the addNotesdetails-function and passing the model
                             addNotesDetails(notes);
                             // clearing the textfields

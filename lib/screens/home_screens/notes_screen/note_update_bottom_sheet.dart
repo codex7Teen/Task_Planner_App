@@ -16,7 +16,14 @@ notesUpdateBottomSheet(
     // arguments
     BuildContext context,
     String initialNoteName,
-    NotesModel notesModel) {
+    NotesModel notesModel,
+    String? initialCategoryName
+    ) {
+
+       // displaying the initial category name as selected if its not null
+ // Reset selectedCategory initially
+  String? selectedNoteCategory = initialCategoryName;
+
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
@@ -69,37 +76,38 @@ notesUpdateBottomSheet(
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                            valueListenable: categoryListNotifier,
-                            builder: (context, categoriesList, _) {
-                              return categoriesList.isNotEmpty
-                                  ? DropdownButtonFormField(
-                                      style: TextStyle(color: Colors.white),
-                                      dropdownColor: Colors.black,
-                                      icon: Icon(Icons.arrow_drop_down_rounded,
-                                          color: Colors.white, size: 25),
-                                      hint: Text(
-                                        'Select Category',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      onChanged: (value) {
-                                        // print(value);
-                                      },
-                                      items: categoriesList.map((cat) {
-                                        return DropdownMenuItem(
-                                          value: cat,
-                                          child: Text(cat,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium
-                                                  ?.copyWith(
-                                                      color: Colors.white)),
-                                        );
-                                      }).toList(),
-                                    )
-                                  : SizedBox(
-                                      width: 10,
-                                    );
-                            }),
+                          valueListenable: categoryListNotifier,
+                          builder: (context, categoriesList, _) {
+                            return categoriesList.isNotEmpty
+                                ? DropdownButtonFormField(
+                                  value: selectedNoteCategory,
+                                    style: TextStyle(color: Colors.white),
+                                    dropdownColor: Colors.black,
+                                    icon: Icon(Icons.arrow_drop_down_rounded,
+                                        color: Colors.white, size: 25),
+                                    hint: Text(
+                                      'Select Category',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    onChanged: (value) {
+                                      selectedNoteCategory = value;
+                                    },
+                                    items: categoriesList.map((cat) {
+                                      return DropdownMenuItem(
+                                        value: cat,
+                                        child: Text(cat,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    color: Colors.white)),
+                                      );
+                                    }).toList(),
+                                  )
+                                : SizedBox(
+                                    width: 10,
+                                  );
+                          }),
                       ),
 
                       // update button
@@ -116,6 +124,8 @@ notesUpdateBottomSheet(
                           if (newName.isNotEmpty) {
                             // update the name in the model
                             notesModel.name = newName;
+                            // update the category in the model
+                            notesModel.notesCategory = selectedNoteCategory;
                             // updating db
                             updateNotes(notesModel.id!, notesModel);
                           }

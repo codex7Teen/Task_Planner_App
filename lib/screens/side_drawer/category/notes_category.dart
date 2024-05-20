@@ -7,7 +7,8 @@ import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/screens/home_screens/notes_screen/edit_note.dart';
 
 class NotesCategory extends StatefulWidget {
-  const NotesCategory({super.key});
+  final String selectedCategory;
+  const NotesCategory({super.key, required this.selectedCategory});
 
   @override
   State<NotesCategory> createState() => _NotesCategoryState();
@@ -22,6 +23,10 @@ class _NotesCategoryState extends State<NotesCategory> {
           valueListenable: notesListNotifier,
           builder:
               (BuildContext context, List<NotesModel> notesList, Widget? child) {
+                //! F I L T E R I N G
+                  // filtering task based on category
+                  final filteredNotes = notesList.where((notes) => notes.notesCategory == widget.selectedCategory).toList();
+                // showing add your notes gif
         if (notesListNotifier.value.isEmpty) {
               return Center(
                 child: Column(
@@ -47,7 +52,7 @@ class _NotesCategoryState extends State<NotesCategory> {
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     // Using filteredNotes
-                    final data = notesList[index];
+                    final data = filteredNotes[index];
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -131,7 +136,7 @@ class _NotesCategoryState extends State<NotesCategory> {
                     );
                   },
                   // telling how much notes to display
-                  itemCount: notesList.length);
+                  itemCount: filteredNotes.length);
             }
           }),
     );

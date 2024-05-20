@@ -17,7 +17,7 @@ final nameController = TextEditingController();
 final descriptionController = TextEditingController();
 
 // selected category which is used to capture the state
-String? selectedCategory;
+String? selectedTaskCategory;
 
 void taskBottomSheet(BuildContext context) {
 
@@ -114,7 +114,7 @@ void taskBottomSheet(BuildContext context) {
                               style: TextStyle(color: Colors.grey),
                             ),
                             onChanged: (value) {
-                              selectedCategory = value;
+                              selectedTaskCategory = value;
                             },
                             items: categoriesList.map((cat) {
                               return DropdownMenuItem(
@@ -144,7 +144,7 @@ void taskBottomSheet(BuildContext context) {
 
                         if(taskName.isNotEmpty && taskDescription.isNotEmpty) {
 
-                          final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: [], taskCategory: selectedCategory);
+                          final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: [], taskCategory: selectedTaskCategory);
                           // calling the addTaskDtaikl function and passing the model
                           addTaskDetails(task);
                           // clearing the textfields

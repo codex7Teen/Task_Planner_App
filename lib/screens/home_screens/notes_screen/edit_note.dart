@@ -54,7 +54,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
           //  Edit button
           TextButton(
               onPressed: () {
-                notesUpdateBottomSheet(context, widget.notesModel.name, widget.notesModel);
+                notesUpdateBottomSheet(context, widget.notesModel.name, widget.notesModel, widget.notesModel.notesCategory);
               },
               child: Text('Edit',
                   style: Theme.of(context)

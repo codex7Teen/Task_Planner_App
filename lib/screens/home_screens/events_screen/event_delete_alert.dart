@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
-import 'package:scribe/db/functions/notes_db_functions.dart';
 
 // ! Delete Alert Box
 showEventlAertDialog(BuildContext context, int? id) {

@@ -10,7 +10,8 @@ import 'package:scribe/screens/home_screens/tasks_screen/steps.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_update_bottom_sheet.dart';
 
 class TasksCategory extends StatefulWidget {
-  const TasksCategory({super.key});
+  final String selectedCategory;
+  const TasksCategory({super.key, required this.selectedCategory});
 
   @override
   State<TasksCategory> createState() => _TasksCategoryState();
@@ -27,6 +28,10 @@ class _TasksCategoryState extends State<TasksCategory> {
             valueListenable: taskListNotifier,
             builder: (BuildContext context, List<TaskModel> taskList,
                 Widget? child) {
+                  //! F I L T E R I N G
+                  // filtering task based on category
+                  final filteredTasks = taskList.where((task) => task.taskCategory == widget.selectedCategory).toList();
+
               // showing add-task GIF if no data to display.
               if (taskListNotifier.value.isEmpty) {
                 return Center(
@@ -45,7 +50,7 @@ class _TasksCategoryState extends State<TasksCategory> {
               } else {
                 return ListView.separated(
                   itemBuilder: (context, index) {
-                    final data = taskList[index];
+                    final data = filteredTasks[index];
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
@@ -211,7 +216,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                       ),
                     );
                   },
-                  itemCount: taskList.length,
+                  itemCount: filteredTasks.length,
                   // spacing between each container
                   separatorBuilder: (context, index) {
                     return SizedBox(height: 23);

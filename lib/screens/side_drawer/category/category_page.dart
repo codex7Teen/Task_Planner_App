@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:scribe/screens/home_screens/home_screen.dart';
 import 'package:scribe/screens/side_drawer/category/notes_category.dart';
 import 'package:scribe/screens/side_drawer/category/tasks_category.dart';
@@ -44,7 +43,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
               });
             },
             controller: _controller2,
-            children: [TasksCategory(), NotesCategory(), TodoCategory()],
+            children: [TasksCategory(selectedCategory: widget.categoryName,), NotesCategory(selectedCategory: widget.categoryName,), TodoCategory(selectedCategory: widget.categoryName,)],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),

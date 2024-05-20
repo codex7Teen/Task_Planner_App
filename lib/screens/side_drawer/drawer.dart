@@ -9,7 +9,7 @@ import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/model/login_model.dart';
 import 'package:scribe/screens/side_drawer/category/add_category_popup.dart';
 import 'package:scribe/screens/side_drawer/category/category_page.dart';
-import 'package:scribe/screens/side_drawer/category/category_widget.dart';
+import 'package:scribe/screens/side_drawer/category/category_list_widget.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});

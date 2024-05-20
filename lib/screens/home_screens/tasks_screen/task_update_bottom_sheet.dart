@@ -16,9 +16,6 @@ final nameController = TextEditingController();
 // task description controller
 final descriptionController = TextEditingController();
 
-// selected category which is used to capture the state
-String? selectedCategory;
-
 void updateTaskBottomSheet(
     BuildContext context,
     String initialTaskName,
@@ -28,7 +25,7 @@ void updateTaskBottomSheet(
       
   // displaying the initial category name as selected if its not null
  // Reset selectedCategory initially
-  String? selectedCategory = initialCategoryName;
+  String? selectedTaskCategory = initialCategoryName;
 
   showModalBottomSheet(
     isScrollControlled: true,
@@ -121,7 +118,7 @@ void updateTaskBottomSheet(
                           builder: (context, categoriesList, _) {
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
-                                  value: selectedCategory,
+                                  value: selectedTaskCategory,
                                     style: TextStyle(color: Colors.white),
                                     dropdownColor: Colors.black,
                                     icon: Icon(Icons.arrow_drop_down_rounded,
@@ -131,7 +128,7 @@ void updateTaskBottomSheet(
                                       style: TextStyle(color: Colors.grey),
                                     ),
                                     onChanged: (value) {
-                                      selectedCategory = value;
+                                      selectedTaskCategory = value;
                                     },
                                     items: categoriesList.map((cat) {
                                       return DropdownMenuItem(
@@ -169,8 +166,10 @@ void updateTaskBottomSheet(
                             newTaskDescription.isNotEmpty) {
                           // Update name in the model
                           taskModel.name = newTaskName;
+                          // Update description in the model
                           taskModel.description = newTaskDescription;
-                          taskModel.taskCategory = selectedCategory;
+                           // Update category in the model
+                          taskModel.taskCategory = selectedTaskCategory;
                           // Adding to db
                           updateTask(taskModel.id!, taskModel);
                         }

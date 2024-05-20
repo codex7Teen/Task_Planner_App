@@ -13,8 +13,13 @@ final _formKey = GlobalKey<FormState>();
 // to-do name controller
 final nameController = TextEditingController();
 
-todoEditBottomSheet(
-    BuildContext context, String initialTodoName, TodoModel todoModel) {
+todoEditBottomSheet(BuildContext context, String initialTodoName,
+    TodoModel todoModel, String? initialCategoryName) {
+
+  // displaying the initial category name as selected if its not null
+  // Reset selectedCategory initially
+  String? selectedTodoCategory = initialCategoryName;
+
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: Color.fromARGB(255, 6, 0, 61),
@@ -67,31 +72,38 @@ todoEditBottomSheet(
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                        valueListenable: categoryListNotifier,
-                        builder: (context, categoriesList, _) {
-                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
-                            style: TextStyle(color: Colors.white),
-                            dropdownColor: Colors.black,
-                            icon: Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white, size: 25),
-                            hint: Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              // print(value);
-                            },
-                            items: categoriesList.map((cat) {
-                              return DropdownMenuItem(
-                                value: cat,
-                                child: Text(cat, style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium?.copyWith(color: Colors.white)),
-                              );
-                            }).toList(),
-                          ) : SizedBox(width: 10,);
-                        }
-                      ),
+                          valueListenable: categoryListNotifier,
+                          builder: (context, categoriesList, _) {
+                            return categoriesList.isNotEmpty
+                                ? DropdownButtonFormField(
+                                  value: selectedTodoCategory,
+                                    style: TextStyle(color: Colors.white),
+                                    dropdownColor: Colors.black,
+                                    icon: Icon(Icons.arrow_drop_down_rounded,
+                                        color: Colors.white, size: 25),
+                                    hint: Text(
+                                      'Select Category',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    onChanged: (value) {
+                                      selectedTodoCategory = value;
+                                    },
+                                    items: categoriesList.map((cat) {
+                                      return DropdownMenuItem(
+                                        value: cat,
+                                        child: Text(cat,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    color: Colors.white)),
+                                      );
+                                    }).toList(),
+                                  )
+                                : SizedBox(
+                                    width: 10,
+                                  );
+                          }),
                       ),
 
                       // create-button
@@ -109,9 +121,11 @@ todoEditBottomSheet(
                           final newTodoName = nameController.text.trim();
 
                           if (newTodoName.isNotEmpty) {
-                            // add to model
+                            // add to db
                             todoModel.name = newTodoName;
                             // add to db
+                            todoModel.todoCategory = selectedTodoCategory;
+                            // update db
                             updateTodo(todoModel.id!, todoModel);
                           }
                         },

@@ -13,6 +13,9 @@ final _formKey = GlobalKey<FormState>();
 // to-do name controller
 final nameController = TextEditingController();
 
+// selected category which is used to capture the state
+String? selectedTodoCategory;
+
 todoBottomSheet(BuildContext context) {
   showModalBottomSheet(
       isScrollControlled: true,
@@ -66,37 +69,31 @@ todoBottomSheet(BuildContext context) {
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                            valueListenable: categoryListNotifier,
-                            builder: (context, categoriesList, _) {
-                              return categoriesList.isNotEmpty
-                                  ? DropdownButtonFormField(
-                                      style: TextStyle(color: Colors.white),
-                                      dropdownColor: Colors.black,
-                                      icon: Icon(Icons.arrow_drop_down_rounded,
-                                          color: Colors.white, size: 25),
-                                      hint: Text(
-                                        'Select Category',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      onChanged: (value) {
-                                        // print(value);
-                                      },
-                                      items: categoriesList.map((cat) {
-                                        return DropdownMenuItem(
-                                          value: cat,
-                                          child: Text(cat,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium
-                                                  ?.copyWith(
-                                                      color: Colors.white)),
-                                        );
-                                      }).toList(),
-                                    )
-                                  : SizedBox(
-                                      width: 10,
-                                    );
-                            }),
+                        valueListenable: categoryListNotifier,
+                        builder: (context, categoriesList, _) {
+                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
+                            style: TextStyle(color: Colors.white),
+                            dropdownColor: Colors.black,
+                            icon: Icon(Icons.arrow_drop_down_rounded,
+                                color: Colors.white, size: 25),
+                            hint: Text(
+                              'Select Category',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onChanged: (value) {
+                              selectedTodoCategory = value;
+                            },
+                            items: categoriesList.map((cat) {
+                              return DropdownMenuItem(
+                                value: cat,
+                                child: Text(cat, style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium?.copyWith(color: Colors.white)),
+                              );
+                            }).toList(),
+                          ) : SizedBox(width: 10,);
+                        }
+                      ),
                       ),
 
                       // create-button
@@ -115,7 +112,7 @@ todoBottomSheet(BuildContext context) {
 
                           if (todoName.isNotEmpty) {
                             final todo =
-                                TodoModel(name: todoName, todoStepsList: []);
+                                TodoModel(name: todoName, todoStepsList: [], todoCategory: selectedTodoCategory);
                             // add to db
                             addTodoDetails(todo);
                             // clearing the fields sdgv46g 5yt tgbefrvcbng hjkn79l

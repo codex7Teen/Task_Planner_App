@@ -23,5 +23,8 @@ class TodoModel extends HiveObject{
   @HiveField(4)
   bool todoCheckBox;
 
-  TodoModel({required this.name, this.id, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false});
+  @HiveField(5)
+  String? todoCategory;
+
+  TodoModel({required this.name, this.id, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false, this.todoCategory});
 } 
