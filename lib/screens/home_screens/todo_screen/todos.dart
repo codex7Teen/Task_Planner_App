@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
-import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
-import 'package:scribe/db/model/task_model.dart';
 import 'package:scribe/db/model/todo_model.dart';
 import 'package:scribe/db/model/todo_steps_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 class TodoWidget extends StatefulWidget {
   final TodoModel todoModel;
@@ -33,7 +31,7 @@ class _TodoWidgetState extends State<TodoWidget> {
   Widget build(BuildContext context) {
     return ListView.builder(
       // making the list non scrollable
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       // shrinkwrap to use only the required size
       shrinkWrap: true,
       itemBuilder: (context, index) {
@@ -46,8 +44,8 @@ class _TodoWidgetState extends State<TodoWidget> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.circle, color: Colors.white, size: 10),
-                  SizedBox(width: 8),
+                  const Icon(Icons.circle, color: whiteColor, size: 10),
+                  const SizedBox(width: 8),
                   Text(todoData.stepTodo,
                       style: todoData.isTodoChecked ? Theme.of(context)
                           .textTheme
@@ -55,15 +53,15 @@ class _TodoWidgetState extends State<TodoWidget> {
                           ?.copyWith(color: Colors.grey[600], decoration: TextDecoration.lineThrough) : Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white)
+                          ?.copyWith(color: whiteColor)
                           ),
                 ],
               ),
               Row(
                 children: [
                   Checkbox(
-                      checkColor: Color.fromARGB(255, 6, 0, 61),
-                      fillColor: MaterialStatePropertyAll(Colors.white),
+                      checkColor: const Color.fromARGB(255, 6, 0, 61),
+                      fillColor: const MaterialStatePropertyAll(whiteColor),
                       value: todoData.isTodoChecked,
                       onChanged: (newBool) {
                         setState(() {
@@ -82,9 +80,9 @@ class _TodoWidgetState extends State<TodoWidget> {
                         todo.todoStepsList.removeAt(index);
                         await updateTodo(todo.key, todo);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete,
-                        color: Colors.white,
+                        color: whiteColor,
                         size: 23,
                       )),
                 ],

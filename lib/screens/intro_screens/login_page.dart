@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/model/login_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 class ScreenLogin extends StatefulWidget {
@@ -41,15 +42,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.fill,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Image.asset('assets/images/decoration_image_2.png',
                       height: MediaQuery.of(context).size.height * 0.23,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fill),
-                  Divider(
+                   Divider(
                     indent: 17,
                     endIndent: 17,
-                    color: Color.fromARGB(255, 6, 0, 61),
+                    color: navyBlue1,
                     thickness: 0.1,
                   )
                 ],
@@ -66,7 +67,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     height: 15,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -92,9 +93,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               labelText: 'Enter your name...',
                               labelStyle: Theme.of(context)
                                 .textTheme
-                                .labelLarge?.copyWith(color: Color.fromARGB(255, 153, 153, 153), fontSize: 16)
+                                .labelLarge?.copyWith(color: const Color.fromARGB(255, 153, 153, 153), fontSize: 16)
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
@@ -123,9 +124,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     child: Container(
                         width: 95,
                         height: 43,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                            color: Color.fromARGB(255, 6, 0, 61)),
+                        decoration:  BoxDecoration(
+                            borderRadius: const BorderRadius.all(Radius.circular(30)),
+                            color: navyBlue1),
                         child: Center(
                           child: Text(
                             'Explore',

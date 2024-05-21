@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, use_build_context_synchronously, unused_import, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_alert_box.dart';
-import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_update_bottom_sheet.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
@@ -35,7 +34,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 6, 0, 61),
+        backgroundColor: navyBlue1,
         title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // notes title
@@ -43,9 +42,9 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
-                    ?.copyWith(color: Colors.white, fontSize: 20))),
+                    ?.copyWith(color: whiteColor, fontSize: 20))),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: whiteColor),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -60,7 +59,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
-                      ?.copyWith(color: Colors.white))),
+                      ?.copyWith(color: whiteColor))),
 
           // Delete button
           TextButton(
@@ -72,11 +71,11 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
-                      ?.copyWith(color: Colors.white))),
+                      ?.copyWith(color: whiteColor))),
         ],
       ),
       //! N O T E S - C O N T A I N E R
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -88,7 +87,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
             // notes container
             child: Container(
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 235, 255),
+                  color: const Color.fromARGB(255, 221, 235, 255),
                   borderRadius: BorderRadius.circular(20)),
               //! N O T E S - FIELD
               child: Padding(
@@ -98,8 +97,8 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) => Validators()
                       .validateField(value, 'Please type something to save.'),
-                  style: TextStyle(fontSize: 18),
-                  decoration: InputDecoration(
+                  style: const TextStyle(fontSize: 18),
+                  decoration: const InputDecoration(
                       hintText: "Write your notes here...", border: InputBorder.none),
                   maxLines: 30,
                   minLines: 1,
@@ -110,11 +109,11 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
         ),
       ),
       floatingActionButton: Align(
-        alignment: Alignment(0.9, 0.95),
+        alignment: const Alignment(0.9, 0.95),
         //! S A V E - BTN
         child: FloatingActionButton.extended(
-            backgroundColor: Color.fromARGB(255, 6, 0, 61),
-            label: Text('Save', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)),
+            backgroundColor: navyBlue1,
+            label: Text('Save', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: whiteColor)),
             onPressed: () {
               // validate the notes
               if (_formKey.currentState!.validate()) {

@@ -1,9 +1,8 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/edit_note.dart';
 
 class NotesCategory extends StatefulWidget {
@@ -21,17 +20,20 @@ class _NotesCategoryState extends State<NotesCategory> {
       padding: const EdgeInsets.only(left: 20, right: 20, top: 150, bottom: 35),
       child: ValueListenableBuilder(
           valueListenable: notesListNotifier,
-          builder:
-              (BuildContext context, List<NotesModel> notesList, Widget? child) {
-                //! F I L T E R I N G
-                  // filtering task based on category
-                  final filteredNotes = notesList.where((notes) => notes.notesCategory == widget.selectedCategory).toList();
-                // showing add your notes gif
-        if (filteredNotes.isEmpty) {
+          builder: (BuildContext context, List<NotesModel> notesList,
+              Widget? child) {
+            //! F I L T E R I N G
+            // filtering task based on category
+            final filteredNotes = notesList
+                .where(
+                    (notes) => notes.notesCategory == widget.selectedCategory)
+                .toList();
+            // showing add your notes gif
+            if (filteredNotes.isEmpty) {
               return Center(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 103,
                     ),
                     Lottie.asset('assets/animations/notes.json', width: 222),
@@ -39,14 +41,15 @@ class _NotesCategoryState extends State<NotesCategory> {
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge
-                            ?.copyWith(fontWeight: FontWeight.w300, fontSize: 24))
+                            ?.copyWith(
+                                fontWeight: FontWeight.w300, fontSize: 24))
                   ],
                 ),
               );
             } else {
               // viewing the available notes according to filtered-notes
               return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisSpacing: 18,
                       mainAxisSpacing: 20,
                       crossAxisCount: 2),
@@ -60,7 +63,7 @@ class _NotesCategoryState extends State<NotesCategory> {
                         Container(
                           height: 43,
                           width: 185,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 6, 0, 61),
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),
@@ -81,26 +84,26 @@ class _NotesCategoryState extends State<NotesCategory> {
                                     data.isFavorite
                                         ? Icons.favorite_rounded
                                         : Icons.favorite_border_rounded,
-                                    color: Colors.white,
+                                    color: whiteColor,
                                     size: 18,
                                   )),
                               Expanded(
                                   child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
                                 child: Text(
                                   data.name,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium
                                       ?.copyWith(
-                                          color: Colors.white, fontSize: 14.5),
+                                          color: whiteColor, fontSize: 14.5),
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                scrollDirection: Axis.horizontal,
                               )),
                             ],
                           ),
                         ),
-      
+
                         //! notes content
                         GestureDetector(
                           onTap: () {
@@ -114,11 +117,11 @@ class _NotesCategoryState extends State<NotesCategory> {
                               height: 133.7,
                               width: 185,
                               decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 221, 235, 255),
-                                  borderRadius: BorderRadius.only(
+                                  color: alertBackgroundColor,
+                                  borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20))),
-      
+
                               // showing lottie only if notes is empty
                               child: data.note?.isEmpty ?? true
                                   ? // lottie animation

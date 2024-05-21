@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/add_steps_pop.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/alert_box.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/steps.dart';
@@ -28,9 +27,11 @@ class _TasksCategoryState extends State<TasksCategory> {
             valueListenable: taskListNotifier,
             builder: (BuildContext context, List<TaskModel> taskList,
                 Widget? child) {
-                  //! F I L T E R I N G
-                  // filtering task based on category
-                  final filteredTasks = taskList.where((task) => task.taskCategory == widget.selectedCategory).toList();
+              //! F I L T E R I N G
+              // filtering task based on category
+              final filteredTasks = taskList
+                  .where((task) => task.taskCategory == widget.selectedCategory)
+                  .toList();
 
               // showing add-task GIF if no data to display.
               if (filteredTasks.isEmpty) {
@@ -55,19 +56,20 @@ class _TasksCategoryState extends State<TasksCategory> {
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
                         collapsedBackgroundColor:
-                            Color.fromARGB(255, 221, 235, 255),
-                        shape: Border(),
+                            alertBackgroundColor,
+                        shape: const Border(),
                         title: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color: navyBlue1,
                               borderRadius: BorderRadius.circular(15)),
                           child: Row(
                             children: [
                               // T A S K - C H E C K B O X
                               Checkbox(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
-                                  checkColor: Color.fromARGB(255, 6, 0, 61),
+                                  fillColor: MaterialStatePropertyAll(
+                                      whiteColor),
+                                  checkColor:
+                                      navyBlue1,
                                   value: data.isChecked1,
                                   onChanged: (newBool) {
                                     setState(() {
@@ -77,7 +79,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                       updateTask(data.id!, data);
                                     });
                                   }),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Expanded(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -96,7 +98,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                               .textTheme
                                               .titleMedium
                                               ?.copyWith(
-                                                  color: Colors.white,
+                                                  color: whiteColor,
                                                   fontSize: 17)),
                                 ),
                               ),
@@ -106,10 +108,10 @@ class _TasksCategoryState extends State<TasksCategory> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color: navyBlue1,
                               borderRadius: BorderRadius.circular(19),
                               border: Border.all(
-                                color: Colors.white,
+                                color: whiteColor!,
                                 width: 1.3,
                               ),
                             ),
@@ -128,7 +130,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                           .textTheme
                                           .bodyMedium
                                           ?.copyWith(
-                                            color: Colors.white,
+                                            color: whiteColor
                                           ),
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
@@ -138,14 +140,14 @@ class _TasksCategoryState extends State<TasksCategory> {
                                   //! STEPS  &  C H E C K B O X E S
                                   StepsWidget(taskModel: data),
 
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
 
                                   //! B O T T O M - I C O N S
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 24,
                                       ),
                                       // Add task-btn
@@ -156,7 +158,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                           },
                                           icon: Icon(
                                             Icons.add_task_rounded,
-                                            color: Colors.white,
+                                            color: whiteColor,
                                             size: 23,
                                           )),
                                       // edit tadsk btn
@@ -170,9 +172,9 @@ class _TasksCategoryState extends State<TasksCategory> {
                                                 data,
                                                 data.taskCategory);
                                           },
-                                          icon: Icon(
+                                          icon:  Icon(
                                             Icons.edit_note_rounded,
-                                            color: Colors.white,
+                                            color: whiteColor,
                                             size: 30,
                                           )),
                                       // favorite button
@@ -190,7 +192,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                                   ? Icons.favorite_rounded
                                                   : Icons
                                                       .favorite_border_rounded,
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               size: 23)),
                                       // delete-task button
                                       IconButton(
@@ -199,11 +201,11 @@ class _TasksCategoryState extends State<TasksCategory> {
                                             showTaskAlertDialog(
                                                 context, data.id);
                                           },
-                                          icon: Icon(
+                                          icon:  Icon(
                                               Icons.delete_outline_rounded,
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               size: 23)),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 24,
                                       ),
                                     ],
@@ -219,7 +221,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                   itemCount: filteredTasks.length,
                   // spacing between each container
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 23);
+                    return const SizedBox(height: 23);
                   },
                 );
               }

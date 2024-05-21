@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 class NotesSearchBar extends StatefulWidget {
   final VoidCallback onCancelTapped;
@@ -27,10 +27,10 @@ class _SearchBarFieldState extends State<NotesSearchBar> {
         style: Theme.of(context)
             .textTheme
             .titleMedium
-            ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+            ?.copyWith(color: navyBlue1),
         decoration: InputDecoration(
             hintText: 'Search...',
-            fillColor: Colors.white,
+            fillColor: whiteColor,
             filled: true,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -43,9 +43,9 @@ class _SearchBarFieldState extends State<NotesSearchBar> {
                   // calls the setstate to toggle between icons.
                   widget.onCancelTapped();
                 },
-                icon: Icon(Icons.cancel_rounded)),
+                icon: const Icon(Icons.cancel_rounded)),
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 25, vertical: 12.0)),
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 12.0)),
       ),
     );
   }

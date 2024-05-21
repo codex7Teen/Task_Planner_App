@@ -1,6 +1,6 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/intro_screens/app_intro.dart';
 
 class ScreenLogo extends StatelessWidget {
@@ -9,7 +9,7 @@ class ScreenLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -33,15 +33,15 @@ class ScreenLogo extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ScreenIntro()));
+                      MaterialPageRoute(builder: (context) => const ScreenIntro()));
                 },
                 // Lets Begin Button
                 child: Container(
                   width: 55,
                   height: 39,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Color.fromARGB(255, 6, 0, 61)),
+                  decoration:  BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      color: navyBlue1),
                   child: const Icon(
                     Icons.navigate_next_rounded,
                     color: Colors.white,

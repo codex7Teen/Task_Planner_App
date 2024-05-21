@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 // setting globalkey for forms
@@ -26,7 +26,7 @@ notesUpdateBottomSheet(
 
   showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: Color.fromARGB(255, 6, 0, 61),
+      backgroundColor: navyBlue1,
       context: context,
       builder: (context) {
         return Padding(
@@ -41,9 +41,9 @@ notesUpdateBottomSheet(
                   // Enter task field
                   Row(
                     children: [
-                      Icon(Icons.task_alt_rounded,
-                          color: Colors.white, size: 23),
-                      SizedBox(width: 25),
+                      const Icon(Icons.task_alt_rounded,
+                          color: whiteColor, size: 23),
+                      const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
                         controller: nameController..text = initialNoteName,
@@ -53,7 +53,7 @@ notesUpdateBottomSheet(
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
-                            ?.copyWith(color: Colors.white, fontSize: 17),
+                            ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
                             label: Text('Enter note name',
                                 style: Theme.of(context)
@@ -64,9 +64,9 @@ notesUpdateBottomSheet(
                       ))
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   // Dropdown list and create button
                   Row(
@@ -81,11 +81,11 @@ notesUpdateBottomSheet(
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
                                   value: selectedNoteCategory,
-                                    style: TextStyle(color: Colors.white),
-                                    dropdownColor: Colors.black,
-                                    icon: Icon(Icons.arrow_drop_down_rounded,
-                                        color: Colors.white, size: 25),
-                                    hint: Text(
+                                    style: const TextStyle(color: whiteColor),
+                                    dropdownColor: blackColor,
+                                    icon: const Icon(Icons.arrow_drop_down_rounded,
+                                        color: whiteColor, size: 25),
+                                    hint: const Text(
                                       'Select Category',
                                       style: TextStyle(color: Colors.grey),
                                     ),
@@ -100,11 +100,11 @@ notesUpdateBottomSheet(
                                                 .textTheme
                                                 .titleMedium
                                                 ?.copyWith(
-                                                    color: Colors.white)),
+                                                    color: whiteColor)),
                                       );
                                     }).toList(),
                                   )
-                                : SizedBox(
+                                : const SizedBox(
                                     width: 10,
                                   );
                           }),
@@ -135,20 +135,20 @@ notesUpdateBottomSheet(
                           width: 100,
                           decoration: BoxDecoration(
                               border:
-                                  Border.all(width: 1.5, color: Colors.white),
+                                  Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
+                          child: const Padding(
+                            padding: EdgeInsets.only(
                                 bottom: 6, top: 3, left: 6, right: 6),
                             child: Row(
                               children: [
                                 Icon(Icons.create_outlined,
-                                    color: Colors.white, size: 18.5),
+                                    color: whiteColor, size: 18.5),
                                 SizedBox(width: 6),
                                 Text(
                                   'Update',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: whiteColor,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 18),
                                 ),

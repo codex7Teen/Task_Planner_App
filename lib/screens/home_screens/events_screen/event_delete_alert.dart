@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 // ! Delete Alert Box
 showEventlAertDialog(BuildContext context, int? id) {
@@ -14,7 +14,7 @@ showEventlAertDialog(BuildContext context, int? id) {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+                ?.copyWith(color:  navyBlue1),
           ),
           actions: [
             // cancel button
@@ -46,10 +46,10 @@ showEventlAertDialog(BuildContext context, int? id) {
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
-                      ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+                      ?.copyWith(color: navyBlue1),
                 )),
           ],
-          backgroundColor: Color.fromARGB(255, 221, 235, 255),
+          backgroundColor: const Color.fromARGB(255, 221, 235, 255),
         );
       });
 }

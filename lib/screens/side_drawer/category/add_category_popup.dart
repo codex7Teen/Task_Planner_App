@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/model/category_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
 //! ADD CATEGORY POP-UP
 showAddCategoryPopup(BuildContext context) {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   TextEditingController categoryNameController = TextEditingController();
 
@@ -15,20 +14,20 @@ showAddCategoryPopup(BuildContext context) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 221, 235, 255),
+          backgroundColor: alertBackgroundColor,
           content: SizedBox(
             height: MediaQuery.of(context).size.height * .22,
             width: MediaQuery.of(context).size.width * .2,
             child: SingleChildScrollView(
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   children: [
                     Text(
                       'Add new category.',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: categoryNameController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -41,14 +40,14 @@ showAddCategoryPopup(BuildContext context) {
                               .textTheme
                               .labelLarge
                               ?.copyWith(
-                                  color: Color.fromARGB(255, 153, 153, 153))),
+                                  color: const Color.fromARGB(255, 153, 153, 153))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         // C A N C E L - B U T T O N
                         TextButton(
                             onPressed: () {
@@ -61,7 +60,7 @@ showAddCategoryPopup(BuildContext context) {
                         TextButton(
                             onPressed: () {
                               // do validation
-                              final validated = _formKey.currentState!.validate();
+                              final validated = formKey.currentState!.validate();
 
                               if(validated){
                                 // Save to db

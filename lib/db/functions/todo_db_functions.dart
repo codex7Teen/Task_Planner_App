@@ -6,7 +6,7 @@ import 'package:scribe/db/model/todo_model.dart';
 
 ValueNotifier<List<TodoModel>> todoListNotifier = ValueNotifier([]);
 
-//! ADD TASK
+//! ADD TODOS
 Future<void> addTodoDetails(TodoModel value) async {
   final todoDB = await Hive.openBox<TodoModel>(TodoModel.boxName);
 

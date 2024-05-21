@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:scribe/screens/home_screens/home_screen.dart';
 
@@ -10,7 +8,7 @@ class Validators {
     var userName = nameController.text;
     userName.isNotEmpty
         ? Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => ScreenHome()))
+            MaterialPageRoute(builder: (context) => const ScreenHome()))
         : null;
   }
 

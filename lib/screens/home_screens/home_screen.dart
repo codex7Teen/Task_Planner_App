@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -7,9 +6,9 @@ import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/events_page.dart';
-import 'package:scribe/decorators/colors/home_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_page.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/tasks_page.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_page.dart';
@@ -24,17 +23,16 @@ class ScreenHome extends StatefulWidget {
 class _ScreenHomeState extends State<ScreenHome> {
   // list of all home pages such as task, notes etc.
   final List<Widget> _pages = [
-    ScreenTasks(),
-    ScreenNotes(),
-    ScreenTodo(),
-    ScreenEvents()
+    const ScreenTasks(),
+    const ScreenNotes(),
+    const ScreenTodo(),
+    const ScreenEvents()
   ];
 
   //! init state
   @override
   void initState() {
     super.initState();
-    applyNavBarColors();
     // calling the function to get value from DB.
     getLoginDetails();
     // calling the function to get value from DB.
@@ -70,20 +68,20 @@ class _ScreenHomeState extends State<ScreenHome> {
     return Scaffold(
       // adding the four home-pages to body
       body: _pages[_selectedIndex],
-      backgroundColor: scaffoldBackground,
+      backgroundColor: whiteColor,
 
       // bottom navigation bar
       bottomNavigationBar: Container(
-        color: bottomNavBarColor,
+        color: whiteColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
           child: GNav(
             onTabChange: _navigateBottomBar,
             duration: const Duration(milliseconds: 200),
-            activeColor: activeColor,
-            color: gNavColor,
-            backgroundColor: gNavBackground!,
-            tabBackgroundColor: gTabBackground!,
+            activeColor: navyBlueLightColor,
+            color: navyBlue1,
+            backgroundColor: navyBlue1,
+            tabBackgroundColor: gTabBackground,
             // icons and label
             tabs: [
               GButton(
@@ -92,9 +90,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Color.fromARGB(255, 0, 18, 138), fontSize: 15),
+                                              color: navyBlueLightColor, fontSize: 15),
                 gap: 10,
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.library_books_rounded,
@@ -102,9 +100,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Color.fromARGB(255, 0, 18, 138), fontSize: 15),
+                                              color: navyBlueLightColor, fontSize: 15),
                 gap: 10,
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.fact_check_outlined,
@@ -112,9 +110,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Color.fromARGB(255, 0, 18, 138), fontSize: 15),
+                                              color: navyBlueLightColor, fontSize: 15),
                 gap: 10,
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.calendar_month_rounded,
@@ -122,9 +120,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Color.fromARGB(255, 0, 18, 138), fontSize: 15),
+                                              color: navyBlueLightColor, fontSize: 15),
                 gap: 10,
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
               )
             ],
           ),

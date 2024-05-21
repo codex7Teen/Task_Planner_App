@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_import, unused_import, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
-import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
@@ -36,8 +34,8 @@ Future<EventsModel?> editEventBottomSheet(
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                  primary: Colors.blue, // header background color
+                colorScheme: const ColorScheme.light(
+                  primary: blueColor, // header background color
                 ),
               ),
               child: child!,
@@ -60,9 +58,9 @@ Future<EventsModel?> editEventBottomSheet(
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                    primary: Colors.blue, // header background color
-                    secondary: Colors.cyan),
+                colorScheme: const ColorScheme.light(
+                    primary: blueColor, // header background color
+                    secondary: cyanColor),
               ),
               child: child!,
             );
@@ -89,7 +87,7 @@ Future<EventsModel?> editEventBottomSheet(
     // setting the todate to same as fromdate if selected fromdate is after the todate
     if (date.isAfter(toDateNotifier.value)) {
       // Update toDateNotifier with combined DateTime
-      toDateNotifier.value = date.add(Duration(hours: 2));
+      toDateNotifier.value = date.add(const Duration(hours: 2));
     }
 
     // adding the from datetime to notifier obj
@@ -111,13 +109,13 @@ Future<EventsModel?> editEventBottomSheet(
 
     // Ensure toDate is always 2 hours after fromDate
     toDateNotifier.value = date.isBefore(fromDateNotifier.value)
-        ? fromDateNotifier.value.add(Duration(hours: 2))
+        ? fromDateNotifier.value.add(const Duration(hours: 2))
         : date;
   }
 
   Future<EventsModel?> val = showModalBottomSheet<EventsModel>(
       isScrollControlled: true,
-      backgroundColor: Color.fromARGB(255, 6, 0, 61),
+      backgroundColor: const Color.fromARGB(255, 6, 0, 61),
       context: context,
       builder: (context) {
         return Padding(
@@ -132,9 +130,9 @@ Future<EventsModel?> editEventBottomSheet(
                   // Enter event field
                   Row(
                     children: [
-                      Icon(Icons.task_alt_rounded,
+                      const Icon(Icons.task_alt_rounded,
                           color: Colors.white, size: 23),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
                         controller: eventNameController,
@@ -155,9 +153,9 @@ Future<EventsModel?> editEventBottomSheet(
                       ))
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //! select from date & time ( FROM )
                   Column(
@@ -168,7 +166,7 @@ Future<EventsModel?> editEventBottomSheet(
                               .textTheme
                               .titleSmall!
                               .copyWith(color: Colors.white, fontSize: 16)),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
@@ -185,7 +183,7 @@ Future<EventsModel?> editEventBottomSheet(
                                             .labelLarge!
                                             .copyWith(color: Colors.white));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Colors.white,
                               ),
@@ -208,7 +206,7 @@ Future<EventsModel?> editEventBottomSheet(
                                             .labelLarge!
                                             .copyWith(color: Colors.white));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Colors.white,
                               ),
@@ -223,7 +221,7 @@ Future<EventsModel?> editEventBottomSheet(
                     ],
                   ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //! select to date & time ( TO )
                   Column(
@@ -234,7 +232,7 @@ Future<EventsModel?> editEventBottomSheet(
                               .textTheme
                               .titleSmall!
                               .copyWith(color: Colors.white, fontSize: 16)),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
@@ -251,7 +249,7 @@ Future<EventsModel?> editEventBottomSheet(
                                             .labelLarge!
                                             .copyWith(color: Colors.white));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Colors.white,
                               ),
@@ -273,7 +271,7 @@ Future<EventsModel?> editEventBottomSheet(
                                             .labelLarge!
                                             .copyWith(color: Colors.white));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Colors.white,
                               ),
@@ -288,7 +286,7 @@ Future<EventsModel?> editEventBottomSheet(
                     ],
                   ),
 
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
 
                   //! U P D A T E - B U T T O N
                   Row(
@@ -329,9 +327,9 @@ Future<EventsModel?> editEventBottomSheet(
                                 bottom: 6, top: 3, left: 6, right: 6),
                             child: Row(
                               children: [
-                                Icon(Icons.create_outlined,
+                                const Icon(Icons.create_outlined,
                                     color: Colors.white, size: 18.5),
-                                SizedBox(width: 6),
+                                const SizedBox(width: 6),
                                 Text('Update',
                                     style: Theme.of(context)
                                         .textTheme

@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
-import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/edit_note.dart';
 
 class NoteBoxes extends StatefulWidget {
@@ -46,7 +45,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
             return Center(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   Lottie.asset('assets/animations/notes.json', width: 227),
@@ -61,7 +60,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
           } else {
             // viewing the available notes according to filtered-notes
             return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 18,
                     mainAxisSpacing: 20,
                     crossAxisCount: 2),
@@ -75,8 +74,8 @@ class _NoteBoxesState extends State<NoteBoxes> {
                       Container(
                         height: 43,
                         width: 185,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 6, 0, 61),
+                        decoration: const BoxDecoration(
+                            color: navyBlue1,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20))),
@@ -96,21 +95,21 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   data.isFavorite
                                       ? Icons.favorite_rounded
                                       : Icons.favorite_border_rounded,
-                                  color: Colors.white,
+                                  color: whiteColor,
                                   size: 18,
                                 )),
                             Expanded(
                                 child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
                               child: Text(
                                 data.name,
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium
                                     ?.copyWith(
-                                        color: Colors.white, fontSize: 14.5),
+                                        color: whiteColor, fontSize: 14.5),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              scrollDirection: Axis.horizontal,
                             )),
                           ],
                         ),
@@ -128,7 +127,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                         child: Container(
                             height: 133.7,
                             width: 185,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 221, 235, 255),
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),

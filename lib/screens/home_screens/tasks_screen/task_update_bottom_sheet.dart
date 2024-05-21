@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
@@ -29,7 +29,7 @@ void updateTaskBottomSheet(
 
   showModalBottomSheet(
     isScrollControlled: true,
-    backgroundColor: Color.fromARGB(255, 6, 0, 61),
+    backgroundColor: navyBlue1,
     context: context,
     builder: (context) {
       return Padding(
@@ -44,8 +44,8 @@ void updateTaskBottomSheet(
                 // E N T E R - T A S K
                 Row(
                   children: [
-                    Icon(Icons.task_alt_rounded, color: Colors.white, size: 23),
-                    SizedBox(width: 25),
+                    const Icon(Icons.task_alt_rounded, color: whiteColor, size: 23),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: TextFormField(
                         maxLength: 30,
@@ -56,7 +56,7 @@ void updateTaskBottomSheet(
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
-                            ?.copyWith(color: Colors.white, fontSize: 17),
+                            ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
                           label: Text('Enter task name',
                               style: Theme.of(context)
@@ -69,14 +69,14 @@ void updateTaskBottomSheet(
                     ),
                   ],
                 ),
-                Divider(),
-                SizedBox(height: 30),
+                const Divider(),
+                const SizedBox(height: 30),
                 // E N T E R - D E S C R I P T I O N
                 Row(
                   children: [
-                    Icon(Icons.description_outlined,
-                        color: Colors.white, size: 23),
-                    SizedBox(width: 26),
+                    const Icon(Icons.description_outlined,
+                        color: whiteColor, size: 23),
+                    const SizedBox(width: 26),
                     Expanded(
                       child: TextFormField(
                         maxLength: 90,
@@ -89,7 +89,7 @@ void updateTaskBottomSheet(
                             .textTheme
                             .titleMedium
                             ?.copyWith(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontSize: 17,
                                 fontWeight: FontWeight.w400),
                         decoration: InputDecoration(
@@ -104,8 +104,8 @@ void updateTaskBottomSheet(
                     ),
                   ],
                 ),
-                Divider(),
-                SizedBox(height: 30),
+                const Divider(),
+                const SizedBox(height: 30),
                 // Dropdown list and create button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,11 +119,11 @@ void updateTaskBottomSheet(
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
                                   value: selectedTaskCategory,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: whiteColor),
                                     dropdownColor: Colors.black,
-                                    icon: Icon(Icons.arrow_drop_down_rounded,
-                                        color: Colors.white, size: 25),
-                                    hint: Text(
+                                    icon: const Icon(Icons.arrow_drop_down_rounded,
+                                        color: whiteColor, size: 25),
+                                    hint: const Text(
                                       'Select Category',
                                       style: TextStyle(color: Colors.grey),
                                     ),
@@ -138,11 +138,11 @@ void updateTaskBottomSheet(
                                                 .textTheme
                                                 .titleMedium
                                                 ?.copyWith(
-                                                    color: Colors.white)),
+                                                    color: whiteColor)),
                                       );
                                     }).toList(),
                                   )
-                                : SizedBox(
+                                : const SizedBox(
                                     width: 10,
                                   );
                           }),
@@ -178,7 +178,7 @@ void updateTaskBottomSheet(
                         height: 35,
                         width: 105,
                         decoration: BoxDecoration(
-                          border: Border.all(width: 1.5, color: Colors.white),
+                          border: Border.all(width: 1.5, color: whiteColor),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
@@ -186,15 +186,15 @@ void updateTaskBottomSheet(
                               bottom: 6, top: 3, left: 6, right: 6),
                           child: Row(
                             children: [
-                              Icon(Icons.create_outlined,
-                                  color: Colors.white, size: 18.5),
-                              SizedBox(width: 6),
+                              const Icon(Icons.create_outlined,
+                                  color: whiteColor, size: 18.5),
+                              const SizedBox(width: 6),
                               Text('Update',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium
                                       ?.copyWith(
-                                          color: Colors.white,
+                                          color: whiteColor,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 19)),
                             ],

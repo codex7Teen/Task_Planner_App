@@ -1,15 +1,12 @@
-// ignore_for_file: unnecessary_import, prefer_const_constructors, unused_import
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/add_steps_pop.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/alert_box.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/steps.dart';
-import 'package:scribe/screens/home_screens/tasks_screen/task_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/task_update_bottom_sheet.dart';
 
 class TaskBoxes extends StatefulWidget {
@@ -73,18 +70,18 @@ class _TaskBoxesState extends State<TaskBoxes> {
                   borderRadius: BorderRadius.circular(15),
                   child: ExpansionTile(
                     collapsedBackgroundColor:
-                        Color.fromARGB(255, 221, 235, 255),
-                    shape: Border(),
+                         alertBackgroundColor,
+                    shape: const Border(),
                     title: Container(
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 6, 0, 61),
+                          color:  navyBlue1,
                           borderRadius: BorderRadius.circular(15)),
                       child: Row(
                         children: [
                           // T A S K - C H E C K B O X
                           Checkbox(
-                              fillColor: MaterialStatePropertyAll(Colors.white),
-                              checkColor: Color.fromARGB(255, 6, 0, 61),
+                              fillColor: const MaterialStatePropertyAll(whiteColor),
+                              checkColor:  navyBlue1,
                               value: data.isChecked1,
                               onChanged: (newBool) {
                                 setState(() {
@@ -94,7 +91,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   updateTask(data.id!, data);
                                 });
                               }),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -113,7 +110,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               fontSize: 17)),
                             ),
                           ),
@@ -123,10 +120,10 @@ class _TaskBoxesState extends State<TaskBoxes> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 6, 0, 61),
+                          color:  navyBlue1,
                           borderRadius: BorderRadius.circular(19),
                           border: Border.all(
-                            color: Colors.white,
+                            color: whiteColor,
                             width: 1.3,
                           ),
                         ),
@@ -145,7 +142,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                        color: Colors.white,
+                                        color: whiteColor,
                                       ),
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
@@ -155,14 +152,14 @@ class _TaskBoxesState extends State<TaskBoxes> {
                               //! STEPS  &  C H E C K B O X E S
                               StepsWidget(taskModel: data),
 
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
 
                               //! B O T T O M - I C O N S
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 24,
                                   ),
                                   // Add task-btn
@@ -171,9 +168,9 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                         // ADD STEPS (Opens add step popup)
                                         showAddStepsPopup(context, data);
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.add_task_rounded,
-                                        color: Colors.white,
+                                        color: whiteColor,
                                         size: 23,
                                       )),
                                   // edit tadsk btn
@@ -183,9 +180,9 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                         updateTaskBottomSheet(context,
                                             data.name, data.description, data, data.taskCategory);
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.edit_note_rounded,
-                                        color: Colors.white,
+                                        color: whiteColor,
                                         size: 30,
                                       )),
                                   // favorite button
@@ -201,7 +198,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                           data.isFavorite
                                               ? Icons.favorite_rounded
                                               : Icons.favorite_border_rounded,
-                                          color: Colors.white,
+                                          color: whiteColor,
                                           size: 23)),
                                   // delete-task button
                                   IconButton(
@@ -209,9 +206,9 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                         // show delete alert-box
                                         showTaskAlertDialog(context, data.id);
                                       },
-                                      icon: Icon(Icons.delete_outline_rounded,
-                                          color: Colors.white, size: 23)),
-                                  SizedBox(
+                                      icon: const Icon(Icons.delete_outline_rounded,
+                                          color: whiteColor, size: 23)),
+                                  const SizedBox(
                                     width: 24,
                                   ),
                                 ],
@@ -227,7 +224,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
               itemCount: filteredTasks.length,
               // spacing between each container
               separatorBuilder: (context, index) {
-                return SizedBox(height: 23);
+                return const SizedBox(height: 23);
               },
             );
           }

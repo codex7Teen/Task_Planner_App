@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
-import 'package:scribe/db/model/notes_model.dart';
 import 'package:scribe/db/model/todo_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 class TodoSearchBarField extends StatefulWidget {
   final List<TodoModel> todoListx;
@@ -27,7 +25,7 @@ class _TodoSearchBarFieldState extends State<TodoSearchBarField> {
                         },
                         style: Theme.of(context)
                               .textTheme
-                              .titleMedium?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+                              .titleMedium?.copyWith(color: navyBlue1),
                         decoration: InputDecoration(
                             hintText: 'Search...',
                             fillColor: Colors.white,
@@ -43,8 +41,8 @@ class _TodoSearchBarFieldState extends State<TodoSearchBarField> {
                                   // calls the setstate to toggle between icons.
                                   widget.onCancelTapped();
                                 },
-                                icon: Icon(Icons.cancel_rounded)),
-                            contentPadding: EdgeInsets.symmetric(
+                                icon: const Icon(Icons.cancel_rounded)),
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 12.0)),
                       ),
                   );

@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_import, unused_import
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
-import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
@@ -30,8 +28,8 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                  primary: Colors.blue, // header background color
+                colorScheme: const ColorScheme.light(
+                  primary: blueColor, // header background color
                 ),
               ),
               child: child!,
@@ -54,9 +52,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                    primary: Colors.blue, // header background color
-                    secondary: Colors.cyan),
+                colorScheme: const ColorScheme.light(
+                    primary: blueColor, // header background color
+                    secondary: cyanColor),
               ),
               child: child!,
             );
@@ -83,7 +81,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
     // setting the todate to same as fromdate if selected fromdate is after the todate
     if (date.isAfter(toDateNotifier.value)) {
       // Update toDateNotifier with combined DateTime
-      toDateNotifier.value = date.add(Duration(hours: 2));
+      toDateNotifier.value = date.add(const Duration(hours: 2));
     }
 
     // adding the from datetime to notifier obj
@@ -105,13 +103,13 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
 
      // Ensure toDate is always 2 hours after fromDate
   toDateNotifier.value = date.isBefore(fromDateNotifier.value)
-      ? fromDateNotifier.value.add(Duration(hours: 2))
+      ? fromDateNotifier.value.add(const Duration(hours: 2))
       : date;
   }
 
   showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: Color.fromARGB(255, 6, 0, 61),
+      backgroundColor: navyBlue1,
       context: context,
       builder: (context) {
         return Padding(
@@ -126,9 +124,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                   // Enter event field
                   Row(
                     children: [
-                      Icon(Icons.task_alt_rounded,
-                          color: Colors.white, size: 23),
-                      SizedBox(width: 25),
+                      const Icon(Icons.task_alt_rounded,
+                          color: whiteColor, size: 23),
+                      const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
                         controller: eventNameController,
@@ -138,7 +136,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
-                            ?.copyWith(color: Colors.white, fontSize: 17),
+                            ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
                             label: Text('Enter event name',
                                 style: Theme.of(context)
@@ -149,9 +147,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                       ))
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //! select from date & time ( FROM )
                   Column(
@@ -161,8 +159,8 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
-                              .copyWith(color: Colors.white, fontSize: 16)),
-                      SizedBox(height: 8),
+                              .copyWith(color: whiteColor, fontSize: 16)),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
@@ -177,11 +175,11 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
-                                            .copyWith(color: Colors.white));
+                                            .copyWith(color: whiteColor));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                               onTap: () {
                                 // open select from date
@@ -200,11 +198,11 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
-                                            .copyWith(color: Colors.white));
+                                            .copyWith(color: whiteColor));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                               onTap: () {
                                 // open select from time
@@ -217,7 +215,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                     ],
                   ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //! select to date & time ( TO )
                   Column(
@@ -227,8 +225,8 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
-                              .copyWith(color: Colors.white, fontSize: 16)),
-                      SizedBox(height: 8),
+                              .copyWith(color: whiteColor, fontSize: 16)),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
@@ -243,11 +241,11 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
-                                            .copyWith(color: Colors.white));
+                                            .copyWith(color: whiteColor));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                               onTap: () {
                                 // open select from date
@@ -265,11 +263,11 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
-                                            .copyWith(color: Colors.white));
+                                            .copyWith(color: whiteColor));
                                   }),
-                              trailing: Icon(
+                              trailing: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                               onTap: () {
                                 // open select from time
@@ -282,7 +280,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                     ],
                   ),
 
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
 
                   //! C R E A T E - B U T T O N
                   Row(
@@ -308,7 +306,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                             // resets the fromdate and todate to current date
                             fromDateNotifier.value = DateTime.now();
                             toDateNotifier.value =
-                                DateTime.now().add(Duration(hours: 2));
+                                DateTime.now().add(const Duration(hours: 2));
 
                             // popping bottomsheet
                             Navigator.pop(context);
@@ -323,22 +321,22 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           width: 100,
                           decoration: BoxDecoration(
                               border:
-                                  Border.all(width: 1.5, color: Colors.white),
+                                  Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 6, top: 3, left: 6, right: 6),
                             child: Row(
                               children: [
-                                Icon(Icons.create_outlined,
-                                    color: Colors.white, size: 18.5),
-                                SizedBox(width: 6),
+                                const Icon(Icons.create_outlined,
+                                    color: whiteColor, size: 18.5),
+                                const SizedBox(width: 6),
                                 Text('Create',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
                                         ?.copyWith(
-                                            color: Colors.white,
+                                            color: whiteColor,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 19)),
                               ],

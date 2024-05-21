@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/home_screen.dart';
 import 'package:scribe/screens/side_drawer/category/notes_category.dart';
 import 'package:scribe/screens/side_drawer/category/tasks_category.dart';
@@ -27,7 +26,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Stack(
         children: [
           Column(
@@ -43,7 +42,17 @@ class _ScreenCategoryState extends State<ScreenCategory> {
               });
             },
             controller: _controller2,
-            children: [TasksCategory(selectedCategory: widget.categoryName,), NotesCategory(selectedCategory: widget.categoryName,), TodoCategory(selectedCategory: widget.categoryName,)],
+            children: [
+              TasksCategory(
+                selectedCategory: widget.categoryName,
+              ),
+              NotesCategory(
+                selectedCategory: widget.categoryName,
+              ),
+              TodoCategory(
+                selectedCategory: widget.categoryName,
+              )
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -58,11 +67,11 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                           //go back
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => ScreenHome()));
+                                  builder: (context) => const ScreenHome()));
                         },
                         icon: Icon(
                           Icons.arrow_back_rounded,
-                          color: Color.fromARGB(255, 6, 0, 61),
+                          color: navyBlue1,
                         )),
 
                     Row(
@@ -71,12 +80,12 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                         IconButton(
                             onPressed: () {
                               _controller2.previousPage(
-                                  duration: Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.easeIn);
                             },
-                            icon: Icon(
+                            icon:  Icon(
                               Icons.arrow_left_rounded,
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color: navyBlue1,
                               size: 40,
                             )),
 
@@ -86,31 +95,32 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color: Color.fromARGB(255, 6, 0, 61))),
+                                    color:
+                                        navyBlue1)),
 
                         // right button
                         IconButton(
                             onPressed: () {
                               _controller2.nextPage(
-                                  duration: Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.easeIn);
                             },
                             icon: Icon(
                               Icons.arrow_right_rounded,
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color: navyBlue1,
                               size: 40,
                             )),
                       ],
                     ),
 
                     // search button
-                    SizedBox(
-                      width:50,
+                    const SizedBox(
+                      width: 50,
                     )
                   ],
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
 
@@ -120,10 +130,10 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                   child: Container(
                     height: 39,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: whiteColor,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(
-                        color: Color.fromARGB(255, 6, 0, 61),
+                        color: navyBlue1!,
                         width: .5,
                       ),
                     ),
@@ -134,7 +144,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                           widget.categoryName,
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Color.fromARGB(255, 6, 0, 61),
+                                    color: navyBlue1,
                                     fontSize: 14.5,
                                   ),
                         ),

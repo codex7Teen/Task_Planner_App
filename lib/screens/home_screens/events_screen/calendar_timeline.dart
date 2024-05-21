@@ -1,9 +1,8 @@
-// Filtering dates upon the date pressed and hold
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_data_source.dart';
 import 'package:scribe/screens/home_screens/events_screen/view_event.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -12,8 +11,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 List<EventsModel> _filterEventsByDate(DateTime date) {
   return eventListNotifier.value.where((event) {
     // Check if the selected date is within the event's date range
-    return event.from.isBefore(date.add(Duration(days: 1))) &&
-        event.to.isAfter(date.subtract(Duration(days: 1)));
+    return event.from.isBefore(date.add(const Duration(days: 1))) &&
+        event.to.isAfter(date.subtract(const Duration(days: 1)));
   }).toList();
 }
 
@@ -25,7 +24,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
     context: context,
     builder: (context) {
       return filteredEvents.isEmpty
-          ? Center(child: Text('No Events for this date'))
+          ? const Center(child: Text('No Events for this date'))
           : ClipRRect(
               borderRadius: BorderRadius.circular(20),
               // listens to date changes in the model
@@ -43,21 +42,21 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                     return SfCalendar(
                       //! DECORATION
                       // secondary header
-                      backgroundColor: Colors.white,
-                      todayHighlightColor: Colors.black,
-                      cellBorderColor: Color.fromARGB(255, 221, 235, 255),
+                      backgroundColor: whiteColor,
+                      todayHighlightColor: blackColor,
+                      cellBorderColor:  alertBackgroundColor,
                       timeSlotViewSettings: TimeSlotViewSettings(
                         timeTextStyle: Theme.of(context).textTheme.labelMedium,
                       ),
                       // primary header
-                      headerStyle: CalendarHeaderStyle(
-                        backgroundColor: Color.fromARGB(255, 6, 0, 61),
+                      headerStyle: const CalendarHeaderStyle(
+                        backgroundColor: navyBlue1,
                         textAlign: TextAlign.center,
                         textStyle: TextStyle(
-                            fontWeight: FontWeight.w500, color: Colors.white),
+                            fontWeight: FontWeight.w500, color: whiteColor),
                       ),
                       viewHeaderStyle: ViewHeaderStyle(
-                        backgroundColor: Color.fromARGB(255, 221, 235, 255),
+                        backgroundColor: alertBackgroundColor,
                         dayTextStyle: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -68,7 +67,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                             .copyWith(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(255, 6, 0, 61)),
+                                color: navyBlue1),
                       ),
                       selectionDecoration:
                           BoxDecoration(color: Colors.blue.withOpacity(0.25)),
@@ -81,7 +80,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                         final event = details.appointments.first as EventsModel;
                         return Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 221, 235, 255),
+                              color:  alertBackgroundColor,
                               borderRadius: BorderRadius.circular(8)),
                           width: details.bounds.width,
                           height: details.bounds.height,

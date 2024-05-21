@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class IntroPage2 extends StatelessWidget {
           // sub text
           Text(
             "Scribe enables you to efficiently organize your tasks with customizable to-do lists. Stay on top of your priorities and increase productivity with this intuitive task management app.",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Color.fromARGB(255, 86, 86, 86), fontSize: 14),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color.fromARGB(255, 86, 86, 86), fontSize: 14),
           ),
         ],
       ),

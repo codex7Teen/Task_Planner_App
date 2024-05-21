@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
-import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 // ! Delete Alert Box
 showTodoAlertDialog(BuildContext context, int? id) {
@@ -15,7 +14,7 @@ showTodoAlertDialog(BuildContext context, int? id) {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+                ?.copyWith(color: navyBlue1),
           ),
           actions: [
             // cancel button
@@ -42,10 +41,10 @@ showTodoAlertDialog(BuildContext context, int? id) {
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
-                      ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+                      ?.copyWith(color: navyBlue1),
                 )),
           ],
-          backgroundColor: Color.fromARGB(255, 221, 235, 255),
+          backgroundColor: alertBackgroundColor,
         );
       });
 }

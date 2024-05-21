@@ -1,14 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, unnecessary_import
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/notes_screen/note_boxes.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_search_bar.dart';
-import 'package:scribe/screens/home_screens/tasks_screen/task_search_bar.dart';
-import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenNotes extends StatefulWidget {
@@ -32,20 +29,20 @@ class _ScreenNotesState extends State<ScreenNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(),
+      drawer: const SideDrawer(),
       // Global key
       key: _globalKey,
       // floating button
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
         child: FloatingActionButton.extended(
-          label: Text('Add Notes', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
-          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          label: Text('Add Notes', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: navyBlue1)),
+          icon: const Icon(Icons.add, color: navyBlue1,),
           onPressed: () {
             // bottom sheet
             notesBottomSheet(context);
           },
-          backgroundColor: Colors.white,
+          backgroundColor: whiteColor,
         ),
       ),
 
@@ -73,10 +70,10 @@ class _ScreenNotesState extends State<ScreenNotes> {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     indent: 17,
                     endIndent: 17,
-                    color: Color.fromARGB(255, 6, 0, 61),
+                    color: navyBlue1,
                     thickness: 0.1,
                   )
                 ],
@@ -95,8 +92,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                       // calling open drawer here
                       _globalKey.currentState?.openDrawer();
                     },
-                    icon: Icon(Icons.menu_rounded,
-                        size: 44, color: Color.fromARGB(255, 6, 0, 61))),
+                    icon: const Icon(Icons.menu_rounded,
+                        size: 44, color: navyBlue1)),
                 // date
                 Text(DateFormat('dd/MM/yyyy').format(DateTime.now()), style: Theme.of(context)
                                   .textTheme
@@ -104,7 +101,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                   ?.copyWith(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 6, 0, 61))),
+                                      color:  navyBlue1)),
                 // search icon
                 IconButton(
                     onPressed: () {
@@ -113,8 +110,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         searchToggle = !searchToggle;
                       });
                     },
-                    icon: Icon(Icons.search_rounded,
-                        size: 37, color: Color.fromARGB(255, 6, 0, 61))),
+                    icon: const Icon(Icons.search_rounded,
+                        size: 37, color: navyBlue1)),
               ],
             ) :
             NotesSearchBar(onCancelTapped: (){
@@ -147,11 +144,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         width: 109,
                         decoration: BoxDecoration(
                           color: selectedIndex == 0
-                              ? Color.fromARGB(255, 6, 0, 61)
-                              : Colors.white,
+                              ?  navyBlue1
+                              : whiteColor,
                           borderRadius: BorderRadius.circular(22),
                           border: Border.all(
-                            color: Color.fromARGB(255, 6, 0, 61),
+                            color:  navyBlue1,
                             width: 1,
                           ),
                         ),
@@ -161,8 +158,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             Icon(
                               Icons.list_rounded,
                               color: selectedIndex == 0
-                                  ? Colors.white
-                                  : Color.fromARGB(255, 6, 0, 61),
+                                  ? whiteColor
+                                  :  navyBlue1,
                             ),
                             Text('All Notes',
                                 style: selectedIndex == 0
@@ -170,15 +167,15 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Colors.white, fontSize: 15)
+                                              color: whiteColor, fontSize: 15)
                                     : Theme.of(context)
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
                                               color:
-                                                  Color.fromARGB(255, 6, 0, 61),
+                                                   navyBlue1,
                                               fontSize: 14.5)),
-                            SizedBox(width: 3),
+                            const SizedBox(width: 3),
                           ],
                         ),
                       ),
@@ -197,11 +194,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         width: 109,
                         decoration: BoxDecoration(
                           color: selectedIndex == 1
-                              ? Color.fromARGB(255, 6, 0, 61)
-                              : Colors.white,
+                              ?  navyBlue1
+                              : whiteColor,
                           borderRadius: BorderRadius.circular(22),
                           border: Border.all(
-                            color: Color.fromARGB(255, 6, 0, 61),
+                            color:  navyBlue1,
                             width: 1,
                           ),
                         ),
@@ -212,8 +209,8 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               Icons.favorite_border_rounded,
                               size: 22,
                               color: selectedIndex == 1
-                                  ? Colors.white
-                                  : Color.fromARGB(255, 6, 0, 61),
+                                  ? whiteColor
+                                  :  navyBlue1,
                             ),
                             Text('Favorites',
                                 style: selectedIndex == 1
@@ -221,15 +218,15 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: Colors.white, fontSize: 15)
+                                              color: whiteColor, fontSize: 15)
                                     : Theme.of(context)
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
                                               color:
-                                                  Color.fromARGB(255, 6, 0, 61),
+                                                   navyBlue1,
                                               fontSize: 14.5)),
-                            SizedBox(width: 3),
+                            const SizedBox(width: 3),
                           ],
                         ),
                       ),
@@ -237,7 +234,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
                   ],
                 ),
 
-                SizedBox(height: 28),
+                const SizedBox(height: 28),
 
                 // Seleted field indication text (eg. All tasks, favs etc.)
                 selectedIndex == 0
@@ -245,17 +242,17 @@ class _ScreenNotesState extends State<ScreenNotes> {
                               .textTheme
                               .titleMedium
                               ?.copyWith(
-                                  color: Color.fromARGB(255, 6, 0, 61),
+                                  color:  navyBlue1,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))
                     : Text('Favorites', style: Theme.of(context)
                               .textTheme
                               .titleMedium
                               ?.copyWith(
-                                  color: Color.fromARGB(255, 6, 0, 61),
+                                  color:  navyBlue1,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold)),
-                SizedBox(height: 28),
+                const SizedBox(height: 28),
 
                 //! N O T E - B O X E S S S S
                 Expanded(child: NoteBoxes(sectionIndex: selectedIndex, notesSearchToggle: searchToggle,)),

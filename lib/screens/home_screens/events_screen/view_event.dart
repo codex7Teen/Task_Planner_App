@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
 import 'package:scribe/screens/home_screens/events_screen/edit_event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_delete_alert.dart';
@@ -46,7 +45,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
     return Scaffold(
       //! A P P - B A R
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 6, 0, 61),
+        backgroundColor:  navyBlue1,
         title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // notes title
@@ -54,9 +53,9 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
-                    ?.copyWith(color: Colors.white, fontSize: 20))),
+                    ?.copyWith(color: whiteColor, fontSize: 20))),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: whiteColor),
           onPressed: () {
             Navigator.pop(context, events);
           },
@@ -81,7 +80,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
-                      ?.copyWith(color: Colors.white))),
+                      ?.copyWith(color: whiteColor))),
 
           // Delete button
           TextButton(
@@ -93,10 +92,10 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
-                      ?.copyWith(color: Colors.white))),
+                      ?.copyWith(color: whiteColor))),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
 
       //! B O D Y
       body: Padding(
@@ -112,8 +111,8 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color: Color.fromARGB(255, 6, 0, 61))),
-                  Spacer(),
+                          color: navyBlue1)),
+                  const Spacer(),
                   Text(
                     // from date
                     Utils.toDate(events.from),
@@ -122,7 +121,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                         .bodyMedium!
                         .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(width: 25),
+                  const SizedBox(width: 25),
                   Text(
                     // from time
                     Utils.toTime(events.from),
@@ -134,7 +133,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                 ],
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               //! T O
               Row(
@@ -143,8 +142,8 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color: Color.fromARGB(255, 6, 0, 61))),
-                  Spacer(),
+                          color:  navyBlue1)),
+                  const Spacer(),
                   Text(
                     // to date
                     Utils.toDate(events.to),
@@ -153,7 +152,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                         .bodyMedium!
                         .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
                     // to time
                     Utils.toTime(events.to),
@@ -165,11 +164,11 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                 ],
               ),
 
-              SizedBox(height: 26),
+              const SizedBox(height: 26),
 
-              Divider(),
+              const Divider(),
 
-              SizedBox(height: 26),
+              const SizedBox(height: 26),
 
               //! T I T L E
               SingleChildScrollView(
@@ -181,12 +180,12 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                         .copyWith(fontSize: 22, fontWeight: FontWeight.w500)),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               //! EVENT DESCRIPTION CONTAINER
               Container(
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 221, 235, 255),
+                    color: const Color.fromARGB(255, 221, 235, 255),
                     borderRadius: BorderRadius.circular(20)),
                 //! D E S C R I P T I O N - FIELD
                 child: Padding(
@@ -203,7 +202,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                         validator: (value) => Validators().validateField(
                             value, 'Please write a description to save.'),
                         controller: eventDescriptionController,
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                         decoration: InputDecoration(
                             hintText: 'Write your event description...',
                             hintStyle: Theme.of(context)
@@ -226,15 +225,15 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
       //! S A V E - B U T T O N
       floatingActionButton: showSaveButton
           ? Align(
-              alignment: Alignment(0.9, 0.95),
+              alignment: const Alignment(0.9, 0.95),
               child: FloatingActionButton.extended(
-                backgroundColor: Color.fromARGB(255, 6, 0, 61),
+                backgroundColor: navyBlue1,
                 label: Text(
                   'Save',
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge!
-                      .copyWith(color: Colors.white),
+                      .copyWith(color: whiteColor),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {

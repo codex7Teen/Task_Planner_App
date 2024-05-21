@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
@@ -30,26 +30,26 @@ class _ScreenEventsState extends State<ScreenEvents> {
     super.initState();
     final now = DateTime.now();
     fromDateNotifier = ValueNotifier<DateTime>(now);
-    toDateNotifier = ValueNotifier<DateTime>(now.add(Duration(hours: 2)));
+    toDateNotifier = ValueNotifier<DateTime>(now.add(const Duration(hours: 2)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(),
+      drawer: const SideDrawer(),
       // Global key
       key: _globalKey,
       // floating action button
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
         child: FloatingActionButton.extended(
-          label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Color.fromARGB(255, 6, 0, 61))),
-          icon: Icon(Icons.add, color: Color.fromARGB(255, 6, 0, 61),),
+          label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color:  navyBlue1)),
+          icon: const Icon(Icons.add, color: navyBlue1,),
           onPressed: () {
             // open add event bottom sheet
             eventBottomSheet(context, fromDateNotifier, toDateNotifier);
           },
-          backgroundColor: Colors.white,
+          backgroundColor: whiteColor,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -76,10 +76,10 @@ class _ScreenEventsState extends State<ScreenEvents> {
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.fill,
                   ),
-                  Divider(
+                  const Divider(
                     indent: 17,
                     endIndent: 17,
-                    color: Color.fromARGB(255, 6, 0, 61),
+                    color: navyBlue1,
                     thickness: 0.1,
                   )
                 ],
@@ -98,16 +98,16 @@ class _ScreenEventsState extends State<ScreenEvents> {
                       // calling open drawer here
                       _globalKey.currentState?.openDrawer();
                     },
-                    icon: Icon(Icons.menu_rounded,
-                        size: 44, color: Color.fromARGB(255, 6, 0, 61))),
+                    icon: const Icon(Icons.menu_rounded,
+                        size: 44, color: navyBlue1)),
 
-                SizedBox(width: 95),
+                const SizedBox(width: 95),
                 // date
                 Text(DateFormat('dd/MM/yyyy').format(DateTime.now()),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 6, 0, 61))),
+                        color:  navyBlue1)),
               ],
             ),
           ),
@@ -125,35 +125,35 @@ class _ScreenEventsState extends State<ScreenEvents> {
                       height: 39,
                       width: 109,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: whiteColor,
                         borderRadius: BorderRadius.circular(22),
                         border: Border.all(
-                          color: Color.fromARGB(255, 6, 0, 61),
+                          color: navyBlue1,
                           width: 1,
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.calendar_month_rounded,
-                            color: Color.fromARGB(255, 6, 0, 61),
+                            color: navyBlue1,
                           ),
                           Text('Events',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
                                   ?.copyWith(
-                                      color: Color.fromARGB(255, 6, 0, 61),
+                                      color:  navyBlue1,
                                       fontSize: 14.5)),
-                          SizedBox(width: 3),
+                          const SizedBox(width: 3),
                         ],
                       ),
                     ),
                   ],
                 ),
 
-                SizedBox(height: 28),
+                const SizedBox(height: 28),
 
                 // Calendar logo
                 Text(
@@ -165,12 +165,12 @@ class _ScreenEventsState extends State<ScreenEvents> {
                                 fontWeight: FontWeight.w300, fontSize: 22)
                                   
                 ),
-                SizedBox(height: 28),
+                const SizedBox(height: 28),
 
                 //! C A L E N D A R -------
-                CalendarWidget(),
+                const CalendarWidget(),
 
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
               ],
             ),
           )

@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 
 class SearchBarField extends StatefulWidget {
   final VoidCallback onCancelTapped;
@@ -26,7 +26,7 @@ class _SearchBarFieldState extends State<SearchBarField> {
         style: Theme.of(context)
             .textTheme
             .titleMedium
-            ?.copyWith(color: Color.fromARGB(255, 6, 0, 61)),
+            ?.copyWith(color: navyBlue1),
         decoration: InputDecoration(
             hintText: 'Search...',
             fillColor: Colors.white,
@@ -41,9 +41,9 @@ class _SearchBarFieldState extends State<SearchBarField> {
                   // toggle between icons.
                   widget.onCancelTapped();
                 },
-                icon: Icon(Icons.cancel_rounded)),
+                icon: const Icon(Icons.cancel_rounded)),
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 25, vertical: 12.0)),
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 12.0)),
       ),
     );
   }

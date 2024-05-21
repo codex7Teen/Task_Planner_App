@@ -1,6 +1,6 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/intro_screens/intro_page1.dart';
 import 'package:scribe/screens/intro_screens/intro_page2.dart';
 import 'package:scribe/screens/intro_screens/intro_page3.dart';
@@ -25,7 +25,7 @@ class ScreenIntroState extends State<ScreenIntro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
         body: SafeArea(
       child: Stack(
         children: [
@@ -72,10 +72,10 @@ class ScreenIntroState extends State<ScreenIntro> {
                           child: Container(
                               width: 95,
                               height: 43,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  color: Color.fromARGB(255, 6, 0, 61)),
+                                      const BorderRadius.all(Radius.circular(30)),
+                                  color: navyBlue1),
                               child: Center(
                                 child: Text(
                                   'Done',
@@ -94,10 +94,10 @@ class ScreenIntroState extends State<ScreenIntro> {
                           child: Container(
                               width: 95,
                               height: 43,
-                              decoration: const BoxDecoration(
+                              decoration:  BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  color: Color.fromARGB(255, 6, 0, 61)),
+                                      const BorderRadius.all(Radius.circular(30)),
+                                  color: navyBlue1),
                               child: Center(
                                 child: Text(
                                   'Next',
@@ -119,7 +119,7 @@ class ScreenIntroState extends State<ScreenIntro> {
               _controller.jumpToPage(2);
             }, child: Text('SKIP >>',
             style: TextStyle(
-              color: Color.fromARGB(255, 6, 0, 61) ,
+              color: navyBlue1 ,
               fontSize: 13
             ),
             )))

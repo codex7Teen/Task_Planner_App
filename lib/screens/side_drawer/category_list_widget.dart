@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/side_drawer/category/category_delete_alert.dart';
 import 'package:scribe/screens/side_drawer/category/category_page.dart';
 
@@ -35,7 +34,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           },
                           icon: Icon(
                             Icons.delete,
-                            color: Color.fromARGB(255, 6, 0, 61),
+                            color: navyBlue1,
                           )),
                       Expanded(
                         child: GestureDetector(
@@ -53,13 +52,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                         .textTheme
                                         .titleSmall
                                         ?.copyWith(
-                                            color: Color.fromARGB(255, 6, 0, 61)),
+                                            color: navyBlue1),
                                   ),
                                 ),
                               ),
-                              Icon(
+                               Icon(
                                 Icons.arrow_right,
-                                color: Color.fromARGB(255, 6, 0, 61),
+                                color: navyBlue1,
                               ),
                             ],
                           ),

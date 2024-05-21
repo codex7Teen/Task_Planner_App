@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +25,7 @@ class IntroPage3 extends StatelessWidget {
           Text(
             "Scribe enables you to seamlessly plan and manage events with ease. From scheduling to invitations, stay organized and on track with this versatile event management app.",
             style:
-                Theme.of(context).textTheme.bodyMedium?.copyWith(color: Color.fromARGB(255, 86, 86, 86),))
+                Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color.fromARGB(255, 86, 86, 86),))
         ],
       ),
     );

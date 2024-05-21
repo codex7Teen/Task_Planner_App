@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_data_source.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_timeline.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -43,32 +43,32 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               view: CalendarView.month,
               dataSource: EventDataSource(events), // Use custom data source
               initialSelectedDate: DateTime.now(),
-              backgroundColor: Colors.white,
-              cellBorderColor: Color.fromARGB(255, 221, 235, 255),
-              headerStyle: CalendarHeaderStyle(
-                backgroundColor: Color.fromARGB(255, 6, 0, 61),
+              backgroundColor: whiteColor,
+              cellBorderColor:  alertBackgroundColor,
+              headerStyle: const CalendarHeaderStyle(
+                backgroundColor: navyBlue1,
                 textAlign: TextAlign.center,
                 textStyle:
-                    TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+                    TextStyle(fontWeight: FontWeight.w500, color: whiteColor),
               ),
-              todayHighlightColor: Color.fromARGB(255, 6, 0, 61),
+              todayHighlightColor:  navyBlue1,
               selectionDecoration: BoxDecoration(
                 border: Border.all(
                   width: 1.5,
-                  color: Color.fromARGB(255, 6, 0, 61),
+                  color: navyBlue1,
                 ),
               ),
               headerHeight: 50,
-              viewHeaderStyle: ViewHeaderStyle(
+              viewHeaderStyle: const ViewHeaderStyle(
                 dayTextStyle: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
-                backgroundColor: Color.fromARGB(255, 221, 235, 255),
+                backgroundColor: alertBackgroundColor,
               ),
-              monthViewSettings: MonthViewSettings(
+              monthViewSettings: const MonthViewSettings(
                 monthCellStyle: MonthCellStyle(
                   textStyle: TextStyle(
-                    color: Color.fromARGB(255, 6, 0, 61),
+                    color: navyBlue1,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

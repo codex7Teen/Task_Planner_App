@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/todo_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/todo_screen/add_todo_pop.dart';
-import 'package:scribe/screens/home_screens/todo_screen/todo,s.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todos.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_alert_box.dart';
-import 'package:scribe/screens/home_screens/todo_screen/todo_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_update_bottomsheet.dart';
 
 class TodoBoxes extends StatefulWidget {
@@ -55,7 +54,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
             } else if (todoListNotifier.value.isEmpty) {
               return Column(
                 children: [
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   Lottie.asset('assets/animations/todo.json', width: 290),
                   Text('Add your todo,s...',
                       style: Theme.of(context)
@@ -74,25 +73,25 @@ class _TodoBoxesState extends State<TodoBoxes> {
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
                         collapsedBackgroundColor:
-                            Color.fromARGB(255, 221, 235, 255),
-                        shape: Border(),
+                            alertBackgroundColor,
+                        shape: const Border(),
                         title: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color:  navyBlue1,
                               borderRadius: BorderRadius.circular(15)),
                           child: Row(
                             children: [
                               Checkbox(
                                   fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
-                                  checkColor: Color.fromARGB(255, 6, 0, 61),
+                                       const MaterialStatePropertyAll(whiteColor),
+                                  checkColor:  navyBlue1,
                                   value: data.todoCheckBox,
                                   onChanged: (newBool) {
                                     setState(() {
                                       data.todoCheckBox = newBool ?? false;
                                     });
                                   }),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Expanded(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -111,7 +110,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                               .textTheme
                                               .titleMedium
                                               ?.copyWith(
-                                                  color: Colors.white,
+                                                  color: whiteColor,
                                                   fontSize: 17)),
                                 ),
                               ),
@@ -121,10 +120,10 @@ class _TodoBoxesState extends State<TodoBoxes> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 6, 0, 61),
+                              color:  navyBlue1,
                               borderRadius: BorderRadius.circular(19),
                               border: Border.all(
-                                color: Colors.white,
+                                color: whiteColor,
                                 width: 1.3,
                               ),
                             ),
@@ -136,14 +135,14 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                   //! STEPS  &  C H E C K B O X E S
                                   TodoWidget(todoModel: data),
 
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
 
                                   // bottom icons
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 24,
                                       ),
                                       IconButton(
@@ -151,9 +150,9 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                             // ADD STEPS (Opens add step popup)
                                             showAddTodoPopup(context, data);
                                           },
-                                          icon: Icon(
+                                          icon:  const Icon(
                                             Icons.add_task_rounded,
-                                            color: Colors.white,
+                                            color: whiteColor,
                                             size: 23,
                                           )),
                                       IconButton(
@@ -162,9 +161,9 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                             todoEditBottomSheet(
                                                 context, data.name, data, data.todoCategory);
                                           },
-                                          icon: Icon(
+                                          icon:  const Icon(
                                             Icons.edit_note_rounded,
-                                            color: Colors.white,
+                                            color: whiteColor,
                                             size: 30,
                                           )),
                                       IconButton(
@@ -181,7 +180,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                                   ? Icons.favorite_rounded
                                                   : Icons
                                                       .favorite_border_rounded,
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               size: 23)),
                                       IconButton(
                                           onPressed: () {
@@ -189,11 +188,11 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                             showTodoAlertDialog(
                                                 context, data.id);
                                           },
-                                          icon: Icon(
+                                          icon:  const Icon(
                                               Icons.delete_outline_rounded,
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               size: 23)),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 24,
                                       ),
                                     ],
@@ -208,7 +207,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                   },
                   itemCount: filteredTodos.length,
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 18);
+                    return const SizedBox(height: 18);
                   });
             }
           }),

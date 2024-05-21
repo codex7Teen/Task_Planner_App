@@ -1,16 +1,15 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/todo_model.dart';
+import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/todo_screen/add_todo_pop.dart';
-import 'package:scribe/screens/home_screens/todo_screen/todo,s.dart';
+import 'package:scribe/screens/home_screens/todo_screen/todos.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_alert_box.dart';
 import 'package:scribe/screens/home_screens/todo_screen/todo_update_bottomsheet.dart';
 
 class TodoCategory extends StatefulWidget {
-  final selectedCategory;
+  final String selectedCategory;
   const TodoCategory({super.key, required this.selectedCategory});
 
   @override
@@ -34,7 +33,7 @@ class _TodoCategoryState extends State<TodoCategory> {
               if (filteredTodos.isEmpty) {
                 return Column(
                   children: [
-                    SizedBox(height: 109),
+                    const SizedBox(height: 109),
                     Lottie.asset('assets/animations/todo.json', width: 290),
                     Text('Add your todo,s...',
                         style: Theme.of(context)
@@ -54,25 +53,25 @@ class _TodoCategoryState extends State<TodoCategory> {
                         borderRadius: BorderRadius.circular(15),
                         child: ExpansionTile(
                           collapsedBackgroundColor:
-                              Color.fromARGB(255, 221, 235, 255),
-                          shape: Border(),
+                              alertBackgroundColor,
+                          shape: const Border(),
                           title: Container(
                             decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 6, 0, 61),
+                                color: navyBlue1,
                                 borderRadius: BorderRadius.circular(15)),
                             child: Row(
                               children: [
                                 Checkbox(
                                     fillColor:
-                                        MaterialStatePropertyAll(Colors.white),
-                                    checkColor: Color.fromARGB(255, 6, 0, 61),
+                                         MaterialStatePropertyAll(whiteColor),
+                                    checkColor: navyBlue1,
                                     value: data.todoCheckBox,
                                     onChanged: (newBool) {
                                       setState(() {
                                         data.todoCheckBox = newBool ?? false;
                                       });
                                     }),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Expanded(
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -91,7 +90,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                                 .textTheme
                                                 .titleMedium
                                                 ?.copyWith(
-                                                    color: Colors.white,
+                                                    color: whiteColor,
                                                     fontSize: 17)),
                                   ),
                                 ),
@@ -101,7 +100,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 6, 0, 61),
+                                color: navyBlue1,
                                 borderRadius: BorderRadius.circular(19),
                                 border: Border.all(
                                   color: Colors.white,
@@ -116,14 +115,14 @@ class _TodoCategoryState extends State<TodoCategory> {
                                     //! STEPS  &  C H E C K B O X E S
                                     TodoWidget(todoModel: data),
 
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
 
                                     // bottom icons
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 24,
                                         ),
                                         IconButton(
@@ -131,7 +130,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                               // ADD STEPS (Opens add step popup)
                                               showAddTodoPopup(context, data);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.add_task_rounded,
                                               color: Colors.white,
                                               size: 23,
@@ -147,7 +146,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                             },
                                             icon: Icon(
                                               Icons.edit_note_rounded,
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               size: 30,
                                             )),
                                         IconButton(
@@ -164,7 +163,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                                     ? Icons.favorite_rounded
                                                     : Icons
                                                         .favorite_border_rounded,
-                                                color: Colors.white,
+                                                color: whiteColor,
                                                 size: 23)),
                                         IconButton(
                                             onPressed: () {
@@ -172,11 +171,11 @@ class _TodoCategoryState extends State<TodoCategory> {
                                               showTodoAlertDialog(
                                                   context, data.id);
                                             },
-                                            icon: Icon(
+                                            icon:  Icon(
                                                 Icons.delete_outline_rounded,
-                                                color: Colors.white,
+                                                color: whiteColor,
                                                 size: 23)),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 24,
                                         ),
                                       ],
@@ -191,7 +190,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                     },
                     itemCount: filteredTodos.length,
                     separatorBuilder: (context, index) {
-                      return SizedBox(height: 18);
+                      return const SizedBox(height: 18);
                     });
               }
             }),
