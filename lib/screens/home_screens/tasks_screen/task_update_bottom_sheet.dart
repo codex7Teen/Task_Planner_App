@@ -171,7 +171,7 @@ void updateTaskBottomSheet(
                            // Update category in the model
                           taskModel.taskCategory = selectedTaskCategory;
                           // Adding to db
-                          updateTask(taskModel.id!, taskModel);
+                          TaskFunctions().updateTask(taskModel.id!, taskModel);
                         }
                       },
                       child: Container(

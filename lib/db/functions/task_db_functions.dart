@@ -6,8 +6,8 @@ import 'package:scribe/db/model/task_model.dart';
 
 ValueNotifier<List<TaskModel>> taskListNotifier = ValueNotifier([]);
 
-// task db functions
-
+//  ChangeNotifier is a class that provides change notification to its listeners.
+class TaskFunctions extends ChangeNotifier {
 //! ADD TASK
 Future<void> addTaskDetails(TaskModel value) async {
   // Open the Hive box for TaskModel
@@ -49,4 +49,5 @@ Future<void> updateTask(int id, TaskModel newValue) async {
   await taskDB.put(id, newValue);
   // Refresh the task list notifier
   getTaskDetails();
+}
 }

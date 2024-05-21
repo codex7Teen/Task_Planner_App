@@ -32,7 +32,7 @@ showTodoAlertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteTodo(id);
+                    TodoFunctions().deleteTodo(id);
                     Navigator.pop(context);
                   }
                 },

@@ -66,7 +66,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                             children: [
                               // T A S K - C H E C K B O X
                               Checkbox(
-                                  fillColor: MaterialStatePropertyAll(
+                                  fillColor: const MaterialStatePropertyAll(
                                       whiteColor),
                                   checkColor:
                                       navyBlue1,
@@ -76,7 +76,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                       data.isChecked1 = newBool ?? false;
 
                                       /// save to task model
-                                      updateTask(data.id!, data);
+                                      TaskFunctions().updateTask(data.id!, data);
                                     });
                                   }),
                               const SizedBox(width: 5),
@@ -111,7 +111,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                               color: navyBlue1,
                               borderRadius: BorderRadius.circular(19),
                               border: Border.all(
-                                color: whiteColor!,
+                                color: whiteColor,
                                 width: 1.3,
                               ),
                             ),
@@ -156,7 +156,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                             // ADD STEPS (Opens add step popup)
                                             showAddStepsPopup(context, data);
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.add_task_rounded,
                                             color: whiteColor,
                                             size: 23,
@@ -172,7 +172,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                                 data,
                                                 data.taskCategory);
                                           },
-                                          icon:  Icon(
+                                          icon:  const Icon(
                                             Icons.edit_note_rounded,
                                             color: whiteColor,
                                             size: 30,
@@ -184,7 +184,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                               data.isFavorite =
                                                   !data.isFavorite;
                                               // save to db
-                                              updateTask(data.id!, data);
+                                              TaskFunctions().updateTask(data.id!, data);
                                             });
                                           },
                                           icon: Icon(
@@ -201,7 +201,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                             showTaskAlertDialog(
                                                 context, data.id);
                                           },
-                                          icon:  Icon(
+                                          icon:  const Icon(
                                               Icons.delete_outline_rounded,
                                               color: whiteColor,
                                               size: 23)),

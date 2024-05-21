@@ -19,7 +19,7 @@ class _SideDrawerState extends State<SideDrawer> {
   @override
   void initState() {
     super.initState();
-    getCategoryDetails();
+    CategoryFunctions().getCategoryDetails();
   }
 
   @override
@@ -84,7 +84,7 @@ class _SideDrawerState extends State<SideDrawer> {
 
             const SizedBox(height: 5),
 
-             Divider(
+             const Divider(
               color:navyBlue1,
               thickness: .1,
             ),
@@ -98,7 +98,7 @@ class _SideDrawerState extends State<SideDrawer> {
                     // add category
                     showAddCategoryPopup(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add_circle_rounded,
                     color: navyBlue1,
                   ),

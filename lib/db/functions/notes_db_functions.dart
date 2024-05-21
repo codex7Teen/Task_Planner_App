@@ -6,6 +6,8 @@ import 'package:scribe/db/model/notes_model.dart';
 
 ValueNotifier<List<NotesModel>> notesListNotifier = ValueNotifier([]);
 
+//  ChangeNotifier is a class that provides change notification to its listeners.
+class NotesFunctions extends ChangeNotifier {
 //! ADD NOTE
 Future<void> addNotesDetails(NotesModel value) async {
   final notesDB = await Hive.openBox<NotesModel>(NotesModel.boxName);
@@ -44,4 +46,5 @@ final notesDB = await Hive.openBox<NotesModel>(NotesModel.boxName);
 await notesDB.put(id, newValue);
 // refresh ui
 getNotesDetails();
+}
 }

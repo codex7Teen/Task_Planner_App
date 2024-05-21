@@ -32,7 +32,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             // delete the specific category
                             showCategoryAlertDialog(context, data.key);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             color: navyBlue1,
                           )),
@@ -56,7 +56,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   ),
                                 ),
                               ),
-                               Icon(
+                               const Icon(
                                 Icons.arrow_right,
                                 color: navyBlue1,
                               ),

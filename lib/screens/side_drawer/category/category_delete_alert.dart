@@ -31,7 +31,7 @@ showCategoryAlertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteCategory(id);
+                    CategoryFunctions().deleteCategory(id);
                     Navigator.pop(context);
                   }
                 },

@@ -69,7 +69,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                               MaterialPageRoute(
                                   builder: (context) => const ScreenHome()));
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_rounded,
                           color: navyBlue1,
                         )),
@@ -83,7 +83,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                   duration: const Duration(milliseconds: 200),
                                   curve: Curves.easeIn);
                             },
-                            icon:  Icon(
+                            icon:  const Icon(
                               Icons.arrow_left_rounded,
                               color: navyBlue1,
                               size: 40,
@@ -105,7 +105,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                   duration: const Duration(milliseconds: 200),
                                   curve: Curves.easeIn);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_right_rounded,
                               color: navyBlue1,
                               size: 40,
@@ -133,7 +133,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(
-                        color: navyBlue1!,
+                        color: navyBlue1,
                         width: .5,
                       ),
                     ),

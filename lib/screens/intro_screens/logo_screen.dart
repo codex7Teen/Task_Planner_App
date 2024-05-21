@@ -39,8 +39,8 @@ class ScreenLogo extends StatelessWidget {
                 child: Container(
                   width: 55,
                   height: 39,
-                  decoration:  BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  decoration:  const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
                       color: navyBlue1),
                   child: const Icon(
                     Icons.navigate_next_rounded,

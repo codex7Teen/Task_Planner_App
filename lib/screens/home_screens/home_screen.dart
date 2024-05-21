@@ -34,15 +34,15 @@ class _ScreenHomeState extends State<ScreenHome> {
   void initState() {
     super.initState();
     // calling the function to get value from DB.
-    getLoginDetails();
+    LoginFunctions().getLoginDetails();
     // calling the function to get value from DB.
-    getTaskDetails();
+    TaskFunctions().getTaskDetails();
     // calling the function to get value from DB.
-    getNotesDetails();
+    NotesFunctions().getNotesDetails();
     // calling the function to get value from DB.
-    getTodoDetails(); 
+    TodoFunctions().getTodoDetails();
     // calling the function to get value from DB.
-    getCategoryDetails();
+    CategoryFunctions().getCategoryDetails();
   }
 
   //! Dispose

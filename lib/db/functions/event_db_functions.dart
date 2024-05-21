@@ -6,6 +6,8 @@ import 'package:scribe/db/model/events_model.dart';
 
 ValueNotifier<List<EventsModel>> eventListNotifier = ValueNotifier([]);
 
+// ChangeNotifier is a class that provides change notification to its listeners.
+class EventFunctions extends ChangeNotifier {
 //! ADD EVENT
 Future<void> addEventDetails(EventsModel value) async {
   final eventDB = await Hive.openBox<EventsModel>(EventsModel.boxName);
@@ -49,4 +51,5 @@ Future<void> deleteEvent(int key) async {
   eventListNotifier.value.addAll(await fetchEvents());
   // notify listeners
   eventListNotifier.notifyListeners();
+}
 }

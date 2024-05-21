@@ -88,7 +88,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   data.isChecked1 = newBool ?? false;
 
                                   /// save to task model
-                                  updateTask(data.id!, data);
+                                  TaskFunctions().updateTask(data.id!, data);
                                 });
                               }),
                           const SizedBox(width: 5),
@@ -191,7 +191,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                         setState(() {
                                           data.isFavorite = !data.isFavorite;
                                           // save to db
-                                          updateTask(data.id!, data);
+                                          TaskFunctions().updateTask(data.id!, data);
                                         });
                                       },
                                       icon: Icon(

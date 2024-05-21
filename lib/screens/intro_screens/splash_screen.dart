@@ -36,7 +36,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   // wait 3 seconds and goto logoscreen
   Future<void> gotoLogoScreen() async {
     // checking whether user has logged in
-    if(await checkLogin())
+    if(await LoginFunctions().checkLogin())
     {
       // if user loggeg in, goto homescreen
  await Future.delayed(const Duration(seconds: 1));

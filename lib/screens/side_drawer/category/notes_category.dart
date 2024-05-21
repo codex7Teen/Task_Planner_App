@@ -77,7 +77,7 @@ class _NotesCategoryState extends State<NotesCategory> {
                                     setState(() {
                                       data.isFavorite = !data.isFavorite;
                                       // Save data to db
-                                      updateNotes(data.id!, data);
+                                      NotesFunctions().updateNotes(data.id!, data);
                                     });
                                   },
                                   icon: Icon(
@@ -116,9 +116,9 @@ class _NotesCategoryState extends State<NotesCategory> {
                           child: Container(
                               height: 133.7,
                               width: 185,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: alertBackgroundColor,
-                                  borderRadius: const BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20))),
 

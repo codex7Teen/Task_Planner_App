@@ -72,9 +72,9 @@ class ScreenIntroState extends State<ScreenIntro> {
                           child: Container(
                               width: 95,
                               height: 43,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius:
-                                      const BorderRadius.all(Radius.circular(30)),
+                                      BorderRadius.all(Radius.circular(30)),
                                   color: navyBlue1),
                               child: Center(
                                 child: Text(
@@ -94,9 +94,9 @@ class ScreenIntroState extends State<ScreenIntro> {
                           child: Container(
                               width: 95,
                               height: 43,
-                              decoration:  BoxDecoration(
+                              decoration:  const BoxDecoration(
                                   borderRadius:
-                                      const BorderRadius.all(Radius.circular(30)),
+                                      BorderRadius.all(Radius.circular(30)),
                                   color: navyBlue1),
                               child: Center(
                                 child: Text(
@@ -117,7 +117,7 @@ class ScreenIntroState extends State<ScreenIntro> {
             child: TextButton(onPressed: (){
               // skip to last intro page
               _controller.jumpToPage(2);
-            }, child: Text('SKIP >>',
+            }, child: const Text('SKIP >>',
             style: TextStyle(
               color: navyBlue1 ,
               fontSize: 13

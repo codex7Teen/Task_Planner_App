@@ -115,7 +115,7 @@ notesBottomSheet(
                           if (notesName.isNotEmpty) {
                             final notes = NotesModel(name: notesName, notesCategory: selectedNoteCategory);
                             // calling the addNotesdetails-function and passing the model
-                            addNotesDetails(notes);
+                            NotesFunctions().addNotesDetails(notes);
                             // clearing the textfields
                             nameController.clear();
                           }

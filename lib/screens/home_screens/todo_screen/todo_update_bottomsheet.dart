@@ -125,7 +125,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                             // add to db
                             todoModel.todoCategory = selectedTodoCategory;
                             // update db
-                            updateTodo(todoModel.id!, todoModel);
+                            TodoFunctions().updateTodo(todoModel.id!, todoModel);
                           }
                         },
                         child: Container(

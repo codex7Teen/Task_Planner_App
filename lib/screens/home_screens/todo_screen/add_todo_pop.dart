@@ -58,7 +58,7 @@ showAddTodoPopup(BuildContext context, TodoModel todoModel) {
                             var todoSteps = TodoStepsModel(stepTodo: todoStep);
                             // adding the value to todosteps list which is in todoModel
                             todoModel.todoStepsList.add(todoSteps);
-                            updateTodo(todoModel.key, todoModel);
+                            TodoFunctions().updateTodo(todoModel.key, todoModel);
                             Navigator.pop(context);
                           }
                           

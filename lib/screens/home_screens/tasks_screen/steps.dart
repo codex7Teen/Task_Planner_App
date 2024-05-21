@@ -69,14 +69,14 @@ class _StepsWidgetState extends State<StepsWidget> {
                           // assigning the new changed bool to isStepChecked bool inside taskstepsmodel
                           task.taskStepsList[index].isStepChecked = stepsData.isStepChecked;
                           // Save to taskstepsmodel
-                          updateTask(task.key, task);
+                          TaskFunctions().updateTask(task.key, task);
                         });
                       }),
                   IconButton(
                       onPressed: ()async {
                         // delete step
                         task.taskStepsList.removeAt(index); 
-                       await updateTask(task.key, task); 
+                       await TaskFunctions().updateTask(task.key, task); 
                       },
                       icon: const Icon(
                         Icons.delete,

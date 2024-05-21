@@ -172,7 +172,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                               data.todoFavorite =
                                                   !data.todoFavorite;
                                               // save to db
-                                              updateTodo(data.id!, data);
+                                              TodoFunctions().updateTodo(data.id!, data);
                                             });
                                           },
                                           icon: Icon(

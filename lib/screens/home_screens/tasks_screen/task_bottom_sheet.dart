@@ -146,7 +146,7 @@ void taskBottomSheet(BuildContext context) {
 
                           final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: [], taskCategory: selectedTaskCategory);
                           // calling the addTaskDtaikl function and passing the model
-                          addTaskDetails(task);
+                          TaskFunctions().addTaskDetails(task);
                           // clearing the textfields
                           nameController.clear();
                           descriptionController.clear();

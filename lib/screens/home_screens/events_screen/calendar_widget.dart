@@ -23,7 +23,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   // GETTING ALL EVENTS
   Future<void> _loadEvents() async {
-    final allEvents = await fetchEvents();
+    final allEvents = await EventFunctions().fetchEvents();
     eventListNotifier.value = allEvents;
     eventListNotifier.notifyListeners();
   }

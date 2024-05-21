@@ -306,7 +306,7 @@ Future<EventsModel?> editEventBottomSheet(
                             event.from = fromDateNotifier.value;
                             event.to = toDateNotifier.value;
 
-                            await updateEvents(event.key, event);
+                            await EventFunctions().updateEvents(event.key, event);
 
                             // popping bottomsheet and passing eventmodel to view event screen
                             Navigator.pop(context, event);

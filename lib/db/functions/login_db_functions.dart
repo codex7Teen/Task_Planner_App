@@ -7,6 +7,8 @@ import 'package:scribe/db/model/login_model.dart';
 
 ValueNotifier<List<LoginModel>> loginListNotifier = ValueNotifier([]);
 
+//  ChangeNotifier is a class that provides change notification to its listeners.
+class LoginFunctions extends ChangeNotifier {
 //! ADD LOGIN
 Future<void> addLoginDetails(LoginModel value) async {
   final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
@@ -35,4 +37,5 @@ Future<void> getLoginDetails() async {
 Future<bool> checkLogin() async {
   final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
   return loginDB.length>0;
+}
 }

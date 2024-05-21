@@ -32,7 +32,7 @@ showTaskAlertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteTask(id);
+                    TaskFunctions().deleteTask(id);
                     Navigator.pop(context);
                   }
                 },

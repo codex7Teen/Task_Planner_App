@@ -114,7 +114,7 @@ todoBottomSheet(BuildContext context) {
                             final todo =
                                 TodoModel(name: todoName, todoStepsList: [], todoCategory: selectedTodoCategory);
                             // add to db
-                            addTodoDetails(todo);
+                            TodoFunctions().addTodoDetails(todo);
                             // clearing the fields sdgv46g 5yt tgbefrvcbng hjkn79l
                             nameController.clear();
                           }

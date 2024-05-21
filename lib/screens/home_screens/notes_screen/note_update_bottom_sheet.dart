@@ -127,7 +127,7 @@ notesUpdateBottomSheet(
                             // update the category in the model
                             notesModel.notesCategory = selectedNoteCategory;
                             // updating db
-                            updateNotes(notesModel.id!, notesModel);
+                            NotesFunctions().updateNotes(notesModel.id!, notesModel);
                           }
                         },
                         child: Container(

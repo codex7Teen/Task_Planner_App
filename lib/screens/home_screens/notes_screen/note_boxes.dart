@@ -88,7 +88,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   setState(() {
                                     data.isFavorite = !data.isFavorite;
                                     // Save data to db
-                                    updateNotes(data.id!, data);
+                                    NotesFunctions().updateNotes(data.id!, data);
                                   });
                                 },
                                 icon: Icon(

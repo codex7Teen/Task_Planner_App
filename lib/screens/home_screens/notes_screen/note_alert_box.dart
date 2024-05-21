@@ -32,7 +32,7 @@ showNotelAertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteNotes(id).then((value) {
+                    NotesFunctions().deleteNotes(id).then((value) {
                       // pops both alert and edit-note
                       Navigator.pop(context);
                       Navigator.pop(context);

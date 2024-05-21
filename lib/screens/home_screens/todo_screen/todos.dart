@@ -71,14 +71,14 @@ class _TodoWidgetState extends State<TodoWidget> {
                           // assigning to newlychanged bool to isTodoChecked inside todostepsmodel which is inside todoModel
                           todo.todoStepsList[index].isTodoChecked = todoData.isTodoChecked;
                           // save to db (todomodel)
-                          updateTodo(todo.id!, todo);
+                          TodoFunctions().updateTodo(todo.id!, todo);
                         });
                       }),
                   IconButton(
                       onPressed: ()async {
                         // delete step
                         todo.todoStepsList.removeAt(index);
-                        await updateTodo(todo.key, todo);
+                        await TodoFunctions().updateTodo(todo.key, todo);
                       },
                       icon: const Icon(
                         Icons.delete,

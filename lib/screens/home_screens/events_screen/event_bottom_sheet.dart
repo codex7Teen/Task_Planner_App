@@ -301,7 +301,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                                 from: fromDateNotifier.value,
                                 to: toDateNotifier.value);
 
-                            addEventDetails(event);
+                            EventFunctions().addEventDetails(event);
 
                             // resets the fromdate and todate to current date
                             fromDateNotifier.value = DateTime.now();

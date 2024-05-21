@@ -63,7 +63,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                               children: [
                                 Checkbox(
                                     fillColor:
-                                         MaterialStatePropertyAll(whiteColor),
+                                         const MaterialStatePropertyAll(whiteColor),
                                     checkColor: navyBlue1,
                                     value: data.todoCheckBox,
                                     onChanged: (newBool) {
@@ -144,7 +144,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                                   data,
                                                   data.todoCategory);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.edit_note_rounded,
                                               color: whiteColor,
                                               size: 30,
@@ -155,7 +155,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                                 data.todoFavorite =
                                                     !data.todoFavorite;
                                                 // save to db
-                                                updateTodo(data.id!, data);
+                                                TodoFunctions().updateTodo(data.id!, data);
                                               });
                                             },
                                             icon: Icon(
@@ -171,7 +171,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                               showTodoAlertDialog(
                                                   context, data.id);
                                             },
-                                            icon:  Icon(
+                                            icon:  const Icon(
                                                 Icons.delete_outline_rounded,
                                                 color: whiteColor,
                                                 size: 23)),

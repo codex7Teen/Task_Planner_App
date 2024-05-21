@@ -32,7 +32,7 @@ showEventlAertDialog(BuildContext context, int? id) {
                 onPressed: () {
                   // delete
                   if (id != null) {
-                    deleteEvent(id);
+                    EventFunctions().deleteEvent(id);
                     // pop alert box
                     Navigator.pop(context);
                     // pop view event screen

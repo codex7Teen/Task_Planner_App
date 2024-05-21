@@ -59,7 +59,7 @@ showAddStepsPopup(BuildContext context, TaskModel taskModel) {
                               var taskSteps = TaskStepsModel(step: taskStep);
                               // adding the value to tasksteps list which is in taskModel
                               taskModel.taskStepsList.add(taskSteps);
-                              updateTask(taskModel.key, taskModel);
+                              TaskFunctions().updateTask(taskModel.key, taskModel);
                               Navigator.pop(context);
                             }
                             

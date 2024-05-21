@@ -47,7 +47,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       height: MediaQuery.of(context).size.height * 0.23,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fill),
-                   Divider(
+                   const Divider(
                     indent: 17,
                     endIndent: 17,
                     color: navyBlue1,
@@ -118,14 +118,14 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       if (userName.isNotEmpty) {
                         final login = LoginModel(name: userName);
                         // calling the addLoginName function and passing the model
-                        addLoginDetails(login);
+                        LoginFunctions().addLoginDetails(login);
                       }
                     },
                     child: Container(
                         width: 95,
                         height: 43,
-                        decoration:  BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(30)),
+                        decoration:  const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: navyBlue1),
                         child: Center(
                           child: Text(

@@ -70,7 +70,7 @@ showAddCategoryPopup(BuildContext context) {
                               final category =
                                   CategoryModel(category: categoryName);
                               // add category to db
-                              addCategory(category);
+                              CategoryFunctions().addCategory(category);
                               // pop
                               Navigator.pop(context);
                               }
