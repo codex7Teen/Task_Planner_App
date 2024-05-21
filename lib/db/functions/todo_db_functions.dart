@@ -1,4 +1,3 @@
-// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -45,4 +44,9 @@ Future<void> updateTodo(int id, TodoModel newValue) async {
   await todoDB.put(id, newValue);
   // Refresh the todo list notifier
   getTodoDetails();
+}
+
+//  ChangeNotifier is a class that provides change notification to its listeners.
+class TodoFunctions extends ChangeNotifier {
+
 }
