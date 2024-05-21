@@ -46,6 +46,7 @@ notesUpdateBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
+                            maxLength: 30,
                         controller: nameController..text = initialNoteName,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()

@@ -99,18 +99,16 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   size: 18,
                                 )),
                             Expanded(
-                                child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Text(
-                                data.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        color: whiteColor, fontSize: 14.5),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )),
+                                child: Text(
+                                  data.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: whiteColor, fontSize: 14.5),
+                                  overflow: TextOverflow.ellipsis,
+                                  // softWrap: false,
+                                )),
                           ],
                         ),
                       ),

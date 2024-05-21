@@ -135,6 +135,7 @@ Future<EventsModel?> editEventBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
+                            maxLength: 30,
                         controller: eventNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()

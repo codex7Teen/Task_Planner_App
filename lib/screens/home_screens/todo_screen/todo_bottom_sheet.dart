@@ -39,6 +39,7 @@ todoBottomSheet(BuildContext context) {
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
+                            maxLength: 30,
                         controller: nameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()

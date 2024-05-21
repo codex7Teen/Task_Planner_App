@@ -41,6 +41,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
+                            maxLength: 30,
                         controller: nameController..text = initialTodoName,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()

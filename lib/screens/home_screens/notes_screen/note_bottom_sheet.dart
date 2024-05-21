@@ -41,6 +41,7 @@ notesBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
+                            maxLength: 30,
                         controller: nameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -50,6 +51,7 @@ notesBottomSheet(
                             .titleMedium
                             ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
+                          
                             label: Text('Enter note name',
                                 style: Theme.of(context)
                                     .textTheme
