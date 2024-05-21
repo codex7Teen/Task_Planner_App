@@ -80,7 +80,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             duration: const Duration(milliseconds: 200),
             activeColor: navyBlueLightColor,
             color: navyBlue1,
-            backgroundColor: navyBlue1,
+            backgroundColor: whiteColor,
             tabBackgroundColor: gTabBackground,
             // icons and label
             tabs: [
@@ -90,7 +90,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: navyBlueLightColor, fontSize: 15),
+                                              color:  navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
@@ -100,7 +100,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: navyBlueLightColor, fontSize: 15),
+                                              color:  navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
@@ -110,7 +110,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: navyBlueLightColor, fontSize: 15),
+                                              color:  navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
@@ -120,7 +120,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color: navyBlueLightColor, fontSize: 15),
+                                              color:  navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               )
