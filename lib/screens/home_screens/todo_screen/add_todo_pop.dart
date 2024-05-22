@@ -18,7 +18,7 @@ showAddTodoPopup(BuildContext context, TodoModel todoModel) {
           return AlertDialog(
             backgroundColor: alertBackgroundColor,
             content: SizedBox(
-              height: MediaQuery.of(context).size.height * .22,
+              height: MediaQuery.of(context).size.height * .23,
               width: MediaQuery.of(context).size.width * .2,
               child: Form(
                 key: formKey ,

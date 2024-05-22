@@ -123,7 +123,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                           }));
                         },
                         child: Container(
-                            height: 133.7,
+                            height: 124,
                             width: 185,
                             decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 221, 235, 255),

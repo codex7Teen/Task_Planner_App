@@ -155,7 +155,7 @@ void taskBottomSheet(BuildContext context) {
                       },
                       child: Container(
                         height: 35,
-                        width: 100,
+                        width: 110,
                         decoration: BoxDecoration(
                           border: Border.all(width: 1.5, color: whiteColor),
                           borderRadius: BorderRadius.circular(20),

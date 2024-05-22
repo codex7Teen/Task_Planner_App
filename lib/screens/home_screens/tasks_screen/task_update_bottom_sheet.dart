@@ -116,6 +116,10 @@ void updateTaskBottomSheet(
                       child: ValueListenableBuilder(
                           valueListenable: categoryListNotifier,
                           builder: (context, categoriesList, _) {
+                             // Ensure the selected category is part of the list
+                            if (!categoriesList.contains(selectedTaskCategory)) {
+                              selectedTaskCategory = null;
+                            }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
                                   value: selectedTaskCategory,
@@ -176,7 +180,7 @@ void updateTaskBottomSheet(
                       },
                       child: Container(
                         height: 35,
-                        width: 105,
+                        width: 110,
                         decoration: BoxDecoration(
                           border: Border.all(width: 1.5, color: whiteColor),
                           borderRadius: BorderRadius.circular(20),

@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
@@ -318,7 +320,7 @@ Future<EventsModel?> editEventBottomSheet(
                         },
                         child: Container(
                           height: 35,
-                          width: 105,
+                          width: 110,
                           decoration: BoxDecoration(
                               border:
                                   Border.all(width: 1.5, color: Colors.white),

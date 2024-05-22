@@ -74,6 +74,10 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                         child: ValueListenableBuilder(
                           valueListenable: categoryListNotifier,
                           builder: (context, categoriesList, _) {
+                            // Ensure the selected category is part of the list
+                             if (!categoriesList.contains(selectedTodoCategory)) {
+                              selectedTodoCategory = null;
+                            }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
                                   value: selectedTodoCategory,
@@ -131,7 +135,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                         },
                         child: Container(
                           height: 35,
-                          width: 105,
+                          width: 110,
                           decoration: BoxDecoration(
                               border:
                                   Border.all(width: 1.5, color: whiteColor),
