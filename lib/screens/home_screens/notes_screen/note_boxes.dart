@@ -40,8 +40,7 @@ class _NoteBoxesState extends State<NoteBoxes> {
                         .headlineLarge
                         ?.copyWith(fontWeight: FontWeight.w300, fontSize: 22)));
             // showing add any add-notes GIF if no data to display and if on allNotes section
-          } else if (notesListNotifier.value.isEmpty &&
-              widget.sectionIndex == 0) {
+          } else if (filteredNotes.isEmpty && (widget.sectionIndex == 0 || widget.sectionIndex ==1)) {
             return Center(
               child: Column(
                 children: [

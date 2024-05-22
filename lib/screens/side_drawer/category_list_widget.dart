@@ -16,31 +16,41 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ValueListenableBuilder(
-          valueListenable: categoryNotifier,
-          builder: (context, categorylist, Widget? child) {
+        valueListenable: categoryNotifier,
+        builder: (context, categorylist, Widget? child) {
+          // Updating the shared category list notifier to access category list in other part of app
+          categoryListNotifier.value = categorylist.map((c) => c.category).toList();
 
-             // Updating the shared category list notifier to access catgry-list in other part of app
-            categoryListNotifier.value = categorylist.map((c) => c.category).toList();
-            
-            return ListView.builder(
+          return ExpansionTile(
+            shape: const Border(),
+            title: Text(
+              'All Categories',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: navyBlue1),
+            ),
+            children: [ categorylist.isNotEmpty ?
+              ListView.builder(
+                shrinkWrap: true, // This is important to make ListView work inside ExpansionTile
                 itemBuilder: (context, index) {
                   final data = categorylist[index];
                   return Row(
                     children: [
                       IconButton(
-                          onPressed: () {
-                            // delete the specific category
-                            showCategoryAlertDialog(context, data.key);
-                          },
-                          icon: const Icon(
-                            Icons.delete,
-                            color: navyBlue1,
-                          )),
+                        onPressed: () {
+                          // delete the specific category
+                          showCategoryAlertDialog(context, data.key);
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: navyBlue1,
+                        ),
+                      ),
                       Expanded(
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => ScreenCategory(categoryName: data.category,))),
+                            MaterialPageRoute(
+                              builder: (context) => ScreenCategory(categoryName: data.category),
+                            ),
+                          ),
                           child: Row(
                             children: [
                               Expanded(
@@ -48,15 +58,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   scrollDirection: Axis.horizontal,
                                   child: Text(
                                     data.category,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall
-                                        ?.copyWith(
-                                            color: navyBlue1),
+                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: navyBlue1),
                                   ),
                                 ),
                               ),
-                               const Icon(
+                              const Icon(
                                 Icons.arrow_right,
                                 color: navyBlue1,
                               ),
@@ -67,8 +73,19 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     ],
                   );
                 },
-                itemCount: categorylist.length);
-          }),
+                itemCount: categorylist.length,
+              ) : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Text('Add any category...', style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(
+                              fontWeight: FontWeight.w300, fontSize: 14),),
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }

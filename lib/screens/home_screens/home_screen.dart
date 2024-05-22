@@ -95,7 +95,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 padding: const EdgeInsets.all(15),
               ),
               GButton(
-                icon: Icons.library_books_rounded,
+                icon: Icons.library_books_outlined,
                 text: 'Notes', textStyle: Theme.of(context)
                                           .textTheme
                                           .titleMedium
@@ -115,7 +115,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 padding: const EdgeInsets.all(15),
               ),
               GButton(
-                icon: Icons.calendar_month_rounded,
+                icon: Icons.calendar_month_outlined,
                 text: 'Events', textStyle: Theme.of(context)
                                           .textTheme
                                           .titleMedium

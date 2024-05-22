@@ -51,7 +51,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                           ?.copyWith(
                               fontWeight: FontWeight.w300, fontSize: 22)));
               // showing add any task gif
-            } else if (todoListNotifier.value.isEmpty) {
+            } else if (filteredTodos.isEmpty && (widget.todoSectionIndex == 0 || widget.todoSectionIndex == 1)) {
               return Column(
                 children: [
                   const SizedBox(height: 50),
