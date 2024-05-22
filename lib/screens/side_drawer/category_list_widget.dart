@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/side_drawer/category/category_delete_alert.dart';
@@ -23,13 +24,20 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
           return ExpansionTile(
             shape: const Border(),
-            title: Text(
-              'All Categories',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: navyBlue1),
+            title: Row(
+              children: [
+                LottieBuilder.asset('assets/animations/category.json'),
+                Text('Categories',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: navyBlue1,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold)),
+              ],
             ),
             children: [ categorylist.isNotEmpty ?
               ListView.builder(
-                shrinkWrap: true, // This is important to make ListView work inside ExpansionTile
+                // This is important to make ListView work inside ExpansionTile
+                shrinkWrap: true, 
                 itemBuilder: (context, index) {
                   final data = categorylist[index];
                   return Row(

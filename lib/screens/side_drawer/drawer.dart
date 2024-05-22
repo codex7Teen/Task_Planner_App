@@ -71,30 +71,19 @@ class _SideDrawerState extends State<SideDrawer> {
             const SizedBox(height: 25),
 
             //! C A T E G O R I E S
-            Row(
-              children: [
-                LottieBuilder.asset('assets/animations/category.json'),
-                Text('Categories',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: navyBlue1,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ],
-            ),
-
-            const SizedBox(height: 5),
-
              const Divider(
               color:navyBlue1,
               thickness: .1,
             ),
 
-            const SizedBox(height: 5),
+            const SizedBox(height: 7),
 
             // Add category
             Center(
               child: TextButton.icon(
                   onPressed: () {
+                    // close the drawer
+                    Navigator.pop(context);
                     // add category
                     showAddCategoryPopup(context);
                   },
@@ -103,10 +92,10 @@ class _SideDrawerState extends State<SideDrawer> {
                     color: navyBlue1,
                   ),
                   label: Text('Add Category',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: navyBlue1))),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: navyBlue1,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold))),
             ),
 
             //! ADDED CATEGORIES
