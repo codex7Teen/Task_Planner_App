@@ -67,7 +67,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
           TextButton(
               onPressed: () {
                 // show alertbox and then delete
-                showNotelAertDialog(context, widget.notesModel.id);
+                showNotelAertDialog(context, widget.notesModel.key);
               },
               child: Text('Delete',
                   style: Theme.of(context)
@@ -133,7 +133,7 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
     // Update note content
     widget.notesModel.note = noteController.text;
     // Save to Hive
-    await notesDB.put(widget.notesModel.id, widget.notesModel);
+    await notesDB.put(widget.notesModel.key, widget.notesModel);
     // pop context
     Navigator.pop(context);
     // notify listeners

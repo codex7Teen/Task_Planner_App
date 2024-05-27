@@ -91,7 +91,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   data.isChecked1 = newBool ?? false;
 
                                   /// save to task model
-                                  TaskFunctions().updateTask(data.id!, data);
+                                  TaskFunctions().updateTask(data.key!, data);
                                 });
                               }),
                           const SizedBox(width: 5),
@@ -198,7 +198,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                           data.isFavorite = !data.isFavorite;
                                           // save to db
                                           TaskFunctions()
-                                              .updateTask(data.id!, data);
+                                              .updateTask(data.key!, data);
                                         });
                                       },
                                       icon: Icon(
@@ -211,7 +211,7 @@ class _TaskBoxesState extends State<TaskBoxes> {
                                   IconButton(
                                       onPressed: () {
                                         // show delete alert-box
-                                        showTaskAlertDialog(context, data.id);
+                                        showTaskAlertDialog(context, data.key);
                                       },
                                       icon: const Icon(
                                           Icons.delete_outline_rounded,

@@ -76,6 +76,7 @@ notesBottomSheet(
                         valueListenable: categoryListNotifier,
                         builder: (context, categoriesList, _) {
                           return categoriesList.isNotEmpty ? DropdownButtonFormField(
+                            isExpanded: true,
                             style: const TextStyle(color: whiteColor),
                             dropdownColor: blackColor,
                             icon: const Icon(Icons.arrow_drop_down_rounded,

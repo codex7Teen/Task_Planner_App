@@ -85,6 +85,7 @@ notesUpdateBottomSheet(
                             }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
+                                  isExpanded: true,
                                   value: selectedNoteCategory,
                                     style: const TextStyle(color: whiteColor),
                                     dropdownColor: blackColor,
@@ -132,7 +133,7 @@ notesUpdateBottomSheet(
                             // update the category in the model
                             notesModel.notesCategory = selectedNoteCategory;
                             // updating db
-                            NotesFunctions().updateNotes(notesModel.id!, notesModel);
+                            NotesFunctions().updateNotes(notesModel.key!, notesModel);
                           }
                         },
                         child: Container(

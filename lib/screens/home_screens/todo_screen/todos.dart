@@ -71,7 +71,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                           // assigning to newlychanged bool to isTodoChecked inside todostepsmodel which is inside todoModel
                           todo.todoStepsList[index].isTodoChecked = todoData.isTodoChecked;
                           // save to db (todomodel)
-                          TodoFunctions().updateTodo(todo.id!, todo);
+                          TodoFunctions().updateTodo(todo.key!, todo);
                         });
                       }),
                   IconButton(

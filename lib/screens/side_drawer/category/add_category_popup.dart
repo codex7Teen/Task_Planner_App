@@ -29,6 +29,7 @@ showAddCategoryPopup(BuildContext context) {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      maxLength: 20,
                       controller: categoryNameController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (name) => Validators()

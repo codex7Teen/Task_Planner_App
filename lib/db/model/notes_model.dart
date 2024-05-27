@@ -2,25 +2,22 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'notes_model.g.dart';
 
 @HiveType(typeId: 3)
-class NotesModel {
+class NotesModel extends HiveObject{
 
 // box name
 static const String boxName = 'Notes_db';
 
 @HiveField(0)
-int? id;
-
-@HiveField(1)
 String name;
 
-@HiveField(2)
+@HiveField(1)
 String? note;
 
-@HiveField(3)
+@HiveField(2)
 bool isFavorite;
 
-@HiveField(4)
+@HiveField(3)
 String? notesCategory;
 
-NotesModel({this.id, required this.name, this.note, this.isFavorite = false, this.notesCategory});
+NotesModel({required this.name, this.note, this.isFavorite = false, this.notesCategory});
 }

@@ -80,6 +80,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                             }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
+                                  isExpanded: true,
                                   value: selectedTodoCategory,
                                     style: const TextStyle(color: whiteColor),
                                     dropdownColor: Colors.black,
@@ -130,7 +131,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                             // add to db
                             todoModel.todoCategory = selectedTodoCategory;
                             // update db
-                            TodoFunctions().updateTodo(todoModel.id!, todoModel);
+                            TodoFunctions().updateTodo(todoModel.key!, todoModel);
                           }
                         },
                         child: Container(

@@ -27,7 +27,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     return Scaffold(
       backgroundColor: whiteColor,
       body: Center(
-          child: Image.asset('assets/images/Scribe-logo-no_background.png',
+          child: Image.asset('assets/images/scribe_new_logo.png',
               width: 135)),
     );
   }

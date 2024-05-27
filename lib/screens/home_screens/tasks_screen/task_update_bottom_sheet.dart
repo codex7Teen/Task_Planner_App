@@ -122,6 +122,7 @@ void updateTaskBottomSheet(
                             }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
+                                  isExpanded: true,
                                   value: selectedTaskCategory,
                                     style: const TextStyle(color: whiteColor),
                                     dropdownColor: Colors.black,
@@ -175,7 +176,7 @@ void updateTaskBottomSheet(
                            // Update category in the model
                           taskModel.taskCategory = selectedTaskCategory;
                           // Adding to db
-                          TaskFunctions().updateTask(taskModel.id!, taskModel);
+                          TaskFunctions().updateTask(taskModel.key!, taskModel);
                         }
                       },
                       child: Container(

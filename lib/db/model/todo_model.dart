@@ -9,22 +9,19 @@ class TodoModel extends HiveObject{
   static const String boxName = 'Todo_box';
 
   @HiveField(0)
-  int? id;
-
-  @HiveField(1)
   String name;
 
-  @HiveField(2)
+  @HiveField(1)
   final List<TodoStepsModel> todoStepsList;
 
-  @HiveField(3)
+  @HiveField(2)
   bool todoFavorite;
 
-  @HiveField(4)
+  @HiveField(3)
   bool todoCheckBox;
 
-  @HiveField(5)
+  @HiveField(4)
   String? todoCategory;
 
-  TodoModel({required this.name, this.id, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false, this.todoCategory});
+  TodoModel({required this.name, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false, this.todoCategory});
 } 

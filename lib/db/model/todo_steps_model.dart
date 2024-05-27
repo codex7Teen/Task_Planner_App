@@ -6,14 +6,11 @@ class TodoStepsModel {
    //box name
   static const String boxName = 'Todo_step_db';
 
-  @HiveField(0)
-  int? id;
-
-  @HiveField(2)
+  @HiveField(1)
   final String stepTodo;
 
-  @HiveField(3)
+  @HiveField(2)
   bool isTodoChecked;
 
-  TodoStepsModel({required this.stepTodo, this.id, this.isTodoChecked = false});
+  TodoStepsModel({required this.stepTodo, this.isTodoChecked = false});
 }

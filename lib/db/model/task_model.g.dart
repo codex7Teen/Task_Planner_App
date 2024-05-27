@@ -17,36 +17,33 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskModel(
-      id: fields[0] as int?,
-      name: fields[1] as String,
-      description: fields[2] as String,
-      taskStepsList: (fields[3] as List).cast<TaskStepsModel>(),
-      isFavorite: fields[4] as bool,
-      isChecked1: fields[5] as bool,
-      isChecked2: fields[6] as bool,
-      taskCategory: fields[7] as String?,
+      name: fields[0] as String,
+      description: fields[1] as String,
+      taskStepsList: (fields[2] as List).cast<TaskStepsModel>(),
+      isFavorite: fields[3] as bool,
+      isChecked1: fields[4] as bool,
+      isChecked2: fields[5] as bool,
+      taskCategory: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(8)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(2)
-      ..write(obj.description)
-      ..writeByte(3)
-      ..write(obj.taskStepsList)
-      ..writeByte(4)
-      ..write(obj.isFavorite)
-      ..writeByte(5)
-      ..write(obj.isChecked1)
-      ..writeByte(6)
-      ..write(obj.isChecked2)
       ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.description)
+      ..writeByte(2)
+      ..write(obj.taskStepsList)
+      ..writeByte(3)
+      ..write(obj.isFavorite)
+      ..writeByte(4)
+      ..write(obj.isChecked1)
+      ..writeByte(5)
+      ..write(obj.isChecked2)
+      ..writeByte(6)
       ..write(obj.taskCategory);
   }
 

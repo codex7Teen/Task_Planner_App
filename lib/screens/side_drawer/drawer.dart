@@ -33,7 +33,7 @@ class _SideDrawerState extends State<SideDrawer> {
             // logo image
             Center(
                 child: Image.asset(
-              'assets/images/Scribe-logo-no_background.png',
+              'assets/images/scribe_new_logo.png',
               width: 90,
             )),
             const SizedBox(height: 25),

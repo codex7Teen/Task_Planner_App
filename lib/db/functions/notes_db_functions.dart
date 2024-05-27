@@ -13,8 +13,7 @@ Future<void> addNotesDetails(NotesModel value) async {
   final notesDB = await Hive.openBox<NotesModel>(NotesModel.boxName);
 
   // add to db
-  final idKey = await notesDB.add(value);
-  value.id = idKey;
+  await notesDB.add(value);
 
   // add to list
   notesListNotifier.value.add(value);

@@ -11,8 +11,7 @@ class TodoFunctions extends ChangeNotifier {
     final todoDB = await Hive.openBox<TodoModel>(TodoModel.boxName);
 
     // add to db
-    final idKey = await todoDB.add(value);
-    value.id = idKey;
+    await todoDB.add(value);
 
     // add to list
     todoListNotifier.value.add(value);

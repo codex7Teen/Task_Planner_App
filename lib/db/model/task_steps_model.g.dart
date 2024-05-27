@@ -17,21 +17,18 @@ class TaskStepsModelAdapter extends TypeAdapter<TaskStepsModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskStepsModel(
-      step: fields[1] as String,
-      id: fields[0] as int?,
-      isStepChecked: fields[2] as bool,
+      step: fields[0] as String,
+      isStepChecked: fields[1] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskStepsModel obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.step)
       ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.step)
+      ..writeByte(1)
       ..write(obj.isStepChecked);
   }
 

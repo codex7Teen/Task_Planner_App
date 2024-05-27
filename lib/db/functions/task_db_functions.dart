@@ -14,8 +14,7 @@ Future<void> addTaskDetails(TaskModel value) async {
   final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
 
   // add to db
-  final idKey = await taskDB.add(value);
-  value.id = idKey;
+  await taskDB.add(value);
   
   // add to list
   taskListNotifier.value.add(value);  

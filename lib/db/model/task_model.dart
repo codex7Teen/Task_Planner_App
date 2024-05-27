@@ -9,33 +9,30 @@ class TaskModel extends HiveObject{
   static const String boxName = 'Task_db';
 
   @HiveField(0)
-  int? id;
-
-  @HiveField(1)
   String name;
   
-  @HiveField(2)
+  @HiveField(1)
   String description;
 
-  @HiveField(3)
+  @HiveField(2)
   final List<TaskStepsModel> taskStepsList;
 
   // FAVORITE ICON
-  @HiveField(4)
+  @HiveField(3)
   bool isFavorite;
 
   // CHECKBOX 1
-  @HiveField(5)
+  @HiveField(4)
   bool isChecked1;
   
   // CHECKBOX 2
-  @HiveField(6)
+  @HiveField(5)
   bool isChecked2;
 
-  @HiveField(7)
+  @HiveField(6)
   String? taskCategory;
 
-  TaskModel({this.id, required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false, this.taskCategory});
+  TaskModel({required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false, this.taskCategory});
 
   get isChecked => null;
 }

@@ -172,7 +172,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                               data.todoFavorite =
                                                   !data.todoFavorite;
                                               // save to db
-                                              TodoFunctions().updateTodo(data.id!, data);
+                                              TodoFunctions().updateTodo(data.key!, data);
                                             });
                                           },
                                           icon: Icon(
@@ -186,7 +186,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                           onPressed: () {
                                             // show delete alert-box
                                             showTodoAlertDialog(
-                                                context, data.id);
+                                                context, data.key);
                                           },
                                           icon:  const Icon(
                                               Icons.delete_outline_rounded,

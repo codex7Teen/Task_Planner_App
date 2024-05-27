@@ -76,7 +76,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                       data.isChecked1 = newBool ?? false;
 
                                       /// save to task model
-                                      TaskFunctions().updateTask(data.id!, data);
+                                      TaskFunctions().updateTask(data.key!, data);
                                     });
                                   }),
                               const SizedBox(width: 5),
@@ -184,7 +184,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                               data.isFavorite =
                                                   !data.isFavorite;
                                               // save to db
-                                              TaskFunctions().updateTask(data.id!, data);
+                                              TaskFunctions().updateTask(data.key!, data);
                                             });
                                           },
                                           icon: Icon(
@@ -199,7 +199,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                           onPressed: () {
                                             // show delete alert-box
                                             showTaskAlertDialog(
-                                                context, data.id);
+                                                context, data.key);
                                           },
                                           icon:  const Icon(
                                               Icons.delete_outline_rounded,

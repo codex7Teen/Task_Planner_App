@@ -26,7 +26,7 @@ class ScreenLogo extends StatelessWidget {
             children: [
               Image.asset(
                 // Scribe logo text
-                'assets/images/scribe-logo-text.jpg',
+                'assets/images/scribe-newlogo-text.jpg',
                 width: 280,
               ),
               const SizedBox(height: 28),
