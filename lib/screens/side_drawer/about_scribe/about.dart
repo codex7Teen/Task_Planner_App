@@ -80,7 +80,8 @@ class ScreenAbout extends StatelessWidget {
                     .copyWith(fontSize: 19, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
-              Text('The app is developed by Dennis Johnson.',
+              Text(
+                  'The app is developed by Dennis Johnson. An Eager to Learn Flutter Developer Crafting Seamless Mobile Experiences with Innovation and Precision.',
                   style: Theme.of(context).textTheme.bodyMedium),
               const SizedBox(height: 16),
               Text(
@@ -95,7 +96,8 @@ class ScreenAbout extends StatelessWidget {
                   'If you have any questions about Scribe or need support, you can contact us at:',
                   style: Theme.of(context).textTheme.bodyMedium),
               const SizedBox(height: 8),
-              Text('Email: djconnect189@gmail.com\nMobile: +91 7558022365',
+              Text(
+                  'Email: djconnect189@gmail.com\nMobile: +91 7558022365\nLinkedIn: Dennis Johnson',
                   style: Theme.of(context).textTheme.titleSmall),
             ],
           ),

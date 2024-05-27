@@ -121,7 +121,7 @@ class ScreenPrivacy extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium),
               const SizedBox(height: 8),
               Text(
-                  'Scribe Support\nEmail: support@scribeapp.com\nMobile: +917558022365',
+                  'Scribe Support\nEmail: support@scribeapp.com\nMobile: +91 7558022365',
                   style: Theme.of(context).textTheme.titleSmall),
             ],
           ),
