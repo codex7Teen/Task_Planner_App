@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
+import 'package:scribe/screens/home_screens/events_screen/add_event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
-import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
 import 'package:scribe/screens/side_drawer/drawer.dart';
 
 class ScreenEvents extends StatefulWidget {

@@ -96,7 +96,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                 .titleMedium
                                 ?.copyWith(
                                     color:
-                                        navyBlue1)),
+                                        navyBlue1, fontWeight: FontWeight.w600)),
 
                         // right button
                         IconButton(
@@ -113,12 +113,11 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                       ],
                     ),
 
-                    // search button
                     const SizedBox(
                       width: 50,
                     )
                   ],
-                ),
+                ), 
 
                 const SizedBox(
                   height: 15,
@@ -145,7 +144,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: navyBlue1,
-                                    fontSize: 14.5,
+                                    fontSize: 14.5, fontWeight: FontWeight.w500
                                   ),
                         ),
                       ),

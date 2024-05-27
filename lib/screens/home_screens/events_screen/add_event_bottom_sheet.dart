@@ -4,6 +4,7 @@ import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
+import 'package:scribe/screens/home_screens/events_screen/event_functions.dart';
 import 'package:scribe/screens/home_screens/events_screen/notification_service.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
@@ -16,97 +17,6 @@ final eventNameController = TextEditingController();
 
 eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
     ValueNotifier<DateTime> toDateNotifier, String userName) {
-  //! E V E N T - F U N C T I O N S
-
-  Future<DateTime?> pickDateTime(
-    DateTime initialDate, {
-    required bool pickDate,
-    DateTime? firstDate,
-  }) async {
-    if (pickDate) {
-      final date = await showDatePicker(
-          // datepicker color-theme
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.light(
-                  primary: blueColor, // header background color
-                ),
-              ),
-              child: child!,
-            );
-          },
-          context: context,
-          firstDate: firstDate ?? DateTime(2015, 8),
-          lastDate: DateTime(2101),
-          initialDate: initialDate);
-
-      if (date == null) return null;
-      // assigns the initial time to time
-      final time =
-          Duration(hours: initialDate.hour, minutes: initialDate.minute);
-
-      return date.add(time);
-    } else {
-      final timeOfDay = await showTimePicker(
-          // timepicker color-theme
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.light(
-                    primary: blueColor, // header background color
-                    secondary: cyanColor),
-              ),
-              child: child!,
-            );
-          },
-          context: context,
-          initialTime: TimeOfDay.fromDateTime(initialDate));
-
-      if (timeOfDay == null) return null;
-
-      final date =
-          DateTime(initialDate.year, initialDate.month, initialDate.day);
-      final time = Duration(hours: timeOfDay.hour, minutes: timeOfDay.minute);
-
-      return date.add(time);
-    }
-  }
-
-  //! F R O M - DATE-TIME
-  Future pickFromDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(fromDateNotifier.value, pickDate: pickDate);
-
-    if (date == null) return;
-
-    // setting the todate to same as fromdate if selected fromdate is after the todate
-    if (date.isAfter(toDateNotifier.value)) {
-      // Update toDateNotifier with combined DateTime
-      toDateNotifier.value = date.add(const Duration(hours: 2));
-    }
-
-    // adding the from datetime to notifier obj
-    fromDateNotifier.value = date;
-  }
-
-  //! T O - DATE-TIME
-  Future pickToDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(
-      toDateNotifier.value,
-      pickDate: pickDate,
-      firstDate: pickDate ? fromDateNotifier.value : null,
-    );
-
-    if (date == null) return;
-
-    // adding the from datetime to notifier obj
-    toDateNotifier.value = date;
-
-     // Ensure toDate is always 2 hours after fromDate
-  toDateNotifier.value = date.isBefore(fromDateNotifier.value)
-      ? fromDateNotifier.value.add(const Duration(hours: 2))
-      : date;
-  }
 
   showModalBottomSheet(
       isScrollControlled: true,
@@ -185,7 +95,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from date
-                                pickFromDateTime(pickDate: true);
+                                pickFromDateTime(context, fromDateNotifier, toDateNotifier, pickDate: true);
                               },
                             ),
                           ),
@@ -208,7 +118,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from time
-                                pickFromDateTime(pickDate: false);
+                                pickFromDateTime(context, fromDateNotifier, toDateNotifier, pickDate: false);
                               },
                             ),
                           ),
@@ -251,7 +161,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from date
-                                pickToDateTime(pickDate: true);
+                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: true);
                               },
                             ),
                           ),
@@ -273,7 +183,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from time
-                                pickToDateTime(pickDate: false);
+                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: false);
                               },
                             ),
                           ),

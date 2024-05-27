@@ -60,8 +60,6 @@ class _ScreenTasksState extends State<ScreenTasks> {
                 children: [
                   Image.asset(
                     'assets/images/decoration_image_1.png',
-                    
-                    // Media Qu.—
                     height: MediaQuery.of(context).size.height * 0.23,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.fill,

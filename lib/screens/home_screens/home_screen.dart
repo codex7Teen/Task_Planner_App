@@ -7,7 +7,7 @@ import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
-import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
+import 'package:scribe/screens/home_screens/events_screen/add_event_bottom_sheet.dart';
 import 'package:scribe/screens/home_screens/events_screen/events_page.dart';
 import 'package:scribe/screens/home_screens/notes_screen/notes_page.dart';
 import 'package:scribe/screens/home_screens/tasks_screen/tasks_page.dart';
