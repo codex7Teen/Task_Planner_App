@@ -12,3 +12,5 @@ const Color snackBarColor =   Color.fromARGB(235, 6, 0, 61);
 const Color alertBackgroundColor =  Color.fromARGB(255, 221, 235, 255);
 const Color blueColor = Colors.blue;
 const Color cyanColor = Colors.cyan;
+const Color navyBlueDeepLightColor=  Color.fromARGB(182, 6, 0, 61);
+const Color navyBlueExtraLightColor=  Color.fromARGB(98, 6, 0, 62);

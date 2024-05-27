@@ -3,6 +3,7 @@ import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/model/login_model.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
+import 'package:scribe/screens/side_drawer/about_scribe/about_widget.dart';
 import 'package:scribe/screens/side_drawer/category/add_category_popup.dart';
 import 'package:scribe/screens/side_drawer/category_list_widget.dart';
 
@@ -98,7 +99,17 @@ class _SideDrawerState extends State<SideDrawer> {
             ),
 
             //! ADDED CATEGORIES
-            const CategoryWidget()
+            const Expanded(
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical, child: CategoryWidget())),
+
+            const Divider(
+              color: navyBlue1,
+              thickness: .1,
+            ),
+
+            //! ABOUT SECTION
+            const ScreenAboutWidget()
           ],
         ),
       ),
