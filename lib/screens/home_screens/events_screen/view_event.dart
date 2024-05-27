@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
+import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
@@ -66,12 +67,14 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
           //!  E D I T - E V E N T
           TextButton(
               onPressed: () {
+                             // fetch username from the loginListNotifier
+            final userName = loginListNotifier.value[0].name;
                 // Edit event (open edit-event bottomsheet)
                 editEventBottomSheet(
                         context,
                         ValueNotifier<DateTime>(widget.event.from),
                         ValueNotifier<DateTime>(widget.event.to),
-                        widget.event)
+                        widget.event, userName)
                     .then((value) {
                   setState(() {
                     events = value!;

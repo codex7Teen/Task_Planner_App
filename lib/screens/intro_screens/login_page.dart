@@ -1,4 +1,5 @@
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
@@ -19,6 +20,17 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
   // creating a key for form
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // request notification permission from user
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    if (!isAllowed) {
+      AwesomeNotifications().requestPermissionToSendNotifications();
+    }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

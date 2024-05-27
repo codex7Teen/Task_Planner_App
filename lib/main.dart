@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:scribe/db/model/category_model.dart';
@@ -35,6 +36,17 @@ Future<void> main() async {
   // Register the CategoryModelAdapter
   Hive.registerAdapter(CategoryModelAdapter());
 
+  // Call Awesome-notification constructor
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+            channelKey: 'basic_channel',
+            channelName: 'Basic notifications',
+            channelDescription: 'Notification channel for events')
+      ],
+      debug: true);
+
   // Run the application
   runApp(const MyApp());
 }
@@ -45,7 +57,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false, 
+      debugShowCheckedModeBanner: false,
       home: ScreenSplash(),
     );
   }

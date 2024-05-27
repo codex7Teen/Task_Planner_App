@@ -4,6 +4,7 @@ import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
+import 'package:scribe/screens/home_screens/events_screen/notification_service.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
@@ -14,7 +15,7 @@ final _formKey = GlobalKey<FormState>();
 final eventNameController = TextEditingController();
 
 eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
-    ValueNotifier<DateTime> toDateNotifier) {
+    ValueNotifier<DateTime> toDateNotifier, String userName) {
   //! E V E N T - F U N C T I O N S
 
   Future<DateTime?> pickDateTime(
@@ -296,13 +297,19 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           if (validated) {
                             // save datas to database
                             final eventName = eventNameController.text.trim();
+                            final notificationId = fromDateNotifier.value.microsecondsSinceEpoch.remainder(100000);
 
                             final event = EventsModel(
                                 name: eventName,
                                 from: fromDateNotifier.value,
-                                to: toDateNotifier.value);
+                                to: toDateNotifier.value,
+                                notificationId: notificationId
+                                );
 
                             EventFunctions().addEventDetails(event);
+
+                            // create a notification for the event
+                            NotificationService.scheduleNotification(notificationId, event.from, eventName, userName);
 
                             // resets the fromdate and todate to current date
                             fromDateNotifier.value = DateTime.now();

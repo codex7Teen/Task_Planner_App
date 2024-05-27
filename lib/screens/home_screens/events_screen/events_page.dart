@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scribe/db/functions/login_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_widget.dart';
 import 'package:scribe/screens/home_screens/events_screen/event_bottom_sheet.dart';
@@ -46,8 +47,11 @@ class _ScreenEventsState extends State<ScreenEvents> {
           label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color:  navyBlue1)),
           icon: const Icon(Icons.add, color: navyBlue1,),
           onPressed: () {
+            // fetch username from the loginListNotifier
+            final userName = loginListNotifier.value[0].name;
+
             // open add event bottom sheet
-            eventBottomSheet(context, fromDateNotifier, toDateNotifier);
+            eventBottomSheet(context, fromDateNotifier, toDateNotifier, userName);
           },
           backgroundColor: whiteColor,
         ),

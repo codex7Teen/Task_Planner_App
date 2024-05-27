@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 // Type-adapter
@@ -20,6 +21,9 @@ class EventsModel extends HiveObject {
   @HiveField(3)
   String? description;
 
+  @HiveField(4)
+  int notificationId;
+
   EventsModel(
-      {required this.name, required this.from, required this.to, this.description});
+      {required this.name, required this.from, required this.to, this.description, required this.notificationId});
 }

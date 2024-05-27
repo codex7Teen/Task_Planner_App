@@ -6,6 +6,7 @@ import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/home_screens/events_screen/calendar_utils.dart';
+import 'package:scribe/screens/home_screens/events_screen/notification_service.dart';
 import 'package:scribe/screens/validations/snackbar.dart';
 import 'package:scribe/screens/validations/validations.dart';
 
@@ -19,7 +20,7 @@ Future<EventsModel?> editEventBottomSheet(
     BuildContext context,
     ValueNotifier<DateTime> fromDateNotifier,
     ValueNotifier<DateTime> toDateNotifier,
-    EventsModel event) {
+    EventsModel event, String userName) {
 // add old value into textfields
   eventNameController.text = event.name;
 
@@ -310,6 +311,15 @@ Future<EventsModel?> editEventBottomSheet(
                             event.to = toDateNotifier.value;
 
                             await EventFunctions().updateEvents(event.key, event);
+
+                            // cancel the existing notification
+                            NotificationService.cancelNotification(event.notificationId);
+
+                            // schedule a new notification
+                            final newNotificationId = fromDateNotifier.value.microsecondsSinceEpoch.remainder(100000);
+                            event.notificationId = newNotificationId;
+                            // Calling the create notification method
+                            NotificationService.scheduleNotification(newNotificationId, event.from, event.name, userName);
 
                             // popping bottomsheet and passing eventmodel to view event screen
                             Navigator.pop(context, event);
