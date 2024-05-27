@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';

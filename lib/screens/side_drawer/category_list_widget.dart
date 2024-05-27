@@ -20,7 +20,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         valueListenable: categoryNotifier,
         builder: (context, categorylist, Widget? child) {
           // Updating the shared category list notifier to access category list in other part of app
-          categoryListNotifier.value = categorylist.map((c) => c.category).toList();
+          categoryListNotifier.value =
+              categorylist.map((c) => c.category).toList();
 
           return ExpansionTile(
             shape: const Border(),
@@ -34,62 +35,71 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         fontWeight: FontWeight.bold)),
               ],
             ),
-            children: [ categorylist.isNotEmpty ?
-              ListView.builder(
-                // This is important to make ListView work inside ExpansionTile
-                shrinkWrap: true, 
-                itemBuilder: (context, index) {
-                  final data = categorylist[index];
-                  return Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          // delete the specific category
-                          showCategoryAlertDialog(context, data.key);
-                        },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: navyBlue1,
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ScreenCategory(categoryName: data.category),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Text(
-                                    data.category,
-                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: navyBlue1),
-                                  ),
-                                ),
-                              ),
-                              const Icon(
-                                Icons.arrow_right,
+            children: [
+              categorylist.isNotEmpty
+                  ? ListView.builder(
+                      // This is important to make ListView work inside ExpansionTile
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final data = categorylist[index];
+                        return Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                // delete the specific category
+                                showCategoryAlertDialog(context, data.key);
+                              },
+                              icon: const Icon(
+                                Icons.delete,
                                 color: navyBlue1,
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ScreenCategory(
+                                        categoryName: data.category),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Text(
+                                          data.category,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall
+                                              ?.copyWith(color: navyBlue1),
+                                        ),
+                                      ),
+                                    ),
+                                    const Icon(
+                                      Icons.arrow_right,
+                                      color: navyBlue1,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      itemCount: categorylist.length,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Text(
+                        'Add any category...',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge
+                            ?.copyWith(
+                                fontWeight: FontWeight.w300, fontSize: 14),
                       ),
-                    ],
-                  );
-                },
-                itemCount: categorylist.length,
-              ) : Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text('Add any category...', style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(
-                              fontWeight: FontWeight.w300, fontSize: 14),),
-              )
+                    )
             ],
           );
         },

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
@@ -41,7 +40,7 @@ notesBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: nameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -51,7 +50,6 @@ notesBottomSheet(
                             .titleMedium
                             ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
-                          
                             label: Text('Enter note name',
                                 style: Theme.of(context)
                                     .textTheme
@@ -73,32 +71,40 @@ notesBottomSheet(
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                        valueListenable: categoryListNotifier,
-                        builder: (context, categoriesList, _) {
-                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
-                            isExpanded: true,
-                            style: const TextStyle(color: whiteColor),
-                            dropdownColor: blackColor,
-                            icon: const Icon(Icons.arrow_drop_down_rounded,
-                                color: whiteColor, size: 25),
-                            hint: const Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              selectedNoteCategory = value;
-                            },
-                            items: categoriesList.map((cat) {
-                              return DropdownMenuItem(
-                                value: cat,
-                                child: Text(cat, style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium?.copyWith(color: whiteColor)),
-                              );
-                            }).toList(),
-                          ) : const SizedBox(width: 10,);
-                        }
-                      ),
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              return categoriesList.isNotEmpty
+                                  ? DropdownButtonFormField(
+                                      isExpanded: true,
+                                      style: const TextStyle(color: whiteColor),
+                                      dropdownColor: blackColor,
+                                      icon: const Icon(
+                                          Icons.arrow_drop_down_rounded,
+                                          color: whiteColor,
+                                          size: 25),
+                                      hint: const Text(
+                                        'Select Category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        selectedNoteCategory = value;
+                                      },
+                                      items: categoriesList.map((cat) {
+                                        return DropdownMenuItem(
+                                          value: cat,
+                                          child: Text(cat,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                      color: whiteColor)),
+                                        );
+                                      }).toList(),
+                                    )
+                                  : const SizedBox(
+                                      width: 10,
+                                    );
+                            }),
                       ),
 
                       // create button
@@ -116,7 +122,9 @@ notesBottomSheet(
                           final notesName = nameController.text.trim();
 
                           if (notesName.isNotEmpty) {
-                            final notes = NotesModel(name: notesName, notesCategory: selectedNoteCategory);
+                            final notes = NotesModel(
+                                name: notesName,
+                                notesCategory: selectedNoteCategory);
                             // calling the addNotesdetails-function and passing the model
                             NotesFunctions().addNotesDetails(notes);
                             // clearing the textfields
@@ -127,8 +135,7 @@ notesBottomSheet(
                           height: 35,
                           width: 110,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.5, color: whiteColor),
+                              border: Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: const Padding(
                             padding: EdgeInsets.only(

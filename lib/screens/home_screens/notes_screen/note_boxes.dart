@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
@@ -40,7 +39,8 @@ class _NoteBoxesState extends State<NoteBoxes> {
                         .headlineLarge
                         ?.copyWith(fontWeight: FontWeight.w300, fontSize: 22)));
             // showing add any add-notes GIF if no data to display and if on allNotes section
-          } else if (filteredNotes.isEmpty && (widget.sectionIndex == 0 || widget.sectionIndex ==1)) {
+          } else if (filteredNotes.isEmpty &&
+              (widget.sectionIndex == 0 || widget.sectionIndex == 1)) {
             return Center(
               child: Column(
                 children: [
@@ -87,7 +87,8 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                   setState(() {
                                     data.isFavorite = !data.isFavorite;
                                     // Save data to db
-                                    NotesFunctions().updateNotes(data.key!, data);
+                                    NotesFunctions()
+                                        .updateNotes(data.key!, data);
                                   });
                                 },
                                 icon: Icon(
@@ -99,15 +100,14 @@ class _NoteBoxesState extends State<NoteBoxes> {
                                 )),
                             Expanded(
                                 child: Text(
-                                  data.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                          color: whiteColor, fontSize: 14.5),
-                                  overflow: TextOverflow.ellipsis,
-                                  // softWrap: false,
-                                )),
+                              data.name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: whiteColor, fontSize: 14.5),
+                              overflow: TextOverflow.ellipsis,
+                              // softWrap: false,
+                            )),
                           ],
                         ),
                       ),

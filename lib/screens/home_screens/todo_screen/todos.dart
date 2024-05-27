@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
 import 'package:scribe/db/model/todo_model.dart';
@@ -14,7 +13,6 @@ class TodoWidget extends StatefulWidget {
 }
 
 class _TodoWidgetState extends State<TodoWidget> {
-
   late TodoModel todo;
   late List<TodoStepsModel> todoDataList;
 
@@ -47,14 +45,14 @@ class _TodoWidgetState extends State<TodoWidget> {
                   const Icon(Icons.circle, color: whiteColor, size: 10),
                   const SizedBox(width: 8),
                   Text(todoData.stepTodo,
-                      style: todoData.isTodoChecked ? Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: Colors.grey[600], decoration: TextDecoration.lineThrough) : Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: whiteColor)
-                          ),
+                      style: todoData.isTodoChecked
+                          ? Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: Colors.grey[600],
+                              decoration: TextDecoration.lineThrough)
+                          : Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(color: whiteColor)),
                 ],
               ),
               Row(
@@ -67,15 +65,15 @@ class _TodoWidgetState extends State<TodoWidget> {
                         setState(() {
                           todoData.isTodoChecked = newBool ?? false;
 
-                        
                           // assigning to newlychanged bool to isTodoChecked inside todostepsmodel which is inside todoModel
-                          todo.todoStepsList[index].isTodoChecked = todoData.isTodoChecked;
+                          todo.todoStepsList[index].isTodoChecked =
+                              todoData.isTodoChecked;
                           // save to db (todomodel)
                           TodoFunctions().updateTodo(todo.key!, todo);
                         });
                       }),
                   IconButton(
-                      onPressed: ()async {
+                      onPressed: () async {
                         // delete step
                         todo.todoStepsList.removeAt(index);
                         await TodoFunctions().updateTodo(todo.key, todo);

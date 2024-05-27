@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
 import 'package:scribe/db/model/task_model.dart';
@@ -23,10 +22,8 @@ class _SearchBarFieldState extends State<SearchBarField> {
         onChanged: (value) {
           searchFields(value);
         },
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium
-            ?.copyWith(color: navyBlue1),
+        style:
+            Theme.of(context).textTheme.titleMedium?.copyWith(color: navyBlue1),
         decoration: InputDecoration(
             hintText: 'Search...',
             fillColor: Colors.white,

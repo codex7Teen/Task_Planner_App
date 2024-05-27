@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
@@ -58,7 +57,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
         physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
               // decoration images
@@ -84,20 +83,22 @@ class _ScreenTodoState extends State<ScreenTodo> {
                           fit: BoxFit.fill,
                         ),
                       ),
-                       const Divider(
+                      const Divider(
                         indent: 17,
                         endIndent: 17,
                         color: navyBlue1,
                         thickness: 0.1,
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.0999)
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0999)
                     ],
                   )
                 ],
               ),
-          
+
               Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
                   child: !searchToggle
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,18 +109,18 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                   // calling open drawer here
                                   _globalKey.currentState?.openDrawer();
                                 },
-                                icon:  const Icon(Icons.menu_rounded,
-                                    size: 44,
-                                    color: navyBlue1)),
+                                icon: const Icon(Icons.menu_rounded,
+                                    size: 44, color: navyBlue1)),
                             // date
-                            Text(DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                            Text(
+                                DateFormat('dd/MM/yyyy').format(DateTime.now()),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleLarge
                                     ?.copyWith(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color:  navyBlue1)),
+                                        color: navyBlue1)),
                             // search icon
                             IconButton(
                                 onPressed: () {
@@ -128,23 +129,22 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                     searchToggle = !searchToggle;
                                   });
                                 },
-                                icon:  const Icon(Icons.search_rounded,
-                                    size: 37,
-                                    color: navyBlue1)),
+                                icon: const Icon(Icons.search_rounded,
+                                    size: 37, color: navyBlue1)),
                           ],
                         )
-                        //! S E A R C H - B A R
+                      //! S E A R C H - B A R
                       : TodoSearchBarField(
-                        todoListx: todoListNotifier.value,
+                          todoListx: todoListNotifier.value,
                           onCancelTapped: () {
                             setState(() {
                               searchToggle = !searchToggle;
                             });
                           })),
-          
+
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 20, right: 20, top: 90, bottom: 35),
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, top: 90, bottom: 35),
                 child: Column(
                   children: [
                     Row(
@@ -162,12 +162,11 @@ class _ScreenTodoState extends State<ScreenTodo> {
                             height: 39,
                             width: 109,
                             decoration: BoxDecoration(
-                              color: selectedIndex == 0
-                                  ?  navyBlue1
-                                  : whiteColor,
+                              color:
+                                  selectedIndex == 0 ? navyBlue1 : whiteColor,
                               borderRadius: BorderRadius.circular(22),
                               border: Border.all(
-                                color:  navyBlue1,
+                                color: navyBlue1,
                                 width: 1,
                               ),
                             ),
@@ -178,7 +177,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                   Icons.list_rounded,
                                   color: selectedIndex == 0
                                       ? whiteColor
-                                      :  navyBlue1,
+                                      : navyBlue1,
                                 ),
                                 Text(
                                   'All ToDo',
@@ -192,15 +191,14 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                              color:  navyBlue1,
-                                              fontSize: 14.5),
+                                              color: navyBlue1, fontSize: 14.5),
                                 ),
                                 const SizedBox(width: 3),
                               ],
                             ),
                           ),
                         ),
-          
+
                         // favorites
                         GestureDetector(
                           onTap: () {
@@ -213,12 +211,11 @@ class _ScreenTodoState extends State<ScreenTodo> {
                             height: 39,
                             width: 109,
                             decoration: BoxDecoration(
-                              color: selectedIndex == 1
-                                  ?  navyBlue1
-                                  : whiteColor,
+                              color:
+                                  selectedIndex == 1 ? navyBlue1 : whiteColor,
                               borderRadius: BorderRadius.circular(22),
                               border: Border.all(
-                                color:  navyBlue1,
+                                color: navyBlue1,
                                 width: 1,
                               ),
                             ),
@@ -230,7 +227,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                   size: 22,
                                   color: selectedIndex == 1
                                       ? whiteColor
-                                      :  navyBlue1,
+                                      : navyBlue1,
                                 ),
                                 Text('Favorites',
                                     style: selectedIndex == 1
@@ -243,8 +240,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                             .textTheme
                                             .titleMedium
                                             ?.copyWith(
-                                                color:
-                                                     navyBlue1,
+                                                color: navyBlue1,
                                                 fontSize: 14.5)),
                                 const SizedBox(width: 3),
                               ],
@@ -253,9 +249,9 @@ class _ScreenTodoState extends State<ScreenTodo> {
                         ),
                       ],
                     ),
-          
+
                     const SizedBox(height: 28),
-          
+
                     // Seleted field indication text (eg. All tasks, favs etc.)
                     selectedIndex == 0
                         ? Text('All Todo',
@@ -263,7 +259,7 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color:  navyBlue1,
+                                    color: navyBlue1,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold))
                         : Text('Favorites',
@@ -271,10 +267,10 @@ class _ScreenTodoState extends State<ScreenTodo> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color:  navyBlue1,
+                                    color: navyBlue1,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold)),
-          
+
                     const SizedBox(height: 28),
                     //! T O D O - B O X E S S S
                     TodoBoxes(

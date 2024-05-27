@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
@@ -86,41 +85,41 @@ class _ScreenHomeState extends State<ScreenHome> {
             tabs: [
               GButton(
                 icon: Icons.list_alt_rounded,
-                text: 'Tasks', textStyle: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:  navyBlue1, fontSize: 15),
+                text: 'Tasks',
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.library_books_outlined,
-                text: 'Notes', textStyle: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:  navyBlue1, fontSize: 15),
+                text: 'Notes',
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.fact_check_outlined,
-                text: 'ToDo', textStyle: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:  navyBlue1, fontSize: 15),
+                text: 'ToDo',
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               ),
               GButton(
                 icon: Icons.calendar_month_outlined,
-                text: 'Events', textStyle: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color:  navyBlue1, fontSize: 15),
+                text: 'Events',
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: navyBlue1, fontSize: 15),
                 gap: 10,
                 padding: const EdgeInsets.all(15),
               )

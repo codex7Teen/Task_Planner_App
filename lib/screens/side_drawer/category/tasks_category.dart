@@ -55,8 +55,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
-                        collapsedBackgroundColor:
-                            alertBackgroundColor,
+                        collapsedBackgroundColor: alertBackgroundColor,
                         shape: const Border(),
                         title: Container(
                           decoration: BoxDecoration(
@@ -68,15 +67,15 @@ class _TasksCategoryState extends State<TasksCategory> {
                               Checkbox(
                                   fillColor: const MaterialStatePropertyAll(
                                       whiteColor),
-                                  checkColor:
-                                      navyBlue1,
+                                  checkColor: navyBlue1,
                                   value: data.isChecked1,
                                   onChanged: (newBool) {
                                     setState(() {
                                       data.isChecked1 = newBool ?? false;
 
                                       /// save to task model
-                                      TaskFunctions().updateTask(data.key!, data);
+                                      TaskFunctions()
+                                          .updateTask(data.key!, data);
                                     });
                                   }),
                               const SizedBox(width: 5),
@@ -129,9 +128,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium
-                                          ?.copyWith(
-                                            color: whiteColor
-                                          ),
+                                          ?.copyWith(color: whiteColor),
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -172,7 +169,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                                 data,
                                                 data.taskCategory);
                                           },
-                                          icon:  const Icon(
+                                          icon: const Icon(
                                             Icons.edit_note_rounded,
                                             color: whiteColor,
                                             size: 30,
@@ -184,7 +181,8 @@ class _TasksCategoryState extends State<TasksCategory> {
                                               data.isFavorite =
                                                   !data.isFavorite;
                                               // save to db
-                                              TaskFunctions().updateTask(data.key!, data);
+                                              TaskFunctions()
+                                                  .updateTask(data.key!, data);
                                             });
                                           },
                                           icon: Icon(
@@ -201,7 +199,7 @@ class _TasksCategoryState extends State<TasksCategory> {
                                             showTaskAlertDialog(
                                                 context, data.key);
                                           },
-                                          icon:  const Icon(
+                                          icon: const Icon(
                                               Icons.delete_outline_rounded,
                                               color: whiteColor,
                                               size: 23)),

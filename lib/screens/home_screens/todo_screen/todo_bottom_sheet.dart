@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
@@ -19,7 +18,7 @@ String? selectedTodoCategory;
 todoBottomSheet(BuildContext context) {
   showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor:  navyBlue1,
+      backgroundColor: navyBlue1,
       context: context,
       builder: (context) {
         return Padding(
@@ -34,12 +33,12 @@ todoBottomSheet(BuildContext context) {
                   // Enter task field
                   Row(
                     children: [
-                       const Icon(Icons.task_alt_rounded,
+                      const Icon(Icons.task_alt_rounded,
                           color: whiteColor, size: 23),
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: nameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -70,32 +69,40 @@ todoBottomSheet(BuildContext context) {
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                        valueListenable: categoryListNotifier,
-                        builder: (context, categoriesList, _) {
-                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
-                            isExpanded: true,
-                            style:  const TextStyle(color:whiteColor),
-                            dropdownColor: blackColor,
-                            icon: const Icon(Icons.arrow_drop_down_rounded,
-                                color: whiteColor, size: 25),
-                            hint: const Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              selectedTodoCategory = value;
-                            },
-                            items: categoriesList.map((cat) {
-                              return DropdownMenuItem(
-                                value: cat,
-                                child: Text(cat, style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium?.copyWith(color:whiteColor)),
-                              );
-                            }).toList(),
-                          ) : const SizedBox(width: 10,);
-                        }
-                      ),
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              return categoriesList.isNotEmpty
+                                  ? DropdownButtonFormField(
+                                      isExpanded: true,
+                                      style: const TextStyle(color: whiteColor),
+                                      dropdownColor: blackColor,
+                                      icon: const Icon(
+                                          Icons.arrow_drop_down_rounded,
+                                          color: whiteColor,
+                                          size: 25),
+                                      hint: const Text(
+                                        'Select Category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        selectedTodoCategory = value;
+                                      },
+                                      items: categoriesList.map((cat) {
+                                        return DropdownMenuItem(
+                                          value: cat,
+                                          child: Text(cat,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                      color: whiteColor)),
+                                        );
+                                      }).toList(),
+                                    )
+                                  : const SizedBox(
+                                      width: 10,
+                                    );
+                            }),
                       ),
 
                       // create-button
@@ -113,8 +120,10 @@ todoBottomSheet(BuildContext context) {
                           final todoName = nameController.text.trim();
 
                           if (todoName.isNotEmpty) {
-                            final todo =
-                                TodoModel(name: todoName, todoStepsList: [], todoCategory: selectedTodoCategory);
+                            final todo = TodoModel(
+                                name: todoName,
+                                todoStepsList: [],
+                                todoCategory: selectedTodoCategory);
                             // add to db
                             TodoFunctions().addTodoDetails(todo);
                             // clearing the fields sdgv46g 5yt tgbefrvcbng hjkn79l
@@ -125,15 +134,14 @@ todoBottomSheet(BuildContext context) {
                           height: 35,
                           width: 110,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.5, color: whiteColor),
+                              border: Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 6, top: 3, left: 6, right: 6),
                             child: Row(
                               children: [
-                                 const Icon(Icons.create_outlined,
+                                const Icon(Icons.create_outlined,
                                     color: whiteColor, size: 18.5),
                                 const SizedBox(width: 6),
                                 Text('Create',

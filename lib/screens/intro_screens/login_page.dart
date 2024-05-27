@@ -1,4 +1,3 @@
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -25,9 +24,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
   void initState() {
     // request notification permission from user
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-    if (!isAllowed) {
-      AwesomeNotifications().requestPermissionToSendNotifications();
-    }
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
     });
     super.initState();
   }
@@ -59,7 +58,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       height: MediaQuery.of(context).size.height * 0.23,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fill),
-                   const Divider(
+                  const Divider(
                     indent: 17,
                     endIndent: 17,
                     color: navyBlue1,
@@ -88,8 +87,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                 .textTheme
                                 .headlineLarge
                                 ?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 22,)),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                )),
                         // textfield for entering name
                         Form(
                           key: _formKey,
@@ -102,11 +102,14 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                 .validateField(name, 'Please enter any step'),
                             controller: nameController,
                             decoration: InputDecoration(
-                              labelText: 'Enter your name...',
-                              labelStyle: Theme.of(context)
-                                .textTheme
-                                .labelLarge?.copyWith(color: const Color.fromARGB(255, 153, 153, 153), fontSize: 16)
-                            ),
+                                labelText: 'Enter your name...',
+                                labelStyle: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                        color: const Color.fromARGB(
+                                            255, 153, 153, 153),
+                                        fontSize: 16)),
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
@@ -136,14 +139,16 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     child: Container(
                         width: 95,
                         height: 43,
-                        decoration:  const BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: navyBlue1),
                         child: Center(
-                          child: Text(
-                            'Explore',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontSize: 18)
-                          ),
+                          child: Text('Explore',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                      color: Colors.white, fontSize: 18)),
                         )),
                   ),
                 ],

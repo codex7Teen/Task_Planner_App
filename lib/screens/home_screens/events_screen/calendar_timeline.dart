@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
@@ -44,7 +43,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                       // secondary header
                       backgroundColor: whiteColor,
                       todayHighlightColor: blackColor,
-                      cellBorderColor:  alertBackgroundColor,
+                      cellBorderColor: alertBackgroundColor,
                       timeSlotViewSettings: TimeSlotViewSettings(
                         timeTextStyle: Theme.of(context).textTheme.labelMedium,
                       ),
@@ -80,7 +79,7 @@ void showTimelineBottomSheet(BuildContext context, DateTime date) {
                         final event = details.appointments.first as EventsModel;
                         return Container(
                           decoration: BoxDecoration(
-                              color:  alertBackgroundColor,
+                              color: alertBackgroundColor,
                               borderRadius: BorderRadius.circular(8)),
                           width: details.bounds.width,
                           height: details.bounds.height,

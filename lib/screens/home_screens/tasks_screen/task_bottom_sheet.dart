@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
@@ -12,7 +11,7 @@ final _formKey = GlobalKey<FormState>();
 
 // task name controller
 final nameController = TextEditingController();
- 
+
 // task description controller
 final descriptionController = TextEditingController();
 
@@ -20,7 +19,6 @@ final descriptionController = TextEditingController();
 String? selectedTaskCategory;
 
 void taskBottomSheet(BuildContext context) {
-
   showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: navyBlue1,
@@ -38,7 +36,8 @@ void taskBottomSheet(BuildContext context) {
                 // E N T E R - T A S K
                 Row(
                   children: [
-                    const Icon(Icons.task_alt_rounded, color: whiteColor, size: 23),
+                    const Icon(Icons.task_alt_rounded,
+                        color: whiteColor, size: 23),
                     const SizedBox(width: 25),
                     Expanded(
                       child: TextFormField(
@@ -48,14 +47,15 @@ void taskBottomSheet(BuildContext context) {
                         validator: (name) => Validators()
                             .validateField(name, 'Please enter task name'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: whiteColor, fontSize: 17),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: whiteColor, fontSize: 17),
                         decoration: InputDecoration(
-                          label: Text('Enter task name', style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)),
+                          label: Text('Enter task name',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(color: Colors.grey)),
                           border: InputBorder.none,
                         ),
                       ),
@@ -78,14 +78,18 @@ void taskBottomSheet(BuildContext context) {
                         validator: (desc) => Validators().validateField(
                             desc, 'Please enter task description'),
                         style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: whiteColor, fontSize: 17, fontWeight: FontWeight.w400),
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: whiteColor,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400),
                         decoration: InputDecoration(
-                          label: Text('Enter description', style: Theme.of(context)
-                              .textTheme
-                              .titleSmall?.copyWith(color: Colors.grey)),
+                          label: Text('Enter description',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(color: Colors.grey)),
                           border: InputBorder.none,
                         ),
                       ),
@@ -102,32 +106,39 @@ void taskBottomSheet(BuildContext context) {
                       height: 50,
                       width: 150,
                       child: ValueListenableBuilder(
-                        valueListenable: categoryListNotifier,
-                        builder: (context, categoriesList, _) {
-                          return categoriesList.isNotEmpty ? DropdownButtonFormField(
-                            isExpanded: true,
-                            style: const TextStyle(color: whiteColor),
-                            dropdownColor: blackColor,
-                            icon: const Icon(Icons.arrow_drop_down_rounded,
-                                color: whiteColor, size: 25),
-                            hint: const Text(
-                              'Select Category',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onChanged: (value) {
-                              selectedTaskCategory = value;
-                            },
-                            items: categoriesList.map((cat) {
-                              return DropdownMenuItem(
-                                value: cat,
-                                child: Text(cat, style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium?.copyWith(color: whiteColor)),
-                              );
-                            }).toList(),
-                          ) : const SizedBox(width: 10,);
-                        }
-                      ),
+                          valueListenable: categoryListNotifier,
+                          builder: (context, categoriesList, _) {
+                            return categoriesList.isNotEmpty
+                                ? DropdownButtonFormField(
+                                    isExpanded: true,
+                                    style: const TextStyle(color: whiteColor),
+                                    dropdownColor: blackColor,
+                                    icon: const Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: whiteColor,
+                                        size: 25),
+                                    hint: const Text(
+                                      'Select Category',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    onChanged: (value) {
+                                      selectedTaskCategory = value;
+                                    },
+                                    items: categoriesList.map((cat) {
+                                      return DropdownMenuItem(
+                                        value: cat,
+                                        child: Text(cat,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(color: whiteColor)),
+                                      );
+                                    }).toList(),
+                                  )
+                                : const SizedBox(
+                                    width: 10,
+                                  );
+                          }),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -141,18 +152,21 @@ void taskBottomSheet(BuildContext context) {
 
                         //! save datas to database
                         final taskName = nameController.text.trim();
-                        final taskDescription = descriptionController.text.trim();
+                        final taskDescription =
+                            descriptionController.text.trim();
 
-                        if(taskName.isNotEmpty && taskDescription.isNotEmpty) {
-
-                          final task = TaskModel(name: taskName, description: taskDescription, taskStepsList: [], taskCategory: selectedTaskCategory);
+                        if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
+                          final task = TaskModel(
+                              name: taskName,
+                              description: taskDescription,
+                              taskStepsList: [],
+                              taskCategory: selectedTaskCategory);
                           // calling the addTaskDtaikl function and passing the model
                           TaskFunctions().addTaskDetails(task);
                           // clearing the textfields
                           nameController.clear();
                           descriptionController.clear();
                         }
-
                       },
                       child: Container(
                         height: 35,
@@ -169,11 +183,14 @@ void taskBottomSheet(BuildContext context) {
                               const Icon(Icons.create_outlined,
                                   color: whiteColor, size: 18.5),
                               const SizedBox(width: 6),
-                              Text('Create', style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              color: whiteColor, fontWeight: FontWeight.bold, fontSize: 19)),
+                              Text('Create',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: whiteColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 19)),
                             ],
                           ),
                         ),

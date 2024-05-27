@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/task_db_functions.dart';
@@ -22,9 +21,8 @@ void updateTaskBottomSheet(
     String initialTaskDescriptionName,
     TaskModel taskModel,
     String? initialCategoryName) {
-      
   // displaying the initial category name as selected if its not null
- // Reset selectedCategory initially
+  // Reset selectedCategory initially
   String? selectedTaskCategory = initialCategoryName;
 
   showModalBottomSheet(
@@ -44,7 +42,8 @@ void updateTaskBottomSheet(
                 // E N T E R - T A S K
                 Row(
                   children: [
-                    const Icon(Icons.task_alt_rounded, color: whiteColor, size: 23),
+                    const Icon(Icons.task_alt_rounded,
+                        color: whiteColor, size: 23),
                     const SizedBox(width: 25),
                     Expanded(
                       child: TextFormField(
@@ -116,18 +115,21 @@ void updateTaskBottomSheet(
                       child: ValueListenableBuilder(
                           valueListenable: categoryListNotifier,
                           builder: (context, categoriesList, _) {
-                             // Ensure the selected category is part of the list
-                            if (!categoriesList.contains(selectedTaskCategory)) {
+                            // Ensure the selected category is part of the list
+                            if (!categoriesList
+                                .contains(selectedTaskCategory)) {
                               selectedTaskCategory = null;
                             }
                             return categoriesList.isNotEmpty
                                 ? DropdownButtonFormField(
-                                  isExpanded: true,
-                                  value: selectedTaskCategory,
+                                    isExpanded: true,
+                                    value: selectedTaskCategory,
                                     style: const TextStyle(color: whiteColor),
                                     dropdownColor: Colors.black,
-                                    icon: const Icon(Icons.arrow_drop_down_rounded,
-                                        color: whiteColor, size: 25),
+                                    icon: const Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: whiteColor,
+                                        size: 25),
                                     hint: const Text(
                                       'Select Category',
                                       style: TextStyle(color: Colors.grey),
@@ -142,8 +144,7 @@ void updateTaskBottomSheet(
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium
-                                                ?.copyWith(
-                                                    color: whiteColor)),
+                                                ?.copyWith(color: whiteColor)),
                                       );
                                     }).toList(),
                                   )
@@ -173,7 +174,7 @@ void updateTaskBottomSheet(
                           taskModel.name = newTaskName;
                           // Update description in the model
                           taskModel.description = newTaskDescription;
-                           // Update category in the model
+                          // Update category in the model
                           taskModel.taskCategory = selectedTaskCategory;
                           // Adding to db
                           TaskFunctions().updateTask(taskModel.key!, taskModel);

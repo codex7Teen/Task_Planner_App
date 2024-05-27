@@ -70,8 +70,8 @@ class _SideDrawerState extends State<SideDrawer> {
             const SizedBox(height: 25),
 
             //! C A T E G O R I E S
-             const Divider(
-              color:navyBlue1,
+            const Divider(
+              color: navyBlue1,
               thickness: .1,
             ),
 
@@ -92,9 +92,9 @@ class _SideDrawerState extends State<SideDrawer> {
                   ),
                   label: Text('Add Category',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: navyBlue1,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold))),
+                          color: navyBlue1,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold))),
             ),
 
             //! ADDED CATEGORIES

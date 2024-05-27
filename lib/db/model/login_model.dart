@@ -9,6 +9,6 @@ class LoginModel {
 
   @HiveField(0)
   final String name;
-   
+
   LoginModel({required this.name});
-}  
+}

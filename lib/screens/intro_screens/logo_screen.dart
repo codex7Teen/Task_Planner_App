@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/intro_screens/app_intro.dart';
@@ -15,12 +14,15 @@ class ScreenLogo extends StatelessWidget {
         children: [
           Column(
             // decoration image 1
-            children: [Image.asset('assets/images/decoration_image_1.png',
-            // Media Query
-                  height: MediaQuery.of(context).size.height * 0.23,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
-            )],
+            children: [
+              Image.asset(
+                'assets/images/decoration_image_1.png',
+                // Media Query
+                height: MediaQuery.of(context).size.height * 0.23,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fill,
+              )
+            ],
           ),
           Column(
             children: [
@@ -32,14 +34,14 @@ class ScreenLogo extends StatelessWidget {
               const SizedBox(height: 28),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ScreenIntro()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const ScreenIntro()));
                 },
                 // Lets Begin Button
                 child: Container(
                   width: 55,
                   height: 39,
-                  decoration:  const BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                       color: navyBlue1),
                   child: const Icon(
@@ -50,23 +52,25 @@ class ScreenLogo extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                "Let's begin.",
-                style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge?.copyWith(fontWeight: FontWeight.w300, fontSize: 26)
-              )
+              Text("Let's begin.",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge
+                      ?.copyWith(fontWeight: FontWeight.w300, fontSize: 26))
             ],
           ),
-          
+
           // decoration image 2
           Column(
-            children: [Image.asset('assets/images/decoration_image_2.png',
-            // Media Query
-                  height: MediaQuery.of(context).size.height * 0.23,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
-            )],
+            children: [
+              Image.asset(
+                'assets/images/decoration_image_2.png',
+                // Media Query
+                height: MediaQuery.of(context).size.height * 0.23,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fill,
+              )
+            ],
           )
         ],
       ),

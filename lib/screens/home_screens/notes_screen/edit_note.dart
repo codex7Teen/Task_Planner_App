@@ -1,4 +1,3 @@
-
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
@@ -55,7 +54,8 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
           //  Edit button
           TextButton(
               onPressed: () {
-                notesUpdateBottomSheet(context, widget.notesModel.name, widget.notesModel, widget.notesModel.notesCategory);
+                notesUpdateBottomSheet(context, widget.notesModel.name,
+                    widget.notesModel, widget.notesModel.notesCategory);
               },
               child: Text('Edit',
                   style: Theme.of(context)
@@ -101,7 +101,8 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
                       .validateField(value, 'Please type something to save.'),
                   style: const TextStyle(fontSize: 18),
                   decoration: const InputDecoration(
-                      hintText: "Write your notes here...", border: InputBorder.none),
+                      hintText: "Write your notes here...",
+                      border: InputBorder.none),
                   maxLines: 30,
                   minLines: 1,
                 ),
@@ -115,7 +116,11 @@ class _ScreenEditNotesState extends State<ScreenEditNotes> {
         //! S A V E - BTN
         child: FloatingActionButton.extended(
             backgroundColor: navyBlue1,
-            label: Text('Save', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: whiteColor)),
+            label: Text('Save',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge!
+                    .copyWith(color: whiteColor)),
             onPressed: () {
               // validate the notes
               if (_formKey.currentState!.validate()) {

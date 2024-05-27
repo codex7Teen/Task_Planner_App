@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/category_db_functions.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
@@ -17,11 +16,9 @@ notesUpdateBottomSheet(
     BuildContext context,
     String initialNoteName,
     NotesModel notesModel,
-    String? initialCategoryName
-    ) {
-
-       // displaying the initial category name as selected if its not null
- // Reset selectedCategory initially
+    String? initialCategoryName) {
+  // displaying the initial category name as selected if its not null
+  // Reset selectedCategory initially
   String? selectedNoteCategory = initialCategoryName;
 
   showModalBottomSheet(
@@ -46,7 +43,7 @@ notesUpdateBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: nameController..text = initialNoteName,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -77,43 +74,46 @@ notesUpdateBottomSheet(
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                          valueListenable: categoryListNotifier,
-                          builder: (context, categoriesList, _) {
-                            // Ensure the selected category is part of the list
-                            if (!categoriesList.contains(selectedNoteCategory)) {
-                              selectedNoteCategory = null;
-                            }
-                            return categoriesList.isNotEmpty
-                                ? DropdownButtonFormField(
-                                  isExpanded: true,
-                                  value: selectedNoteCategory,
-                                    style: const TextStyle(color: whiteColor),
-                                    dropdownColor: blackColor,
-                                    icon: const Icon(Icons.arrow_drop_down_rounded,
-                                        color: whiteColor, size: 25),
-                                    hint: const Text(
-                                      'Select Category',
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                    onChanged: (value) {
-                                      selectedNoteCategory = value;
-                                    },
-                                    items: categoriesList.map((cat) {
-                                      return DropdownMenuItem(
-                                        value: cat,
-                                        child: Text(cat,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(
-                                                    color: whiteColor)),
-                                      );
-                                    }).toList(),
-                                  )
-                                : const SizedBox(
-                                    width: 10,
-                                  );
-                          }),
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              // Ensure the selected category is part of the list
+                              if (!categoriesList
+                                  .contains(selectedNoteCategory)) {
+                                selectedNoteCategory = null;
+                              }
+                              return categoriesList.isNotEmpty
+                                  ? DropdownButtonFormField(
+                                      isExpanded: true,
+                                      value: selectedNoteCategory,
+                                      style: const TextStyle(color: whiteColor),
+                                      dropdownColor: blackColor,
+                                      icon: const Icon(
+                                          Icons.arrow_drop_down_rounded,
+                                          color: whiteColor,
+                                          size: 25),
+                                      hint: const Text(
+                                        'Select Category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        selectedNoteCategory = value;
+                                      },
+                                      items: categoriesList.map((cat) {
+                                        return DropdownMenuItem(
+                                          value: cat,
+                                          child: Text(cat,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                      color: whiteColor)),
+                                        );
+                                      }).toList(),
+                                    )
+                                  : const SizedBox(
+                                      width: 10,
+                                    );
+                            }),
                       ),
 
                       // update button
@@ -133,15 +133,15 @@ notesUpdateBottomSheet(
                             // update the category in the model
                             notesModel.notesCategory = selectedNoteCategory;
                             // updating db
-                            NotesFunctions().updateNotes(notesModel.key!, notesModel);
+                            NotesFunctions()
+                                .updateNotes(notesModel.key!, notesModel);
                           }
                         },
                         child: Container(
                           height: 35,
                           width: 110,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.5, color: whiteColor),
+                              border: Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: const Padding(
                             padding: EdgeInsets.only(

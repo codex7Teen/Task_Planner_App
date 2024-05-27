@@ -3,7 +3,7 @@ part 'todo_steps_model.g.dart';
 
 @HiveType(typeId: 6)
 class TodoStepsModel {
-   //box name
+  //box name
   static const String boxName = 'Todo_step_db';
 
   @HiveField(1)

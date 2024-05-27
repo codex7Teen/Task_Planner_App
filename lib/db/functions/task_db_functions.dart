@@ -9,44 +9,44 @@ ValueNotifier<List<TaskModel>> taskListNotifier = ValueNotifier([]);
 //  ChangeNotifier is a class that provides change notification to its listeners.
 class TaskFunctions extends ChangeNotifier {
 //! ADD TASK
-Future<void> addTaskDetails(TaskModel value) async {
-  // Open the Hive box for TaskModel
-  final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
+  Future<void> addTaskDetails(TaskModel value) async {
+    // Open the Hive box for TaskModel
+    final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
 
-  // add to db
-  await taskDB.add(value);
-  
-  // add to list
-  taskListNotifier.value.add(value);  
-  // notify listeners
-  taskListNotifier.notifyListeners();
-}
+    // add to db
+    await taskDB.add(value);
+
+    // add to list
+    taskListNotifier.value.add(value);
+    // notify listeners
+    taskListNotifier.notifyListeners();
+  }
 
 //! GET TASK
-Future<void> getTaskDetails() async {
-  final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
-  taskListNotifier.value.clear();
+  Future<void> getTaskDetails() async {
+    final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
+    taskListNotifier.value.clear();
 
-  taskListNotifier.value.addAll(taskDB.values);
-  // notifying listeners
-  taskListNotifier.notifyListeners();
-}
+    taskListNotifier.value.addAll(taskDB.values);
+    // notifying listeners
+    taskListNotifier.notifyListeners();
+  }
 
 //! DELETE TASK
-Future<void> deleteTask(int id) async {
-   final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
+  Future<void> deleteTask(int id) async {
+    final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
     await taskDB.delete(id);
     // Refresh the task list notifier
     getTaskDetails();
-}
+  }
 
 //! UPDATE TASK
-Future<void> updateTask(int id, TaskModel newValue) async {
-  final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
+  Future<void> updateTask(int id, TaskModel newValue) async {
+    final taskDB = await Hive.openBox<TaskModel>(TaskModel.boxName);
 
-  // update the existing task wiith the new value using the ID provided
-  await taskDB.put(id, newValue);
-  // Refresh the task list notifier
-  getTaskDetails();
-}
+    // update the existing task wiith the new value using the ID provided
+    await taskDB.put(id, newValue);
+    // Refresh the task list notifier
+    getTaskDetails();
+  }
 }

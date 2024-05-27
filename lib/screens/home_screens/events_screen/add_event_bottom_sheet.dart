@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/db/model/events_model.dart';
@@ -17,7 +16,6 @@ final eventNameController = TextEditingController();
 
 eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
     ValueNotifier<DateTime> toDateNotifier, String userName) {
-
   showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: navyBlue1,
@@ -40,7 +38,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: eventNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -95,7 +93,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from date
-                                pickFromDateTime(context, fromDateNotifier, toDateNotifier, pickDate: true);
+                                pickFromDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: true);
                               },
                             ),
                           ),
@@ -118,7 +118,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from time
-                                pickFromDateTime(context, fromDateNotifier, toDateNotifier, pickDate: false);
+                                pickFromDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: false);
                               },
                             ),
                           ),
@@ -161,7 +163,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from date
-                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: true);
+                                pickToDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: true);
                               },
                             ),
                           ),
@@ -183,7 +187,9 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                               ),
                               onTap: () {
                                 // open select from time
-                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: false);
+                                pickToDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: false);
                               },
                             ),
                           ),
@@ -207,19 +213,24 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           if (validated) {
                             // save datas to database
                             final eventName = eventNameController.text.trim();
-                            final notificationId = fromDateNotifier.value.microsecondsSinceEpoch.remainder(100000);
+                            final notificationId = fromDateNotifier
+                                .value.microsecondsSinceEpoch
+                                .remainder(100000);
 
                             final event = EventsModel(
                                 name: eventName,
                                 from: fromDateNotifier.value,
                                 to: toDateNotifier.value,
-                                notificationId: notificationId
-                                );
+                                notificationId: notificationId);
 
                             EventFunctions().addEventDetails(event);
 
                             // create a notification for the event
-                            NotificationService.scheduleNotification(notificationId, event.from, eventName, userName);
+                            NotificationService.scheduleNotification(
+                                notificationId,
+                                event.from,
+                                eventName,
+                                userName);
 
                             // resets the fromdate and todate to current date
                             fromDateNotifier.value = DateTime.now();
@@ -238,8 +249,7 @@ eventBottomSheet(BuildContext context, ValueNotifier<DateTime> fromDateNotifier,
                           height: 35,
                           width: 110,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.5, color: whiteColor),
+                              border: Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.only(

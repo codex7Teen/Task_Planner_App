@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/event_db_functions.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
@@ -14,7 +13,7 @@ showEventlAertDialog(BuildContext context, int? id) {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(color:  navyBlue1),
+                ?.copyWith(color: navyBlue1),
           ),
           actions: [
             // cancel button

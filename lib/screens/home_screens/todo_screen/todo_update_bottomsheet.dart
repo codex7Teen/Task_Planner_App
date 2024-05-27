@@ -14,7 +14,6 @@ final nameController = TextEditingController();
 
 todoEditBottomSheet(BuildContext context, String initialTodoName,
     TodoModel todoModel, String? initialCategoryName) {
-
   // displaying the initial category name as selected if its not null
   // Reset selectedCategory initially
   String? selectedTodoCategory = initialCategoryName;
@@ -41,7 +40,7 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: nameController..text = initialTodoName,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -72,43 +71,46 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                         height: 50,
                         width: 150,
                         child: ValueListenableBuilder(
-                          valueListenable: categoryListNotifier,
-                          builder: (context, categoriesList, _) {
-                            // Ensure the selected category is part of the list
-                             if (!categoriesList.contains(selectedTodoCategory)) {
-                              selectedTodoCategory = null;
-                            }
-                            return categoriesList.isNotEmpty
-                                ? DropdownButtonFormField(
-                                  isExpanded: true,
-                                  value: selectedTodoCategory,
-                                    style: const TextStyle(color: whiteColor),
-                                    dropdownColor: Colors.black,
-                                    icon: const Icon(Icons.arrow_drop_down_rounded,
-                                        color: whiteColor, size: 25),
-                                    hint: const Text(
-                                      'Select Category',
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                    onChanged: (value) {
-                                      selectedTodoCategory = value;
-                                    },
-                                    items: categoriesList.map((cat) {
-                                      return DropdownMenuItem(
-                                        value: cat,
-                                        child: Text(cat,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(
-                                                    color: whiteColor)),
-                                      );
-                                    }).toList(),
-                                  )
-                                : const SizedBox(
-                                    width: 10,
-                                  );
-                          }),
+                            valueListenable: categoryListNotifier,
+                            builder: (context, categoriesList, _) {
+                              // Ensure the selected category is part of the list
+                              if (!categoriesList
+                                  .contains(selectedTodoCategory)) {
+                                selectedTodoCategory = null;
+                              }
+                              return categoriesList.isNotEmpty
+                                  ? DropdownButtonFormField(
+                                      isExpanded: true,
+                                      value: selectedTodoCategory,
+                                      style: const TextStyle(color: whiteColor),
+                                      dropdownColor: Colors.black,
+                                      icon: const Icon(
+                                          Icons.arrow_drop_down_rounded,
+                                          color: whiteColor,
+                                          size: 25),
+                                      hint: const Text(
+                                        'Select Category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        selectedTodoCategory = value;
+                                      },
+                                      items: categoriesList.map((cat) {
+                                        return DropdownMenuItem(
+                                          value: cat,
+                                          child: Text(cat,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                      color: whiteColor)),
+                                        );
+                                      }).toList(),
+                                    )
+                                  : const SizedBox(
+                                      width: 10,
+                                    );
+                            }),
                       ),
 
                       // create-button
@@ -131,15 +133,15 @@ todoEditBottomSheet(BuildContext context, String initialTodoName,
                             // add to db
                             todoModel.todoCategory = selectedTodoCategory;
                             // update db
-                            TodoFunctions().updateTodo(todoModel.key!, todoModel);
+                            TodoFunctions()
+                                .updateTodo(todoModel.key!, todoModel);
                           }
                         },
                         child: Container(
                           height: 35,
                           width: 110,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.5, color: whiteColor),
+                              border: Border.all(width: 1.5, color: whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.only(

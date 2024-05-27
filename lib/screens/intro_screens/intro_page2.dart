@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class IntroPage2 extends StatelessWidget {
@@ -18,13 +17,15 @@ class IntroPage2 extends StatelessWidget {
           // heading text
           Text(
             'Create Todo lists\nwith Scribe.',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w900, fontSize: 28, height: 1.1),
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                fontWeight: FontWeight.w900, fontSize: 28, height: 1.1),
           ),
           const SizedBox(height: 12),
           // sub text
           Text(
             "Scribe enables you to efficiently organize your tasks with customizable to-do lists. Stay on top of your priorities and increase productivity with this intuitive task management app.",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color.fromARGB(255, 86, 86, 86), fontSize: 14),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: const Color.fromARGB(255, 86, 86, 86), fontSize: 14),
           ),
         ],
       ),

@@ -47,9 +47,9 @@ class _TaskBoxesState extends State<TaskBoxes> {
                         .textTheme
                         .headlineLarge
                         ?.copyWith(fontWeight: FontWeight.w300, fontSize: 22)));
-          // showing no-tasks found for sectionIndex 0, 1 and 2
-          // showing add any add-task GIF if no data to display.
-         } else if (filteredTasks.isEmpty &&
+            // showing no-tasks found for sectionIndex 0, 1 and 2
+            // showing add any add-task GIF if no data to display.
+          } else if (filteredTasks.isEmpty &&
               (widget.sectionIndex == 0 ||
                   widget.sectionIndex == 1 ||
                   widget.sectionIndex == 2)) {

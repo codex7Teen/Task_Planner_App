@@ -83,7 +83,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                   duration: const Duration(milliseconds: 200),
                                   curve: Curves.easeIn);
                             },
-                            icon:  const Icon(
+                            icon: const Icon(
                               Icons.arrow_left_rounded,
                               color: navyBlue1,
                               size: 40,
@@ -95,8 +95,8 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color:
-                                        navyBlue1, fontWeight: FontWeight.w600)),
+                                    color: navyBlue1,
+                                    fontWeight: FontWeight.w600)),
 
                         // right button
                         IconButton(
@@ -117,7 +117,7 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                       width: 50,
                     )
                   ],
-                ), 
+                ),
 
                 const SizedBox(
                   height: 15,
@@ -141,11 +141,13 @@ class _ScreenCategoryState extends State<ScreenCategory> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           widget.categoryName,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: navyBlue1,
-                                    fontSize: 14.5, fontWeight: FontWeight.w500
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                  color: navyBlue1,
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),

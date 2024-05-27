@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
@@ -36,8 +35,15 @@ class _ScreenNotesState extends State<ScreenNotes> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
         child: FloatingActionButton.extended(
-          label: Text('Add Notes', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: navyBlue1)),
-          icon: const Icon(Icons.add, color: navyBlue1,),
+          label: Text('Add Notes',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge!
+                  .copyWith(color: navyBlue1)),
+          icon: const Icon(
+            Icons.add,
+            color: navyBlue1,
+          ),
           onPressed: () {
             // bottom sheet
             notesBottomSheet(context);
@@ -50,7 +56,7 @@ class _ScreenNotesState extends State<ScreenNotes> {
         physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
               // decoration images
@@ -81,57 +87,62 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         color: navyBlue1,
                         thickness: 0.1,
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.0999)
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0999)
                     ],
                   )
                 ],
               ),
-          
+
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
-                child: !searchToggle ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // side bar icon
-                    IconButton(
-                        onPressed: () {
-                          // calling open drawer here
-                          _globalKey.currentState?.openDrawer();
-                        },
-                        icon: const Icon(Icons.menu_rounded,
-                            size: 44, color: navyBlue1)),
-                    // date
-                    Text(DateFormat('dd/MM/yyyy').format(DateTime.now()), style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color:  navyBlue1)),
-                    // search icon
-                    IconButton(
-                        onPressed: () {
-                          // Open Search Bar
+                padding:
+                    const EdgeInsets.symmetric(vertical: 22, horizontal: 8),
+                child: !searchToggle
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // side bar icon
+                          IconButton(
+                              onPressed: () {
+                                // calling open drawer here
+                                _globalKey.currentState?.openDrawer();
+                              },
+                              icon: const Icon(Icons.menu_rounded,
+                                  size: 44, color: navyBlue1)),
+                          // date
+                          Text(DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: navyBlue1)),
+                          // search icon
+                          IconButton(
+                              onPressed: () {
+                                // Open Search Bar
+                                setState(() {
+                                  searchToggle = !searchToggle;
+                                });
+                              },
+                              icon: const Icon(Icons.search_rounded,
+                                  size: 37, color: navyBlue1)),
+                        ],
+                      )
+                    : NotesSearchBar(
+                        onCancelTapped: () {
                           setState(() {
                             searchToggle = !searchToggle;
                           });
                         },
-                        icon: const Icon(Icons.search_rounded,
-                            size: 37, color: navyBlue1)),
-                  ],
-                ) :
-                NotesSearchBar(onCancelTapped: (){
-                  setState(() {
-                    searchToggle = !searchToggle;
-                  });
-                },
-                notesModelx: notesListNotifier.value,
-                ),
+                        notesModelx: notesListNotifier.value,
+                      ),
               ),
-          
+
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 20, right: 20, top: 90, bottom: 35),
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, top: 90, bottom: 35),
                 child: Column(
                   children: [
                     Row(
@@ -149,12 +160,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             height: 39,
                             width: 109,
                             decoration: BoxDecoration(
-                              color: selectedIndex == 0
-                                  ?  navyBlue1
-                                  : whiteColor,
+                              color:
+                                  selectedIndex == 0 ? navyBlue1 : whiteColor,
                               borderRadius: BorderRadius.circular(22),
                               border: Border.all(
-                                color:  navyBlue1,
+                                color: navyBlue1,
                                 width: 1,
                               ),
                             ),
@@ -165,28 +175,27 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                   Icons.list_rounded,
                                   color: selectedIndex == 0
                                       ? whiteColor
-                                      :  navyBlue1,
+                                      : navyBlue1,
                                 ),
                                 Text('All Notes',
                                     style: selectedIndex == 0
                                         ? Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                  color: whiteColor, fontSize: 15)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: whiteColor, fontSize: 15)
                                         : Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                  color:
-                                                       navyBlue1,
-                                                  fontSize: 14.5)),
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: navyBlue1,
+                                                fontSize: 14.5)),
                                 const SizedBox(width: 3),
                               ],
                             ),
                           ),
                         ),
-          
+
                         // favorites
                         GestureDetector(
                           onTap: () {
@@ -199,12 +208,11 @@ class _ScreenNotesState extends State<ScreenNotes> {
                             height: 39,
                             width: 109,
                             decoration: BoxDecoration(
-                              color: selectedIndex == 1
-                                  ?  navyBlue1
-                                  : whiteColor,
+                              color:
+                                  selectedIndex == 1 ? navyBlue1 : whiteColor,
                               borderRadius: BorderRadius.circular(22),
                               border: Border.all(
-                                color:  navyBlue1,
+                                color: navyBlue1,
                                 width: 1,
                               ),
                             ),
@@ -216,22 +224,21 @@ class _ScreenNotesState extends State<ScreenNotes> {
                                   size: 22,
                                   color: selectedIndex == 1
                                       ? whiteColor
-                                      :  navyBlue1,
+                                      : navyBlue1,
                                 ),
                                 Text('Favorites',
                                     style: selectedIndex == 1
                                         ? Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                  color: whiteColor, fontSize: 15)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: whiteColor, fontSize: 15)
                                         : Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                  color:
-                                                       navyBlue1,
-                                                  fontSize: 14.5)),
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: navyBlue1,
+                                                fontSize: 14.5)),
                                 const SizedBox(width: 3),
                               ],
                             ),
@@ -239,29 +246,35 @@ class _ScreenNotesState extends State<ScreenNotes> {
                         ),
                       ],
                     ),
-          
+
                     const SizedBox(height: 28),
-          
+
                     // Seleted field indication text (eg. All tasks, favs etc.)
                     selectedIndex == 0
-                        ? Text('All Notes', style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                      color:  navyBlue1,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold))
-                        : Text('Favorites', style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                      color:  navyBlue1,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
+                        ? Text('All Notes',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                    color: navyBlue1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold))
+                        : Text('Favorites',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                    color: navyBlue1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold)),
                     const SizedBox(height: 28),
-          
+
                     //! N O T E - B O X E S S S S
-                    Expanded(child: NoteBoxes(sectionIndex: selectedIndex, notesSearchToggle: searchToggle,)),
+                    Expanded(
+                        child: NoteBoxes(
+                      sectionIndex: selectedIndex,
+                      notesSearchToggle: searchToggle,
+                    )),
                   ],
                 ),
               )

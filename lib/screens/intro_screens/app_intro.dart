@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/decorators/colors/app_colors.dart';
 import 'package:scribe/screens/intro_screens/intro_page1.dart';
@@ -15,7 +14,6 @@ class ScreenIntro extends StatefulWidget {
 }
 
 class ScreenIntroState extends State<ScreenIntro> {
-  
   // controller to track the current page we're on
   final PageController _controller = PageController();
 
@@ -25,106 +23,113 @@ class ScreenIntroState extends State<ScreenIntro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
+        backgroundColor: whiteColor,
         body: SafeArea(
-      child: Stack(
-        children: [
-          // page view
-          PageView(
-            controller: _controller,
-            onPageChanged: (index) {
-              setState(() {
-                _onlastpage = (index == 2);
-              });
-            },
-            children: const [IntroPage1(), IntroPage2(), IntroPage3()],
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 95,
-            child: Container(
-              alignment: const Alignment(0, 0.6),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // dot indicators
-                  SmoothPageIndicator(
-                    controller: _controller,
-                    count: 3,
-                    effect: const ExpandingDotsEffect(
-                        activeDotColor: Colors.black,
-                        dotHeight: 7,
-                        dotWidth: 7),
-                  ),
-                  const SizedBox(height: 28),
-
-                  // Next button and done button
-                  _onlastpage
-                      ?
-                      // done button
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => const ScreenLogin()));
-                          },
-                          child: Container(
-                              width: 95,
-                              height: 43,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  color: navyBlue1),
-                              child: Center(
-                                child: Text(
-                                  'Done',
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontSize: 18)
-                                ),
-                              )),
-                        )
-                      :
-                      // Next button
-                      GestureDetector(
-                          onTap: () {
-                            _controller.nextPage(
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.fastOutSlowIn);
-                          },
-                          child: Container(
-                              width: 95,
-                              height: 43,
-                              decoration:  const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  color: navyBlue1),
-                              child: Center(
-                                child: Text(
-                                  'Next',
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontSize: 18)
-                                ),
-                              )),
-                        ),
-                ],
+          child: Stack(
+            children: [
+              // page view
+              PageView(
+                controller: _controller,
+                onPageChanged: (index) {
+                  setState(() {
+                    _onlastpage = (index == 2);
+                  });
+                },
+                children: const [IntroPage1(), IntroPage2(), IntroPage3()],
               ),
-            ),
-          ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 95,
+                child: Container(
+                  alignment: const Alignment(0, 0.6),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // dot indicators
+                      SmoothPageIndicator(
+                        controller: _controller,
+                        count: 3,
+                        effect: const ExpandingDotsEffect(
+                            activeDotColor: Colors.black,
+                            dotHeight: 7,
+                            dotWidth: 7),
+                      ),
+                      const SizedBox(height: 28),
 
-          // Skip Button
-          Positioned(
-            top: 10,
-            right: 14,
-            child: TextButton(onPressed: (){
-              // skip to last intro page
-              _controller.jumpToPage(2);
-            }, child: const Text('SKIP >>',
-            style: TextStyle(
-              color: navyBlue1 ,
-              fontSize: 13
-            ),
-            )))
-        ],
-      ),
-    ));
+                      // Next button and done button
+                      _onlastpage
+                          ?
+                          // done button
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ScreenLogin()));
+                              },
+                              child: Container(
+                                  width: 95,
+                                  height: 43,
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
+                                      color: navyBlue1),
+                                  child: Center(
+                                    child: Text('Done',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 18)),
+                                  )),
+                            )
+                          :
+                          // Next button
+                          GestureDetector(
+                              onTap: () {
+                                _controller.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.fastOutSlowIn);
+                              },
+                              child: Container(
+                                  width: 95,
+                                  height: 43,
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
+                                      color: navyBlue1),
+                                  child: Center(
+                                    child: Text('Next',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 18)),
+                                  )),
+                            ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Skip Button
+              Positioned(
+                  top: 10,
+                  right: 14,
+                  child: TextButton(
+                      onPressed: () {
+                        // skip to last intro page
+                        _controller.jumpToPage(2);
+                      },
+                      child: const Text(
+                        'SKIP >>',
+                        style: TextStyle(color: navyBlue1, fontSize: 13),
+                      )))
+            ],
+          ),
+        ));
   }
 }

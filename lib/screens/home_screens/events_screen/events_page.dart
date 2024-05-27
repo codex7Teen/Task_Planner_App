@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scribe/db/functions/login_db_functions.dart';
@@ -15,18 +14,17 @@ class ScreenEvents extends StatefulWidget {
 }
 
 class _ScreenEventsState extends State<ScreenEvents> {
-
 // datetime notifier which contains the FROM-datetime
   late ValueNotifier<DateTime> fromDateNotifier;
-  
+
   // datetime notifier which contains the TO-datetime
   late ValueNotifier<DateTime> toDateNotifier;
 
-    // Setting global key for scafold state
+  // Setting global key for scafold state
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-   
+
 //! INIT State
-@override
+  @override
   void initState() {
     super.initState();
     final now = DateTime.now();
@@ -44,14 +42,22 @@ class _ScreenEventsState extends State<ScreenEvents> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 18),
         child: FloatingActionButton.extended(
-          label: Text('Add Events', style: Theme.of(context).textTheme.labelLarge!.copyWith(color:  navyBlue1)),
-          icon: const Icon(Icons.add, color: navyBlue1,),
+          label: Text('Add Events',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge!
+                  .copyWith(color: navyBlue1)),
+          icon: const Icon(
+            Icons.add,
+            color: navyBlue1,
+          ),
           onPressed: () {
             // fetch username from the loginListNotifier
             final userName = loginListNotifier.value[0].name;
 
             // open add event bottom sheet
-            eventBottomSheet(context, fromDateNotifier, toDateNotifier, userName);
+            eventBottomSheet(
+                context, fromDateNotifier, toDateNotifier, userName);
           },
           backgroundColor: whiteColor,
         ),
@@ -111,7 +117,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color:  navyBlue1)),
+                        color: navyBlue1)),
               ],
             ),
           ),
@@ -147,9 +153,7 @@ class _ScreenEventsState extends State<ScreenEvents> {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.copyWith(
-                                      color:  navyBlue1,
-                                      fontSize: 14.5)),
+                                  ?.copyWith(color: navyBlue1, fontSize: 14.5)),
                           const SizedBox(width: 3),
                         ],
                       ),
@@ -160,15 +164,11 @@ class _ScreenEventsState extends State<ScreenEvents> {
                 const SizedBox(height: 28),
 
                 // Calendar logo
-                Text(
-                  'Add your events.',
-                  style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge
-                            ?.copyWith(
-                                fontWeight: FontWeight.w300, fontSize: 22)
-                                  
-                ),
+                Text('Add your events.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineLarge
+                        ?.copyWith(fontWeight: FontWeight.w300, fontSize: 22)),
                 const SizedBox(height: 28),
 
                 //! C A L E N D A R -------

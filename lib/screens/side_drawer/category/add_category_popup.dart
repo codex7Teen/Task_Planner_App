@@ -41,7 +41,8 @@ showAddCategoryPopup(BuildContext context) {
                               .textTheme
                               .labelLarge
                               ?.copyWith(
-                                  color: const Color.fromARGB(255, 153, 153, 153))),
+                                  color: const Color.fromARGB(
+                                      255, 153, 153, 153))),
                     ),
                     const SizedBox(
                       height: 20,
@@ -61,21 +62,21 @@ showAddCategoryPopup(BuildContext context) {
                         TextButton(
                             onPressed: () {
                               // do validation
-                              final validated = formKey.currentState!.validate();
+                              final validated =
+                                  formKey.currentState!.validate();
 
-                              if(validated){
+                              if (validated) {
                                 // Save to db
-                              final categoryName =
-                                  categoryNameController.text.trim();
+                                final categoryName =
+                                    categoryNameController.text.trim();
 
-                              final category =
-                                  CategoryModel(category: categoryName);
-                              // add category to db
-                              CategoryFunctions().addCategory(category);
-                              // pop
-                              Navigator.pop(context);
+                                final category =
+                                    CategoryModel(category: categoryName);
+                                // add category to db
+                                CategoryFunctions().addCategory(category);
+                                // pop
+                                Navigator.pop(context);
                               }
-                              
                             },
                             child: Text(
                               'Create',

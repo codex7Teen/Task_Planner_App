@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class IntroPage3 extends StatelessWidget {
@@ -13,19 +12,20 @@ class IntroPage3 extends StatelessWidget {
         children: [
           const SizedBox(height: 110),
           // image
-          Expanded(child: Center(child: Image.asset('assets/images/events.jpg'))),
+          Expanded(
+              child: Center(child: Image.asset('assets/images/events.jpg'))),
           const SizedBox(height: 80),
           // heading text
-          Text(
-            'Create events\nwith Scribe.',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w900, fontSize: 28, height: 1.1)
-          ),
+          Text('Create events\nwith Scribe.',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.w900, fontSize: 28, height: 1.1)),
           const SizedBox(height: 12),
           // sub text
           Text(
-            "Scribe enables you to seamlessly plan and manage events with ease. From scheduling to invitations, stay organized and on track with this versatile event management app.",
-            style:
-                Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color.fromARGB(255, 86, 86, 86),))
+              "Scribe enables you to seamlessly plan and manage events with ease. From scheduling to invitations, stay organized and on track with this versatile event management app.",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: const Color.fromARGB(255, 86, 86, 86),
+                  ))
         ],
       ),
     );

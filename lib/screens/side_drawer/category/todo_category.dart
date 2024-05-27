@@ -28,7 +28,9 @@ class _TodoCategoryState extends State<TodoCategory> {
                 Widget? child) {
               //! F I L T E R I N G
               // filtering task based on category
-              final filteredTodos = todoList.where((todo) => todo.todoCategory == widget.selectedCategory).toList();
+              final filteredTodos = todoList
+                  .where((todo) => todo.todoCategory == widget.selectedCategory)
+                  .toList();
               // showing add any task gif
               if (filteredTodos.isEmpty) {
                 return Column(
@@ -52,8 +54,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: ExpansionTile(
-                          collapsedBackgroundColor:
-                              alertBackgroundColor,
+                          collapsedBackgroundColor: alertBackgroundColor,
                           shape: const Border(),
                           title: Container(
                             decoration: BoxDecoration(
@@ -62,8 +63,8 @@ class _TodoCategoryState extends State<TodoCategory> {
                             child: Row(
                               children: [
                                 Checkbox(
-                                    fillColor:
-                                         const MaterialStatePropertyAll(whiteColor),
+                                    fillColor: const MaterialStatePropertyAll(
+                                        whiteColor),
                                     checkColor: navyBlue1,
                                     value: data.todoCheckBox,
                                     onChanged: (newBool) {
@@ -155,7 +156,8 @@ class _TodoCategoryState extends State<TodoCategory> {
                                                 data.todoFavorite =
                                                     !data.todoFavorite;
                                                 // save to db
-                                                TodoFunctions().updateTodo(data.key!, data);
+                                                TodoFunctions().updateTodo(
+                                                    data.key!, data);
                                               });
                                             },
                                             icon: Icon(
@@ -171,7 +173,7 @@ class _TodoCategoryState extends State<TodoCategory> {
                                               showTodoAlertDialog(
                                                   context, data.key);
                                             },
-                                            icon:  const Icon(
+                                            icon: const Icon(
                                                 Icons.delete_outline_rounded,
                                                 color: whiteColor,
                                                 size: 23)),

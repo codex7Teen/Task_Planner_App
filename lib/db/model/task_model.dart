@@ -4,13 +4,13 @@ import 'package:scribe/db/model/task_steps_model.dart';
 part 'task_model.g.dart';
 
 @HiveType(typeId: 2)
-class TaskModel extends HiveObject{
+class TaskModel extends HiveObject {
   // task db
   static const String boxName = 'Task_db';
 
   @HiveField(0)
   String name;
-  
+
   @HiveField(1)
   String description;
 
@@ -24,7 +24,7 @@ class TaskModel extends HiveObject{
   // CHECKBOX 1
   @HiveField(4)
   bool isChecked1;
-  
+
   // CHECKBOX 2
   @HiveField(5)
   bool isChecked2;
@@ -32,7 +32,14 @@ class TaskModel extends HiveObject{
   @HiveField(6)
   String? taskCategory;
 
-  TaskModel({required this.name, required this.description,required this.taskStepsList, this.isFavorite = false, this.isChecked1 = false, this.isChecked2 = false, this.taskCategory});
+  TaskModel(
+      {required this.name,
+      required this.description,
+      required this.taskStepsList,
+      this.isFavorite = false,
+      this.isChecked1 = false,
+      this.isChecked2 = false,
+      this.taskCategory});
 
   get isChecked => null;
 }

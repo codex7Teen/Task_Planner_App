@@ -4,8 +4,7 @@ import 'package:scribe/db/model/todo_steps_model.dart';
 part 'todo_model.g.dart';
 
 @HiveType(typeId: 4)
-class TodoModel extends HiveObject{
-
+class TodoModel extends HiveObject {
   static const String boxName = 'Todo_box';
 
   @HiveField(0)
@@ -23,5 +22,10 @@ class TodoModel extends HiveObject{
   @HiveField(4)
   String? todoCategory;
 
-  TodoModel({required this.name, required this.todoStepsList, this.todoFavorite = false, this.todoCheckBox = false, this.todoCategory});
-} 
+  TodoModel(
+      {required this.name,
+      required this.todoStepsList,
+      this.todoFavorite = false,
+      this.todoCheckBox = false,
+      this.todoCategory});
+}

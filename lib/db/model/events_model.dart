@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 // Type-adapter
@@ -10,13 +9,13 @@ class EventsModel extends HiveObject {
   static const String boxName = 'Event_db';
 
   @HiveField(0)
-   String name;
+  String name;
 
   @HiveField(1)
-   DateTime from;
+  DateTime from;
 
   @HiveField(2)
-   DateTime to;
+  DateTime to;
 
   @HiveField(3)
   String? description;
@@ -25,5 +24,9 @@ class EventsModel extends HiveObject {
   int notificationId;
 
   EventsModel(
-      {required this.name, required this.from, required this.to, this.description, required this.notificationId});
+      {required this.name,
+      required this.from,
+      required this.to,
+      this.description,
+      required this.notificationId});
 }

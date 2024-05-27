@@ -10,32 +10,32 @@ ValueNotifier<List<LoginModel>> loginListNotifier = ValueNotifier([]);
 //  ChangeNotifier is a class that provides change notification to its listeners.
 class LoginFunctions extends ChangeNotifier {
 //! ADD LOGIN
-Future<void> addLoginDetails(LoginModel value) async {
-  final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
-  // clearing database
-  await loginDB.clear();
-  // clearing loginListNotifier list
-  loginListNotifier.value.clear();
-  // adding values to DB
-  await loginDB.add(value);
-  loginListNotifier.value.add(value);
-  // notifying listeners
-  loginListNotifier.notifyListeners();
-}
+  Future<void> addLoginDetails(LoginModel value) async {
+    final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
+    // clearing database
+    await loginDB.clear();
+    // clearing loginListNotifier list
+    loginListNotifier.value.clear();
+    // adding values to DB
+    await loginDB.add(value);
+    loginListNotifier.value.add(value);
+    // notifying listeners
+    loginListNotifier.notifyListeners();
+  }
 
 //! GET LOGIN
-Future<void> getLoginDetails() async {
-  final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
-  loginListNotifier.value.clear();
+  Future<void> getLoginDetails() async {
+    final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
+    loginListNotifier.value.clear();
 
-  loginListNotifier.value.addAll(loginDB.values);
-  // notifying listeners
-  loginListNotifier.notifyListeners();
-}
+    loginListNotifier.value.addAll(loginDB.values);
+    // notifying listeners
+    loginListNotifier.notifyListeners();
+  }
 
 //! USER LOGGED IN CHECK
-Future<bool> checkLogin() async {
-  final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
-  return loginDB.length>0;
-}
+  Future<bool> checkLogin() async {
+    final loginDB = await Hive.openBox<LoginModel>(LoginModel.boxName);
+    return loginDB.length > 0;
+  }
 }

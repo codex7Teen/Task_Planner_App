@@ -1,4 +1,3 @@
-
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
@@ -20,7 +19,8 @@ Future<EventsModel?> editEventBottomSheet(
     BuildContext context,
     ValueNotifier<DateTime> fromDateNotifier,
     ValueNotifier<DateTime> toDateNotifier,
-    EventsModel event, String userName) {
+    EventsModel event,
+    String userName) {
 // add old value into textfields
   eventNameController.text = event.name;
 
@@ -46,7 +46,7 @@ Future<EventsModel?> editEventBottomSheet(
                       const SizedBox(width: 25),
                       Expanded(
                           child: TextFormField(
-                            maxLength: 30,
+                        maxLength: 30,
                         controller: eventNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (name) => Validators()
@@ -101,7 +101,9 @@ Future<EventsModel?> editEventBottomSheet(
                               ),
                               onTap: () {
                                 // open select from date
-                                pickFromDateTime(context, fromDateNotifier, toDateNotifier,pickDate: true);
+                                pickFromDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: true);
                               },
                             ),
                           ),
@@ -124,7 +126,9 @@ Future<EventsModel?> editEventBottomSheet(
                               ),
                               onTap: () {
                                 // open select from time
-                                pickFromDateTime(context, fromDateNotifier, toDateNotifier,pickDate: false);
+                                pickFromDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: false);
                               },
                             ),
                           ),
@@ -167,7 +171,9 @@ Future<EventsModel?> editEventBottomSheet(
                               ),
                               onTap: () {
                                 // open select from date
-                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: true);
+                                pickToDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: true);
                               },
                             ),
                           ),
@@ -189,7 +195,9 @@ Future<EventsModel?> editEventBottomSheet(
                               ),
                               onTap: () {
                                 // open select from time
-                                pickToDateTime(context, fromDateNotifier, toDateNotifier,pickDate: false);
+                                pickToDateTime(
+                                    context, fromDateNotifier, toDateNotifier,
+                                    pickDate: false);
                               },
                             ),
                           ),
@@ -218,16 +226,24 @@ Future<EventsModel?> editEventBottomSheet(
                             event.from = fromDateNotifier.value;
                             event.to = toDateNotifier.value;
 
-                            await EventFunctions().updateEvents(event.key, event);
+                            await EventFunctions()
+                                .updateEvents(event.key, event);
 
                             // cancel the existing notification
-                            NotificationService.cancelNotification(event.notificationId);
+                            NotificationService.cancelNotification(
+                                event.notificationId);
 
                             // schedule a new notification
-                            final newNotificationId = fromDateNotifier.value.microsecondsSinceEpoch.remainder(100000);
+                            final newNotificationId = fromDateNotifier
+                                .value.microsecondsSinceEpoch
+                                .remainder(100000);
                             event.notificationId = newNotificationId;
                             // Calling the create notification method
-                            NotificationService.scheduleNotification(newNotificationId, event.from, event.name, userName);
+                            NotificationService.scheduleNotification(
+                                newNotificationId,
+                                event.from,
+                                event.name,
+                                userName);
 
                             // popping bottomsheet and passing eventmodel to view event screen
                             Navigator.pop(context, event);

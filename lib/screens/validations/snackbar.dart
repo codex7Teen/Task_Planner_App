@@ -8,9 +8,7 @@ void showSnackBar(BuildContext context, String snackbarMessage) {
         padding: const EdgeInsets.all(8),
         height: 50,
         decoration: BoxDecoration(
-          color: snackBarColor,
-          borderRadius: BorderRadius.circular(10)
-        ),
+            color: snackBarColor, borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: Row(
@@ -19,9 +17,7 @@ void showSnackBar(BuildContext context, String snackbarMessage) {
               const SizedBox(width: 15),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(snackbarMessage)
-                ],
+                children: [Text(snackbarMessage)],
               )
             ],
           ),
@@ -33,10 +29,7 @@ void showSnackBar(BuildContext context, String snackbarMessage) {
       duration: const Duration(seconds: 2),
       dismissDirection: DismissDirection.up,
       margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height -186,
-        left: 7,
-        right: 7
-      ),
+          bottom: MediaQuery.of(context).size.height - 186, left: 7, right: 7),
     ),
   );
 }

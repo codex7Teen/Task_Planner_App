@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:scribe/db/functions/notes_db_functions.dart';
 import 'package:scribe/db/model/notes_model.dart';
@@ -24,10 +23,8 @@ class _SearchBarFieldState extends State<NotesSearchBar> {
           // search for notes method
           searchNoteFields(value);
         },
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium
-            ?.copyWith(color: navyBlue1),
+        style:
+            Theme.of(context).textTheme.titleMedium?.copyWith(color: navyBlue1),
         decoration: InputDecoration(
             hintText: 'Search...',
             fillColor: whiteColor,
@@ -37,7 +34,6 @@ class _SearchBarFieldState extends State<NotesSearchBar> {
                 borderSide: BorderSide.none),
             suffixIcon: IconButton(
                 onPressed: () {
-
                   // clearing the notesfield
                   clearNotesField();
                   // calls the setstate to toggle between icons.
@@ -49,17 +45,17 @@ class _SearchBarFieldState extends State<NotesSearchBar> {
       ),
     );
   }
-  
+
   // method for searching for notes
   void searchNoteFields(String query) {
     List<NotesModel> filteredNotes = widget.notesModelx
         .where((note) => note.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
-        // assigning the filterednotes to notesmodel
-        setState(() {
-          notesListNotifier.value = filteredNotes;
-        });
+    // assigning the filterednotes to notesmodel
+    setState(() {
+      notesListNotifier.value = filteredNotes;
+    });
   }
 
   // method to clear the field

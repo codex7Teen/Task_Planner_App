@@ -77,7 +77,8 @@ class _NotesCategoryState extends State<NotesCategory> {
                                     setState(() {
                                       data.isFavorite = !data.isFavorite;
                                       // Save data to db
-                                      NotesFunctions().updateNotes(data.key!, data);
+                                      NotesFunctions()
+                                          .updateNotes(data.key!, data);
                                     });
                                   },
                                   icon: Icon(

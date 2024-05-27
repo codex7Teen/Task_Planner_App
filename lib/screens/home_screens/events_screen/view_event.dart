@@ -48,7 +48,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
     return Scaffold(
       //! A P P - B A R
       appBar: AppBar(
-        backgroundColor:  navyBlue1,
+        backgroundColor: navyBlue1,
         title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // notes title
@@ -67,14 +67,15 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
           //!  E D I T - E V E N T
           TextButton(
               onPressed: () {
-                             // fetch username from the loginListNotifier
-            final userName = loginListNotifier.value[0].name;
+                // fetch username from the loginListNotifier
+                final userName = loginListNotifier.value[0].name;
                 // Edit event (open edit-event bottomsheet)
                 editEventBottomSheet(
                         context,
                         ValueNotifier<DateTime>(widget.event.from),
                         ValueNotifier<DateTime>(widget.event.to),
-                        widget.event, userName)
+                        widget.event,
+                        userName)
                     .then((value) {
                   setState(() {
                     events = value!;
@@ -147,7 +148,7 @@ class _ScreenViewEventState extends State<ScreenViewEvent> {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color:  navyBlue1)),
+                          color: navyBlue1)),
                   const Spacer(),
                   Text(
                     // to date

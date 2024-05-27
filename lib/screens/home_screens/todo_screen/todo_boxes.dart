@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scribe/db/functions/todo_db_functions.dart';
@@ -51,7 +50,9 @@ class _TodoBoxesState extends State<TodoBoxes> {
                           ?.copyWith(
                               fontWeight: FontWeight.w300, fontSize: 22)));
               // showing add any task gif
-            } else if (filteredTodos.isEmpty && (widget.todoSectionIndex == 0 || widget.todoSectionIndex == 1)) {
+            } else if (filteredTodos.isEmpty &&
+                (widget.todoSectionIndex == 0 ||
+                    widget.todoSectionIndex == 1)) {
               return Column(
                 children: [
                   const SizedBox(height: 50),
@@ -72,19 +73,18 @@ class _TodoBoxesState extends State<TodoBoxes> {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: ExpansionTile(
-                        collapsedBackgroundColor:
-                            alertBackgroundColor,
+                        collapsedBackgroundColor: alertBackgroundColor,
                         shape: const Border(),
                         title: Container(
                           decoration: BoxDecoration(
-                              color:  navyBlue1,
+                              color: navyBlue1,
                               borderRadius: BorderRadius.circular(15)),
                           child: Row(
                             children: [
                               Checkbox(
-                                  fillColor:
-                                       const MaterialStatePropertyAll(whiteColor),
-                                  checkColor:  navyBlue1,
+                                  fillColor: const MaterialStatePropertyAll(
+                                      whiteColor),
+                                  checkColor: navyBlue1,
                                   value: data.todoCheckBox,
                                   onChanged: (newBool) {
                                     setState(() {
@@ -120,7 +120,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color:  navyBlue1,
+                              color: navyBlue1,
                               borderRadius: BorderRadius.circular(19),
                               border: Border.all(
                                 color: whiteColor,
@@ -150,7 +150,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                             // ADD STEPS (Opens add step popup)
                                             showAddTodoPopup(context, data);
                                           },
-                                          icon:  const Icon(
+                                          icon: const Icon(
                                             Icons.add_task_rounded,
                                             color: whiteColor,
                                             size: 23,
@@ -159,9 +159,12 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                           onPressed: () {
                                             // edit todos
                                             todoEditBottomSheet(
-                                                context, data.name, data, data.todoCategory);
+                                                context,
+                                                data.name,
+                                                data,
+                                                data.todoCategory);
                                           },
-                                          icon:  const Icon(
+                                          icon: const Icon(
                                             Icons.edit_note_rounded,
                                             color: whiteColor,
                                             size: 30,
@@ -172,7 +175,8 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                               data.todoFavorite =
                                                   !data.todoFavorite;
                                               // save to db
-                                              TodoFunctions().updateTodo(data.key!, data);
+                                              TodoFunctions()
+                                                  .updateTodo(data.key!, data);
                                             });
                                           },
                                           icon: Icon(
@@ -188,7 +192,7 @@ class _TodoBoxesState extends State<TodoBoxes> {
                                             showTodoAlertDialog(
                                                 context, data.key);
                                           },
-                                          icon:  const Icon(
+                                          icon: const Icon(
                                               Icons.delete_outline_rounded,
                                               color: whiteColor,
                                               size: 23)),

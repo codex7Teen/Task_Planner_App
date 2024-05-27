@@ -1,4 +1,3 @@
-
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
@@ -39,21 +38,20 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         child: ValueListenableBuilder(
           valueListenable: eventListNotifier,
           builder: (context, events, _) {
-            
             //  SHOW CALENDAR WITH DATA
             return SfCalendar(
               view: CalendarView.month,
               dataSource: EventDataSource(events), // Use custom data source
               initialSelectedDate: DateTime.now(),
               backgroundColor: whiteColor,
-              cellBorderColor:  alertBackgroundColor,
+              cellBorderColor: alertBackgroundColor,
               headerStyle: const CalendarHeaderStyle(
                 backgroundColor: navyBlue1,
                 textAlign: TextAlign.center,
                 textStyle:
                     TextStyle(fontWeight: FontWeight.w500, color: whiteColor),
               ),
-              todayHighlightColor:  navyBlue1,
+              todayHighlightColor: navyBlue1,
               selectionDecoration: BoxDecoration(
                 border: Border.all(
                   width: 1.5,
