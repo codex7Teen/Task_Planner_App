@@ -52,7 +52,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/scribe_logo_white_bg.jpg"
+  image_path: "assets/images/logo_white_bg.jpg"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
