@@ -32,7 +32,11 @@ class _ScreenCategoryState extends State<ScreenCategory> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('assets/images/decoration_image_1.png'),
+              Image.asset('assets/images/decoration_image_1.png',
+              height: MediaQuery.of(context).size.height * 0.23,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fill,
+              ),
             ],
           ),
           PageView(
